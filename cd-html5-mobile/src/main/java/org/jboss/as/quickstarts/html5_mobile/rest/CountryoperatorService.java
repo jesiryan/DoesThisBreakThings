@@ -23,7 +23,9 @@ import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.validation.Validator;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -34,6 +36,7 @@ import javax.ws.rs.core.Response;
 import org.jboss.as.quickstarts.html5_mobile.data.CountryoperatorRepository;
 import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 
+import com.conygre.training.entities.Cause;
 import com.conygre.training.entities.Countryoperator;
 
 /**
@@ -74,5 +77,12 @@ public class CountryoperatorService {
         return countryoperator;
     }
 
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createCountryoperator(Countryoperator countryoperator) {
+    	return null;
+    }
+    
 }
 

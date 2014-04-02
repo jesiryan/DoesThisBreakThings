@@ -26,7 +26,9 @@ import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.validation.Validator;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -36,6 +38,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.jboss.as.quickstarts.html5_mobile.data.CallfailureRepository;
+import org.jboss.as.quickstarts.html5_mobile.model.Member;
 import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 
 import com.conygre.training.entities.Callfailure;
@@ -90,6 +93,13 @@ public class CallfailureService {
         	throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         return callfailures;
-    }  
+    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createCallfailure(Callfailure callfailure) {
+    	return null;
+    }
     
 }

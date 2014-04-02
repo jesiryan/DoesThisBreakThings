@@ -55,6 +55,7 @@ public class CallfailureRepository {
 			return callFailures;
     }
     
+    // User story 4
     public List<Callfailure> findCauseCode_EventIDByIMSI(String IMSI) {
 		List<Callfailure> callfailures = (List<Callfailure>) 
 				em.createNamedQuery("Callfailure.findByIMSI").setParameter("IMSI", IMSI).getResultList();

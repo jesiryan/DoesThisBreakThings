@@ -23,7 +23,9 @@ import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.validation.Validator;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -34,6 +36,7 @@ import javax.ws.rs.core.Response;
 import org.jboss.as.quickstarts.html5_mobile.data.CauseRepository;
 import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 
+import com.conygre.training.entities.Callfailure;
 import com.conygre.training.entities.Cause;
 
 /**
@@ -74,6 +77,11 @@ public class CauseService {
         return cause;
     }
 
-    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createCause(Cause cause) {
+    	return null;
+    }
 }
 
