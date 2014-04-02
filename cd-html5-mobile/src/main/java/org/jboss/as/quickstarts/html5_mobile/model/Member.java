@@ -49,29 +49,13 @@ public class Member implements Serializable {
    @Pattern(regexp = "[A-Za-z ]*", message = "Only letters and spaces")
    @Column(name = "name")
    private String name;
-
+   
    @NotNull
    @NotEmpty
    //@Email(message = "Invalid format")
    private String password;
-
-   public String getPassword() {
-	return password;
-	}
-	
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public String getUserType() {
-		return userType;
-	}
-	
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
-	
-	@NotNull
+   
+   @NotNull
    private String userType;
    
 
@@ -90,5 +74,21 @@ public class Member implements Serializable {
    public void setName(String name) {
       this.name = name;
    }
+   
+   public String getPassword() {
+		return password;
+		}
+		
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String getUserType() {
+		return userType;
+	}
+	
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
 
 }
