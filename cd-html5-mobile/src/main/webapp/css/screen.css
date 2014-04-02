@@ -111,3 +111,33 @@ span.success {
     height: 20px;
     font-weight: bold;
 }
+
+
+
+/* Us4 table styles */
+#results  {
+    display: table;
+    width: 100%;
+}
+
+#results .row {
+    display: table-row;
+}
+
+#results .row .col {
+    display: table-cell;
+    width: auto;
+    border: 1px solid #ccc;
+}
+
+#results .head {
+    color: #FFFFFF;
+    background-color: #000000;
+    padding: 1px 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+#results .data {
+    padding: 1px 5px;
+    font-size: 11px;
+}
