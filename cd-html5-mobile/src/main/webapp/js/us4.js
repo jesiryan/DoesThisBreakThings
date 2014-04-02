@@ -132,9 +132,9 @@ function registerMember(memberData) {
         });
     }
     
-    function updateImsiTable() {
+    function updateImsiTable(imsi) {
         $.ajax({
-            url: "rest/callfailures",
+            url: "rest/us04",
             cache: false,
             success: function(data) {
                 $('#results').empty().append(buildRows(data));

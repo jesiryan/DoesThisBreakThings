@@ -100,14 +100,14 @@
                     getIMSIResultTemplate();
                     
 
-                    /* //Register an event listener on the sumbit action
-                    $('#reg').submit(function(event) {
+                     //Register an event listener on the sumbit action
+                    $('#getResult').submit(function(event) {
                         event.preventDefault();
 
                         var memberData = $(this).serializeObject();
 
                         registerMember(memberData);
-                    }); */
+                    }); 
 
                    /*  //Register the cancel listener
                     $('#cancel').click(function(event) {
@@ -179,12 +179,53 @@
 
 			</div>
 			<div class='wrapper' id='inner-container' >  
-				<form method=GET action='imsiQuery'>
+				<form name="getResult" id="getResult" data-ajax="false">
 					<input type='hidden' name='userStoryNumber' value='us4'>
 					<strong>Enter IMSI: </strong><input class='submissionfield' type='text' name='imsi' placeholder='Please Enter an IMSI number Here' required='required'>
 					<input type='submit' class='button'>
 				</form>
 			</div>
+			
+			
+			
+			<form name="reg" id="reg" data-ajax="false">
+                        <fieldset>
+                            <legend>Register a member:</legend>
+                            <div>
+                                <label for="name">Username:</label>
+                                <input type="text" name="name" id="name" placeholder="Username" required autofocus/>
+                            </div>
+                            <div>
+                                <label for="password">Password:</label>
+                                <input type="password" name="password" id="password" placeholder="User Password" required/>
+                            </div>
+                            <!-- <div>
+                                <label for="repassword">Re-Enter Password:</label>
+                                <input type="password" name="userRePassWord" id="password" placeholder="Repeat Password " required/>
+                            </div> -->
+                            <div>
+                            <label for="userType">Status:</label>
+                            <select name="userType">
+										<option value="Support Engineer">Support Engineer</option>
+										<option value="Customer Service">Customer Service</option>
+										<option value="Network Engineer">Network Engineer</option>
+									</select>
+                                </div>
+                                <br>
+                            <div data-role="controlgroup" data-type="horizontal">
+                                <input type="submit" id="register" value="Register"/>
+                                <input type="button" name="cancel" id="cancel" value="Cancel"/>
+                            </div>
+                           
+                            <div id="formMsgs"></div>
+                            
+                        </fieldset>
+                    </form>
+			
+			
+			
+			
+			
 			
 			<div id="results"></div>
 		</div>
