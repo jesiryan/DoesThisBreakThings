@@ -58,7 +58,16 @@ public class Member implements Serializable {
    @NotNull
    private String userType;
    
-
+   public Member(){
+	   
+   }
+   
+   public Member(String name, String password, String userType){
+	   this.name = name;
+	   this.password = password;
+	   this.userType = userType;
+   }
+   
    public Long getId() {
       return id;
    }
