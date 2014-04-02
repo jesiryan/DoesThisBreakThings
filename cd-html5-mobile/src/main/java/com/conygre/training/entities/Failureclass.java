@@ -34,6 +34,12 @@ public class Failureclass implements Serializable {
 
 	public Failureclass() {
 	}
+	
+	public Failureclass(int failureClass, String description, List<Callfailure> callfailures){
+		this.failureClass = failureClass;
+		this.description = description;
+		this.callfailures = callfailures;
+	}
 
 	public int getFailureClass() {
 		return this.failureClass;
