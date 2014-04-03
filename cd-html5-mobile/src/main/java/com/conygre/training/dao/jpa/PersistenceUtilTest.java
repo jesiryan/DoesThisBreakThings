@@ -1,8 +1,6 @@
 package com.conygre.training.dao.jpa;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
+//import org.junit.Test;
 
 public class PersistenceUtilTest {
 /*
@@ -11,10 +9,10 @@ public class PersistenceUtilTest {
 		//still to do
 	}
 */
-	@Test
-	public final void testPersistAllString() {
-		PersistenceUtil.persistAll("test.xls");
-	}
+//	@Test
+//	public final void testPersistAllString() {
+//		PersistenceUtil.persistAll("test.xls");
+//	}
 /*
 	@Test
 	public final void testPersistFailureclasses() {
