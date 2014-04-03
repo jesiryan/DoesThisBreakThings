@@ -36,7 +36,7 @@ import javax.ws.rs.core.Response;
 import org.jboss.as.quickstarts.html5_mobile.data.CauseRepository;
 import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 
-import com.conygre.training.entities.Callfailure;
+import com.conygre.training.entities.CallFailure;
 import com.conygre.training.entities.Cause;
 
 /**
