@@ -91,63 +91,7 @@
                     });
                 }
             },
-            complete: function() {
-                $( document ).ready( function() {
-                    //setup the app after all scripts have loaded
-
-                    $( "#container" ).show();
-                    //Fetches the initial member data and populates the table using jquery templates
-                    getIMSIResultTemplate();
-                    
-
-                     //Register an event listener on the sumbit action
-                    $('#getResult').submit(function(event) {
-                        event.preventDefault();
-
-                        var memberData = $(this).serializeObject();
-
-                        registerMember(memberData);
-                    }); 
-
-                   /*  //Register the cancel listener
-                    $('#cancel').click(function(event) {
-                        //clear input fields
-                        $('#reg')[0].reset();
-
-                        //clear existing msgs
-                        $('span.invalid').remove();
-                        $('span.success').remove();
-                    }); */
-
-                   /*  $("#refreshButtonD, #refreshButtonM").click(function(event) {
-                        updateMemberTable();
-                        updateCdTable();
-                    }); */
-
-                    /* //Clear member registration and error messages on page change
-                    $("#container").delegate("#register-art", "pagebeforeshow", function(event) {
-                        $("#formMsgs").empty();
-                        $('span.invalid').remove();
-                    }); */
-                });
-
-                $.fn.serializeObject = function() {
-                    var o = {};
-                    var a = this.serializeArray();
-                    $.each(a, function() {
-                        if (o[this.name]) {
-                            if (!o[this.name].push) {
-                                o[this.name] = [o[this.name]];
-                            }
-                            o[this.name].push(this.value || '');
-                        } else {
-                            o[this.name] = this.value || '';
-                        }
-                    });
-                    return o;
-                };
-            }
-        }]);
+      }]);
     </script>
 		
 		
@@ -179,52 +123,13 @@
 
 			</div>
 			<div class='wrapper' id='inner-container' >  
-				<form name="getResult" id="getResult" data-ajax="false">
-					<input type='hidden' name='userStoryNumber' value='us4'>
-					<strong>Enter IMSI: </strong><input class='submissionfield' type='text' name='imsi' placeholder='Please Enter an IMSI number Here' required='required'>
-					<input type='submit' class='button' onclick="getUS04Result(document)">
-				</form>
+				<form >
+					<strong>Enter IMSI:</strong><input class='submissionfield' type='text' name='imsi' id='imsi' placeholder='Please Enter an IMSI number Here' required>
+					<input type='button' class='button' value="Submit" onclick="getIMSIResultTemplate(document.getElementById('imsi').value)"  >
+					</form>
 			</div>
 			
-			
-			
-			<form name="reg" id="reg" data-ajax="false">
-                        <fieldset>
-                            <legend>Register a member:</legend>
-                            <div>
-                                <label for="name">Username:</label>
-                                <input type="text" name="name" id="name" placeholder="Username" required autofocus/>
-                            </div>
-                            <div>
-                                <label for="password">Password:</label>
-                                <input type="password" name="password" id="password" placeholder="User Password" required/>
-                            </div>
-                            <!-- <div>
-                                <label for="repassword">Re-Enter Password:</label>
-                                <input type="password" name="userRePassWord" id="password" placeholder="Repeat Password " required/>
-                            </div> -->
-                            <div>
-                            <label for="userType">Status:</label>
-                            <select name="userType">
-										<option value="Support Engineer">Support Engineer</option>
-										<option value="Customer Service">Customer Service</option>
-										<option value="Network Engineer">Network Engineer</option>
-									</select>
-                                </div>
-                                <br>
-                            <div data-role="controlgroup" data-type="horizontal">
-                                <input type="submit" id="register" value="Register"/>
-                                <input type="button" name="cancel" id="cancel" value="Cancel"/>
-                            </div>
-                           
-                            <div id="formMsgs"></div>
-                            
-                        </fieldset>
-                    </form>
-			
-			
-			
-			
+				
 			
 			
 			<div id="results"></div>

@@ -47,7 +47,7 @@ public class CustomerServiceRepService {
     MemberRegistration upload;
   
     @GET
-    @Path("/us04/{imsi}")
+    @Path("/{imsi}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Callfailure> findCauseCode_EventIDByIMSI(@PathParam("imsi") String IMSI) {	
     	List<Callfailure> callfailures = repository.findCauseCode_EventIDByIMSI(IMSI);
