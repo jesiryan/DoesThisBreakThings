@@ -94,15 +94,14 @@ public class CallfailureRepository {
 		connection = ConnectionFactory.getInstance().getConnection();
 		loginStatement = connection.prepareStatement(loginQueryString);
 		loginStatement.setString(1, "2013-01-01 00:00");
-		loginStatement.setString(2, "2013-01-01 00:00");
+		loginStatement.setString(2, "2014-01-01 00:00");
 		loginResultSet = loginStatement.executeQuery();
 		System.out.println("String" + loginResultSet.toString());
 		while (loginResultSet.next()) {
-			
-			System.out.println("=========================================||||||||||||||||||||||||||||||||||||||||||||||||||---------------------------------------------------------------------");
+			us09List.add(new UserStory09Structure((String)loginResultSet.getString(1), Integer.parseInt(loginResultSet.getString(2)), Integer.parseInt(loginResultSet.getString(3))));
 			System.out.println(loginResultSet.getString(1));
 			System.out.println(loginResultSet.getString(2));
-			System.out.println("=========================================||||||||||||||||||||||||||||||||||||||||||||||||||---------------------------------------------------------------------");
+			System.out.println(loginResultSet.getString(3));
 		}
 		
 		
