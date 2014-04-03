@@ -41,7 +41,7 @@ import org.jboss.as.quickstarts.html5_mobile.data.CallfailureRepository;
 import org.jboss.as.quickstarts.html5_mobile.model.Member;
 import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 
-import com.conygre.training.entities.Callfailure;
+import com.conygre.training.entities.CallFailure;
 
 
 /**
@@ -67,15 +67,15 @@ public class CallfailureService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Callfailure> listAllFailureclasses() {
+    public List<CallFailure> listAllFailureclasses() {
         return repository.findAllOrderedByIMSI();
     }
 
     @GET
     @Path("/{id:[0-9][0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Callfailure lookupFailureclassById(@PathParam("id") int id) {
-    	Callfailure callfailure = repository.findByBaseDataID(id);
+    public CallFailure lookupFailureclassById(@PathParam("id") int id) {
+    	CallFailure callfailure = repository.findByBaseDataID(id);
         if (callfailure == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
@@ -85,10 +85,10 @@ public class CallfailureService {
     @GET
     @Path("/imsiQuery/{imsi}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Callfailure> findCauseCode_EventIDByIMSI(@PathParam("imsi") String IMSI) {
+    public List<CallFailure> findCauseCode_EventIDByIMSI(@PathParam("imsi") String IMSI) {
 
   	    	
-    	List<Callfailure> callfailures = repository.findCauseCode_EventIDByIMSI(IMSI);
+    	List<CallFailure> callfailures = repository.findCauseCode_EventIDByIMSI(IMSI);
         if (callfailures == null) {
         	throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
@@ -98,7 +98,7 @@ public class CallfailureService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createCallfailure(Callfailure callfailure) {
+    public Response createCallfailure(CallFailure callfailure) {
     	return null;
     }
     

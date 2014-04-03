@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.Cell;
 
 import com.conygre.training.dao.jpa.PersistenceUtil;
-import com.conygre.training.entities.Callfailure;
+import com.conygre.training.entities.CallFailure;
 import com.conygre.training.entities.Failureclass;
 
 public class FailureclassReader {

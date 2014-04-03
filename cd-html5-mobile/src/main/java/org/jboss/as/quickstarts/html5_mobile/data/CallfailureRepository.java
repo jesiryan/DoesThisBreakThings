@@ -16,7 +16,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import com.conygre.training.entities.Callfailure;
+import com.conygre.training.entities.CallFailure;
 import com.conygre.training.entities.query.UserStory09Structure;
 
 @ApplicationScoped
@@ -32,14 +32,14 @@ public class CallfailureRepository {
     @PersistenceContext(unitName="conygreChapter8")
     private EntityManager em;
 
-    public Callfailure findByBaseDataID(int baseDataID) {
-        return em.find(Callfailure.class, baseDataID);
+    public CallFailure findByBaseDataID(int baseDataID) {
+        return em.find(CallFailure.class, baseDataID);
     }
 
-    public Callfailure findByIMSI(String iMSI) {
+    public CallFailure findByIMSI(String iMSI) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Callfailure> criteria = cb.createQuery(Callfailure.class);
-        Root<Callfailure> callfailure = criteria.from(Callfailure.class);
+        CriteriaQuery<CallFailure> criteria = cb.createQuery(CallFailure.class);
+        Root<CallFailure> callfailure = criteria.from(CallFailure.class);
         // Swap criteria statements if you would like to try out type-safe criteria queries, a new
         // feature in JPA 2.0
         // criteria.select(member).where(cb.equal(member.get(Member_.name), email));
@@ -47,10 +47,10 @@ public class CallfailureRepository {
         return em.createQuery(criteria).getSingleResult();
     }
 
-    public List<Callfailure> findAllOrderedByIMSI() {
+    public List<CallFailure> findAllOrderedByIMSI() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Callfailure> criteria = cb.createQuery(Callfailure.class);
-        Root<Callfailure> callfailure = criteria.from(Callfailure.class);
+        CriteriaQuery<CallFailure> criteria = cb.createQuery(CallFailure.class);
+        Root<CallFailure> callfailure = criteria.from(CallFailure.class);
         // Swap criteria statements if you would like to try out type-safe criteria queries, a new
         // feature in JPA 2.0
         // criteria.select(member).orderBy(cb.asc(member.get(Member_.name)));
@@ -58,8 +58,8 @@ public class CallfailureRepository {
         return em.createQuery(criteria).getResultList();
     }
     
-    public List<Callfailure> findAllBetween(Date startDateTime, Date endDateTime) {
-   		List<Callfailure> callFailures = (List<Callfailure>) em
+    public List<CallFailure> findAllBetween(Date startDateTime, Date endDateTime) {
+   		List<CallFailure> callFailures = (List<CallFailure>) em
 				.createNamedQuery("CallFailure.findAllBetween")
 				.setParameter("startDateTime", startDateTime)
 				.setParameter("endDateTime", endDateTime).getResultList();
@@ -70,8 +70,8 @@ public class CallfailureRepository {
     }
     
     // User story 4
-    public List<Callfailure> findCauseCode_EventIDByIMSI(String IMSI) {
-		List<Callfailure> callfailures = (List<Callfailure>) 
+    public List<CallFailure> findCauseCode_EventIDByIMSI(String IMSI) {
+		List<CallFailure> callfailures = (List<CallFailure>) 
 				em.createNamedQuery("Callfailure.findByIMSI").setParameter("IMSI", IMSI).getResultList();
 		if (callfailures.size() == 0)
 			return null;
