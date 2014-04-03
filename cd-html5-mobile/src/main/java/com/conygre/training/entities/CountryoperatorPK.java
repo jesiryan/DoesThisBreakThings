@@ -24,6 +24,8 @@ public class CountryoperatorPK implements Serializable {
 		this.mNC = mNC;
 	}
 	
+	/* Getters and Setters */
+	
 	public double getMCC() {
 		return this.mCC;
 	}

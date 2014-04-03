@@ -36,6 +36,52 @@ public class Cause implements Serializable {
 		this.description = description;
 		this.callfailures = callfailures;
 	}
+	
+	private Cause(Builder builder) {
+		this.id.setEventId(builder.eventId);
+		this.id.setCauseCode(builder.causeCode);
+		this.description = builder.description;
+	}
+
+	public static class Builder {
+		private double eventId;
+		private double causeCode;
+		private String description;
+
+		public Builder() {
+			super();
+		}
+
+		public Builder eventId(double eventId) {
+			this.eventId = eventId;
+			return this;
+		}
+
+		public Builder causeCode(double causeCode) {
+			this.causeCode = causeCode;
+			return this;
+		}
+
+		public Builder description(String description) {
+			this.description = description;
+			return this;
+		}
+
+		public Cause build() {
+			return new Cause(this);
+		}
+		
+	}
+	
+	public boolean isEventIdEqual(double eventId) {
+		return this.id.getEventId() == eventId;
+	}
+	
+	public boolean isCauseCodeEqual(double causeCode) {
+		return this.id.getCauseCode() == causeCode;
+	}
+	
+	/* Getters and Setters */
 
 	public CausePK getId() {
 		return this.id;

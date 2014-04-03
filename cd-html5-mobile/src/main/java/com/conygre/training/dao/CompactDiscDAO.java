@@ -7,7 +7,7 @@ import com.conygre.training.entities.CompactDisc;
 
 public interface CompactDiscDAO {
 	
-	void addCompactDisc(CompactDisc disc);
+	Boolean addCompactDisc(CompactDisc disc);
 	CompactDisc getCompactDiscByTitle(String title);
 	List<CompactDisc> getDiscsByArtist(String artist);
 	CompactDisc  findById(int id); 

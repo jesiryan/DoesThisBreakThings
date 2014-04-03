@@ -17,13 +17,13 @@ import java.util.List;
 @Entity
 @XmlRootElement
 //@NamedQuery(name="Failureclass.findAll", query="SELECT f FROM Failureclass f")
-@Table(name = "Failureclass", uniqueConstraints = @UniqueConstraint(columnNames = "failureClass"))
+@Table(name = "Failureclass", uniqueConstraints = @UniqueConstraint(columnNames = "failureclass"))
 public class Failureclass implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int failureClass;
+	private int failureclass;
 
 	private String description;
 
@@ -35,18 +35,58 @@ public class Failureclass implements Serializable {
 	public Failureclass() {
 	}
 	
-	public Failureclass(int failureClass, String description, List<Callfailure> callfailures){
-		this.failureClass = failureClass;
+	public Failureclass(int failureclass, String description){
+		this.failureclass = failureclass;
+		this.description = description;
+	}
+	
+	public Failureclass(int failureclass, String description, List<Callfailure> callfailures){
+		this.failureclass = failureclass;
 		this.description = description;
 		this.callfailures = callfailures;
 	}
-
-	public int getFailureClass() {
-		return this.failureClass;
+	
+	private Failureclass(Builder builder) {
+		this.failureclass = builder.failureclass;
+		this.description = builder.description;
 	}
 
-	public void setFailureClass(int failureClass) {
-		this.failureClass = failureClass;
+	public static class Builder {
+		private int failureclass;
+		private String description;
+
+		public Builder() {
+			super();
+		}
+
+		public Builder failureclass(int failureclass) {
+			this.failureclass = failureclass;
+			return this;
+		}
+
+		public Builder description(String description) {
+			this.description = description;
+			return this;
+		}
+
+		public Failureclass build() {
+			return new Failureclass(this);
+		}
+		
+	}
+	
+	public boolean isFailureclassEqual(int failureclass) {
+		return this.getFailureclass() == failureclass;
+	}
+	
+	/* Getters and Setters */
+	
+	public int getFailureclass() {
+		return this.failureclass;
+	}
+
+	public void setFailureclass(int failureclass) {
+		this.failureclass = failureclass;
 	}
 
 	public String getDescription() {

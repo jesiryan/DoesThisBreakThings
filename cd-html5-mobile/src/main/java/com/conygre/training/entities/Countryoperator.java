@@ -39,6 +39,59 @@ public class Countryoperator implements Serializable {
 		this.operator = operator;
 	}
 	
+	private Countryoperator(Builder builder) {
+		this.id.setMCC(builder.mCC);
+		this.id.setMNC(builder.mNC);
+		this.country = builder.country;
+		this.operator = builder.operator;
+	}
+
+	public static class Builder {
+		private double mCC;
+		private double mNC;
+		private String country;
+		private String operator;
+
+		public Builder() {
+			super();
+		}
+
+		public Builder mCC(double mCC) {
+			this.mCC = mCC;
+			return this;
+		}
+
+		public Builder mNC(double mNC) {
+			this.mNC = mNC;
+			return this;
+		}
+
+		public Builder country(String country) {
+			this.country = country;
+			return this;
+		}
+
+		public Builder operator(String operator) {
+			this.operator = operator;
+			return this;
+		}
+
+		public Countryoperator build() {
+			return new Countryoperator(this);
+		}
+
+	}
+	
+	public boolean isMCCEqual(int mCC) {
+		return this.getId().getMCC() == mCC;
+	}
+	
+	public boolean isMNCEqual(int mNC) {
+		return this.getId().getMNC() == mNC;
+	}
+	
+	/* Getters and Setters */
+	
 	public CountryoperatorPK getId() {
 		return this.id;
 	}

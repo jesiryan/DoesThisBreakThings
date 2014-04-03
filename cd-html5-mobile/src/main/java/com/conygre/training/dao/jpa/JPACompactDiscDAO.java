@@ -22,12 +22,15 @@ public class JPACompactDiscDAO implements CompactDiscDAO {
 	@PersistenceContext(unitName="conygreChapter8")
 	private EntityManager em;
 	
-	public void addCompactDisc(CompactDisc disc) {
+	public Boolean addCompactDisc(CompactDisc disc) {
 	
 		Query query = em.createQuery("select cd from CompactDisc cd");
 		List<CompactDisc> discs = query.getResultList(); 
-		if (!discs.contains(disc))
-			em.persist(disc);		
+		if (!discs.contains(disc)){
+			em.persist(disc);
+			return true;
+		}
+		return false;
 	}
 
 

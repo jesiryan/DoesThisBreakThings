@@ -59,6 +59,91 @@ public class Equipment implements Serializable {
  		this.callfailures = callfailures;
 	}
 	
+	private Equipment(Builder builder) {
+		this.tAC = builder.tAC;
+		this.marketingName = builder.marketingName;
+		this.manufacturer = builder.manufacturer;
+		this.accessCapability = builder.accessCapability;
+		this.model = builder.model;
+		this.vendorName = builder.vendorName;
+		this.equipmentType = builder.equipmentType;
+		this.operatingSystem = builder.operatingSystem;
+		this.inputMode = builder.inputMode;
+	}
+	
+	public static class Builder {
+		private int tAC;
+		private String marketingName;
+		private String manufacturer;
+		private String accessCapability;
+		private String model;
+		private String vendorName;
+		private String equipmentType;
+		private String operatingSystem;
+		private String inputMode;
+
+		public Builder() {
+			super();
+		}
+
+		public Builder tAC(int tAC) {
+			this.tAC = tAC;
+			return this;
+		}
+
+		public Builder marketingName(String marketingName) {
+			this.marketingName = marketingName;
+			return this;
+		}
+
+		public Builder manufacturer(String manufacturer) {
+			this.manufacturer = manufacturer;
+			return this;
+		}
+
+		public Builder accessCapability(String accessCapability) {
+			this.accessCapability = accessCapability;
+			return this;
+		}
+
+		public Builder model(String model) {
+			this.model = model;
+			return this;
+		}
+
+		public Builder vendorName(String vendorName) {
+			this.vendorName = vendorName;
+			return this;
+		}
+
+		public Builder equipmentType(String equipmentType) {
+			this.equipmentType = equipmentType;
+			return this;
+		}
+
+		public Builder operatingSystem(String operatingSystem) {
+			this.operatingSystem = operatingSystem;
+			return this;
+		}
+
+		public Builder inputMode(String inputMode) {
+			this.inputMode = inputMode;
+			return this;
+		}
+
+		public Equipment build() {
+			return new Equipment(this);
+		}
+
+	}
+	
+	public boolean isTACEqual(int tAC) {
+		return this.tAC == tAC;
+	}
+
+	
+	/* Getters and Setters */
+	
 	public int getTAC() {
 		return this.tAC;
 	}

@@ -103,11 +103,11 @@ public class MemberRegistrationTest {
       log.info("Duplicate member register attempt failed with return code " + response.getStatus());
    }
     
-   private Member createMemberInstance(String name, String email, String phone) {
+   private Member createMemberInstance(String name, String password, String userType) {
       Member member = new Member();
-//      member.setEmail(email);
       member.setName(name);
-//      member.setPhoneNumber(phone);
+//      member.setPassword(password);
+//      member.setUserType(userType);
       return member;
    }
 }

@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-
-
 /**
  * The persistent class for the user database table.
  * 
@@ -32,7 +30,15 @@ public class User implements Serializable {
 
 	public User() {
 	}
-
+	
+	public User(String username, String password, String userType){
+		this.username = username;
+		this.password = password;
+		this.userType = userType;
+	}
+	
+	/* Getters and Setters */
+	
 	public int getId() {
 		return this.id;
 	}
