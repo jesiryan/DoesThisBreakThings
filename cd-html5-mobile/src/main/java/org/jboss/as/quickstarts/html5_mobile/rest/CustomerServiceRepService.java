@@ -20,7 +20,6 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.dt340a.group6.sprint1.entity.CallFailure;
 import org.jboss.as.quickstarts.html5_mobile.data.CallfailureRepository;
 import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 
@@ -59,20 +58,20 @@ public class CustomerServiceRepService {
         return callfailures;
     }  
 
-	public static List<Callfailure> countCauseCode(int tAC, double cause,
-			double event) {
-		// eventId and o.causeCode =:causeCode
-		EntityManager em = emf.createEntityManager();
-		List<Callfailure> causeList = (List<Callfailure>) em
-				.createNamedQuery("CallFailure.countByEventAndCause")
-				.setParameter("TAC", tAC).setParameter("EVENT", event)
-				.setParameter("CAUSE", cause).getResultList();
-		em.close();
-
-		if (causeList.size() == 0)
-			return null;
-		else
-			return causeList;
-	}
+//	public static List<Callfailure> countCauseCode(int tAC, double cause,
+//			double event) {
+//		// eventId and o.causeCode =:causeCode
+//		EntityManager em = emf.createEntityManager();
+//		List<Callfailure> causeList = (List<Callfailure>) em
+//				.createNamedQuery("CallFailure.countByEventAndCause")
+//				.setParameter("TAC", tAC).setParameter("EVENT", event)
+//				.setParameter("CAUSE", cause).getResultList();
+//		em.close();
+//
+//		if (causeList.size() == 0)
+//			return null;
+//		else
+//			return causeList;
+//	}
     
 }
