@@ -1,0 +1,15 @@
+<script type="text/template" id="us04-tmpl">
+<% var addHeader = true;
+_.each(callfailures, function(callfailures) { 
+    if ( Modernizr.mq( "only all and (max-width: 640px)" ) ) {
+        addHeader = true;
+    }
+    %>
+	
+	<% if ( addHeader ) { %><thead><tr><th>Event Id</th><th>Cause Code</th><th>Description</th></tr></thead><tbody><% } %><tr><td><%=callfailures.cause.id.eventId%></td><td><%=callfailures.cause.id.causeCode%></td><td><%=callfailures.cause.description%></td></tr>
+	
+	
+	
+<% addHeader = false;
+}); %>
+</script>
