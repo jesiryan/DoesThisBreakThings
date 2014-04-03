@@ -1,116 +1,50 @@
-/* Get the member template */
-function getMemberTemplate() {
-   $.ajax({
-       url: "tmpl/member.tmpl",
-       dataType: "html",
-       success: function( data ) {
-           $( "head" ).append( data );
-           updateMemberTable();
-       }
-   });
-}
-function getCdTemplate() {
-   $.ajax({
-       url: "tmpl/cd.tmpl",
-       dataType: "html",
-       success: function( data ) {
-           $( "head" ).append( data );
-           updateCdTable();
-       }
-   });
-}
+//****************************User Story 9*******************************//
+    
+	/*Pass start and end dateTimes into this function which is called from the submit when you enter start and end dateTimes*/
+    function getUS09ResultTemplate(startdate,enddate) {
+    	
+        $.ajax({
+            url: "tmpl/us04.tmpl",
+            dataType: "html",
+            success: function( data ) {
+            	
+                $( "head" ).append( data );
+                updateUS09Table(startdate,enddate);
+            }
+        });
+    }
+    
+    /* Uses JAX-RS GET to retrieve all imsi Numbers for start and end dateTimes*/
+    function updateUS09Table(startdate,enddate) {
 
-/* Builds the updated table for the member list */
-function buildMemberRows(members) {
-   return _.template( $( "#imsi-tmpl" ).html(), {"members": members});
-}
-/* Builds the updated table for the cd list */
-function buildCdRows(cds) {
-   return _.template( $( "#cd-tmpl" ).html(), {"cds": cds});
-}
-/* Uses JAX-RS GET to retrieve current member list */
-function updateMemberTable() {
-   $.ajax({
-       url: "rest/members",
-       cache: false,
-       success: function(data) {
-           $('#results').empty().append(buildMemberRows(data));
-       },
-       error: function(error) {
-           //console.log("error updating table -" + error.status);
-       }
-   });
-}
-function updateCdTable() {
-   $.ajax({
-       url: "rest/cds",
-       cache: false,
-       success: function(data) {
-           $('#cds').empty().append(buildCdRows(data));
-       },
-       error: function(error) {
-           //console.log("error updating table -" + error.status);
-       }
-   });
-}
+        $.ajax({
+            url: "rest/cust/us09/"+startdate+"/"+enddate,
+            type: "GET",
+            cache: false,
+            data:{	startdate: startdate,
+            		enddate: enddate},
+            success: function(data) {
+            	if (data.length < 1) {
+                    $('#info').removeClass("hidden");
+                    $('#hidden-container').addClass("hidden");
+            		$('#info').empty().append("Information: The query for '" + imsi + "' has returned no results.");
+					document.forms["us09Form"].reset();
+            	} else {
+            		$('#info').addClass("hidden");
+                    $('#hidden-container').removeClass("hidden");
+                	$('#results').empty().append(buildUS09ResultsRows(data));
+                    document.forms["us09Form"].reset();
+                    console.log("The data being added is : " + data);
+                }
+            },
+            error: function(error) {
+//                document.forms["us04Form"].reset();
+                //console.log("error updating table -" + error.status);
+            }
+        });
+    }
 
-/*
-Attempts to register a new member using a JAX-RS POST.  The callbacks
-the refresh the member table, or process JAX-RS response codes to update
-the validation errors.
-*/
-function getUS04Result(imsi) {
-   //clear existing  msgs
-//    $('span.invalid').remove();
-//    $('span.success').remove();
-
-   $.ajax({
-   	url: "/rest/callfailures/us04/?_=344930000000011",
-       type: "GET",
-       contentType: "application/json",
-       //data: JSON.stringify({ imsi: 344930000000011}),
-       success: function (result) {
-           alert(result.Result);
-       
-       	updateImsiTable();
-       }
-   });
-}
-   
-   //****************************User  Story 09*******************************//
-   
-   function getIMSIResultTemplate() {
-       $.ajax({
-           url: "tmpl/imsi.tmpl",
-           dataType: "html",
-           success: function( data ) {
-               $( "head" ).append( data );
-               updateMemberTable();
-           }
-       });
-   }
-   
-   function updateImsiTable() {
-       $.ajax({
-           url: "rest/callfailures/us04",
-           cache: false,
-           success: function(data) {
-               $('#results').empty().append(buildRows(data));
-           },
-           error: function(error) {
-               //console.log("error updating table -" + error.status);
-           }
-       });
-   }
-   
-   
-
-   /* Builds the updated table for the member list */
-   function buildRows(callFailure) {
-       return _.template( $( "#imsi-tmpl" ).html(), {"callfailures": callFailures});
-   }
-   
-   
-   
-   
-   
+	/* Builds the updated table for the callfailures list */
+	function buildUS09ResultsRows(callfailures) {
+	    return _.template( $( "#us04-tmpl" ).html(), {"callfailures": callfailures});
+	}

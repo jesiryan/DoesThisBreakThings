@@ -53,7 +53,6 @@ public class CustomerServiceRepService {
     	List<Callfailure> callfailures = repository.findCauseCode_EventIDByIMSI(IMSI);
         if (callfailures == null) {
         	return null;
-//        	throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         return callfailures;
     }  

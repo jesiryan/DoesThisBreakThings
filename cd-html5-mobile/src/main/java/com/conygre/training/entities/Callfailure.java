@@ -16,16 +16,18 @@ import java.util.Date;
 	 @NamedQuery(name = "Callfailure.findAll", query = "SELECT c FROM Callfailure c ORDER BY c.iMSI"),	 
 	 @NamedQuery(name = "Callfailure.findAllUnordered", query = "SELECT c FROM Callfailure c"),
 	 @NamedQuery(name = "Callfailure.findByTAC", query = "SELECT c FROM Callfailure c WHERE c.equipment.tAC=:TAC"), 
-	// @NamedQuery(name = "Callfailure.findCallfailuresDurationPerIMSI", query = "SELECT new List(c.iMSI, count(c), sum(c.duration)) FROM Callfailure c WHERE c.dateTime>:startDate AND c.dateTime<:endDate GROUP BY c.iMSI"),
-	 //@NamedQuery(name = "Callfailure.findDate", query = "SELECT new List(c.iMSI, c.dateTime) FROM Callfailure c WHERE c.dateTime > :startDate"),
-	 //@NamedQuery(name = "Callfailure.findCountBetweenTimesTotalDuration", query = "SELECT new List(c.iMSI, count(c), sum(c.duration)) FROM Callfailure c WHERE c.dateTime BETWEEN :startDateTime AND :endDateTime GROUP BY c.iMSI"),
-//	 @NamedQuery(name = "Callfailure.groupByTAC", query = "SELECT c FROM Callfailure c WHERE c.equipment.tAC=:TAC GROUP BY c.cause.eventId, c.cause.causeCode"),	 
-//	 @NamedQuery(name = "Callfailure.countByEventAndCause", query = "SELECT count(c) FROM Callfailure c WHERE c.equipment.tAC=:TAC AND c.cause.eventId=:EVENT AND o.cause.causeCode=:CAUSE"),
+	//@NamedQuery(name = "Callfailure.findCallfailuresDurationPerIMSI", query = "SELECT new List(c.iMSI, count(c), sum(c.duration)) FROM Callfailure c WHERE c.dateTime>:startDate AND c.dateTime<:endDate GROUP BY c.iMSI"),
+	//@NamedQuery(name = "Callfailure.findDate", query = "SELECT new List(c.iMSI, c.dateTime) FROM Callfailure c WHERE c.dateTime > :startDate"),
+	 
+	 @NamedQuery(name = "Callfailure.findCountBetweenTimesTotalDuration", query = "SELECT new List(c.iMSI, count(*), SUM(c.duration)) FROM Callfailure c WHERE c.dateTime BETWEEN :startDateTime AND :endDateTime GROUP BY iMSI"),
+	
+	//@NamedQuery(name = "Callfailure.groupByTAC", query = "SELECT c FROM Callfailure c WHERE c.equipment.tAC=:TAC GROUP BY c.cause.eventId, c.cause.causeCode"),	 
+	//@NamedQuery(name = "Callfailure.countByEventAndCause", query = "SELECT count(c) FROM Callfailure c WHERE c.equipment.tAC=:TAC AND c.cause.eventId=:EVENT AND o.cause.causeCode=:CAUSE"),
 	 @NamedQuery(name = "Callfailure.findAllBetween", query = "SELECT c FROM Callfailure c WHERE c.dateTime BETWEEN :startDateTime AND :endDateTime ORDER BY c.iMSI"),	
 	 @NamedQuery(name = "Callfailure.findImsiBetween", query = "SELECT c FROM Callfailure c WHERE c.dateTime BETWEEN :startDateTime AND :endDateTime AND c.iMSI=:IMSI"),	
 	 @NamedQuery(name = "Callfailure.findCountOfOccurancesForGivenIMSI", query = "SELECT count(c) FROM Callfailure c WHERE c.iMSI=:IMSI"),
 	 @NamedQuery(name = "Callfailure.findByTACInTime", query = "SELECT c FROM Callfailure c WHERE c.equipment.tAC=:TAC and c.dateTime BETWEEN :startDateTime and :endDateTime"),
-//	 @NamedQuery(name = "Callfailure.findAffectedIMSIsGivenCauseClass", query = "SELECT c FROM Callfailure c WHERE c.failureclass.failureclass=:causeClass GROUP BY c.iMSI"),
+	//@NamedQuery(name = "Callfailure.findAffectedIMSIsGivenCauseClass", query = "SELECT c FROM Callfailure c WHERE c.failureclass.failureclass=:causeClass GROUP BY c.iMSI"),
 	})
 
 	@Entity
