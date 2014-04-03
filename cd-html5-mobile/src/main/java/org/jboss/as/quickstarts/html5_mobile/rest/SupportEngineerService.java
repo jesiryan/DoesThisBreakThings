@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 import org.jboss.as.quickstarts.html5_mobile.data.CallfailureRepository;
 import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 
-import com.conygre.training.entities.CallFailure;
+import com.conygre.training.entities.Callfailure;
 
 
 @Path("/supp")
@@ -40,8 +40,8 @@ public class SupportEngineerService {
     @GET
     @Path("/usXX/{imsi}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<CallFailure> findCauseCode_EventIDByIMSI(@PathParam("imsi") String IMSI) {	
-    	List<CallFailure> callfailures = repository.findCauseCode_EventIDByIMSI(IMSI);
+    public List<Callfailure> findCauseCode_EventIDByIMSI(@PathParam("imsi") String IMSI) {	
+    	List<Callfailure> callfailures = repository.findCauseCode_EventIDByIMSI(IMSI);
         if (callfailures == null) {
         	return null;
         }

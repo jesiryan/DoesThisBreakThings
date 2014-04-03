@@ -39,7 +39,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.jboss.as.quickstarts.html5_mobile.util.Resources;
 
-import com.conygre.training.entities.CallFailure;
+import com.conygre.training.entities.Callfailure;
 import com.conygre.training.entities.Cause;
 import com.conygre.training.entities.CausePK;
 
@@ -104,12 +104,12 @@ public class CauseRegistrationTest {
 
 		// Register an initial user
 		CausePK causePK = new CausePK(000, 000);
-		List<CallFailure> callfailures = null;
+		List<Callfailure> callfailures = null;
 		Cause cause = createCauseInstance(causePK, "description", callfailures);
 		causeRegistration.createCause(cause);
 
 		// Register a different user with the same CausePK
-		List<CallFailure> callfailures2 = null;
+		List<Callfailure> callfailures2 = null;
 		Cause anotherCause = createCauseInstance(causePK, "description2", callfailures2);
 		Response response = causeRegistration.createCause(anotherCause);
 
@@ -124,7 +124,7 @@ public class CauseRegistrationTest {
 				+ response.getStatus());
 	}
 
-	private Cause createCauseInstance(CausePK id, String description, List<CallFailure> callfailures) {
+	private Cause createCauseInstance(CausePK id, String description, List<Callfailure> callfailures) {
 		Cause cause = new Cause();
 		cause.setId(id);
 		cause.setDescription(description);

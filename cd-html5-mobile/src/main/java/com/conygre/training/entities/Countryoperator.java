@@ -28,7 +28,7 @@ public class Countryoperator implements Serializable {
 	//bi-directional many-to-one association to Callfailure
 	@JsonIgnore
 	@OneToMany(mappedBy="countryoperator")
-	private List<CallFailure> callfailures;
+	private List<Callfailure> callfailures;
 
 	public Countryoperator() {
 	}
@@ -116,22 +116,22 @@ public class Countryoperator implements Serializable {
 		this.operator = operator;
 	}
 
-	public List<CallFailure> getCallfailures() {
+	public List<Callfailure> getCallfailures() {
 		return this.callfailures;
 	}
 
-	public void setCallfailures(List<CallFailure> callfailures) {
+	public void setCallfailures(List<Callfailure> callfailures) {
 		this.callfailures = callfailures;
 	}
 
-	public CallFailure addCallfailure(CallFailure callfailure) {
+	public Callfailure addCallfailure(Callfailure callfailure) {
 		getCallfailures().add(callfailure);
 		callfailure.setCountryoperator(this);
 
 		return callfailure;
 	}
 
-	public CallFailure removeCallfailure(CallFailure callfailure) {
+	public Callfailure removeCallfailure(Callfailure callfailure) {
 		getCallfailures().remove(callfailure);
 		callfailure.setCountryoperator(null);
 

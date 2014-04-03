@@ -30,7 +30,7 @@ public class Failureclass implements Serializable {
 	//bi-directional many-to-one association to Callfailure
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="failureclass")
-	private List<CallFailure> callfailures;
+	private List<Callfailure> callfailures;
 
 	public Failureclass() {
 	}
@@ -40,7 +40,7 @@ public class Failureclass implements Serializable {
 		this.description = description;
 	}
 	
-	public Failureclass(int failureclass, String description, List<CallFailure> callfailures){
+	public Failureclass(int failureclass, String description, List<Callfailure> callfailures){
 		this.failureclass = failureclass;
 		this.description = description;
 		this.callfailures = callfailures;
@@ -97,22 +97,22 @@ public class Failureclass implements Serializable {
 		this.description = description;
 	}
 
-	public List<CallFailure> getCallfailures() {
+	public List<Callfailure> getCallfailures() {
 		return this.callfailures;
 	}
 
-	public void setCallfailures(List<CallFailure> callfailures) {
+	public void setCallfailures(List<Callfailure> callfailures) {
 		this.callfailures = callfailures;
 	}
 
-	public CallFailure addCallfailure(CallFailure callfailure) {
+	public Callfailure addCallfailure(Callfailure callfailure) {
 		getCallfailures().add(callfailure);
 		callfailure.setFailureclass(this);
 
 		return callfailure;
 	}
 
-	public CallFailure removeCallfailure(CallFailure callfailure) {
+	public Callfailure removeCallfailure(Callfailure callfailure) {
 		getCallfailures().remove(callfailure);
 		callfailure.setFailureclass(null);
 

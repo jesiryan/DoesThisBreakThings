@@ -51,9 +51,9 @@ public class CallfailureReader {
 		equipmentList = allMasterTableRows.getEquipment();
 	}
 
-	public CallFailure getOneCallfailureRow(int rowNumber)
+	public Callfailure getOneCallfailureRow(int rowNumber)
 			throws ForeignTableException {
-		return new CallFailure.Builder().dateTime(getDateTime(rowNumber))
+		return new Callfailure.Builder().dateTime(getDateTime(rowNumber))
 				.cause(getCause(rowNumber))
 				.failureclass(getFailureclass(rowNumber))
 				.equipment(getEquipment(rowNumber))

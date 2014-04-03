@@ -142,10 +142,10 @@ public class PersistenceUtil implements Serializable {
 
 	// TODO why is this called findCausecode???
 	@SuppressWarnings("unchecked")
-	public static List<CallFailure> findCauseCode_EventIDByIMSI(String IMSI) {
+	public static List<Callfailure> findCauseCode_EventIDByIMSI(String IMSI) {
 
 		EntityManager em = emf.createEntityManager();
-		List<CallFailure> callfailures = (List<CallFailure>) em
+		List<Callfailure> callfailures = (List<Callfailure>) em
 				.createNamedQuery("Callfailure.findByIMSI")
 				.setParameter("IMSI", IMSI).getResultList();
 		em.close();
@@ -157,11 +157,11 @@ public class PersistenceUtil implements Serializable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static List<CallFailure> findCallByIMSIBetweenDate(String IMSI,
+	public static List<Callfailure> findCallByIMSIBetweenDate(String IMSI,
 			Date startDateTime, Date endDateTime) {
 
 		EntityManager em = emf.createEntityManager();
-		List<CallFailure> callfailures = (List<CallFailure>) em
+		List<Callfailure> callfailures = (List<Callfailure>) em
 				.createNamedQuery("Callfailure.findImsiBetween")
 				.setParameter("IMSI", IMSI)
 				.setParameter("startDateTime", startDateTime)
@@ -175,11 +175,11 @@ public class PersistenceUtil implements Serializable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static List<CallFailure> findCallfailureByTACInTime(int tac,
+	public static List<Callfailure> findCallfailureByTACInTime(int tac,
 			Date startDateTime, Date endDateTime) {
 
 		EntityManager em = emf.createEntityManager();
-		List<CallFailure> callfailures = (List<CallFailure>) em
+		List<Callfailure> callfailures = (List<Callfailure>) em
 				.createNamedQuery("Callfailure.findByTACInTime")
 				.setParameter("TAC", tac)
 				.setParameter("startDateTime", startDateTime)
@@ -224,11 +224,11 @@ public class PersistenceUtil implements Serializable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static List<CallFailure> countCauseCode(int tAC, double cause,
+	public static List<Callfailure> countCauseCode(int tAC, double cause,
 			double event) {
 		// eventId and o.causeCode =:causeCode
 		EntityManager em = emf.createEntityManager();
-		List<CallFailure> causeList = (List<CallFailure>) em
+		List<Callfailure> causeList = (List<Callfailure>) em
 				.createNamedQuery("Callfailure.countByEventAndCause")
 				.setParameter("TAC", tAC).setParameter("EVENT", event)
 				.setParameter("CAUSE", cause).getResultList();
@@ -241,9 +241,9 @@ public class PersistenceUtil implements Serializable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static List<CallFailure> groupCallfailureByTAC(int tac) {
+	public static List<Callfailure> groupCallfailureByTAC(int tac) {
 		EntityManager em = emf.createEntityManager();
-		List<CallFailure> callfailures = (List<CallFailure>) em
+		List<Callfailure> callfailures = (List<Callfailure>) em
 				.createNamedQuery("Callfailure.groupByTAC")
 				.setParameter("TAC", tac).getResultList();
 		em.close();
@@ -253,11 +253,11 @@ public class PersistenceUtil implements Serializable {
 			return callfailures;
 	}
 
-	public static List<CallFailure> findAllCallfailuresBetween(Date startDateTime,
+	public static List<Callfailure> findAllCallfailuresBetween(Date startDateTime,
 			Date endDateTime) {
 		EntityManager em = emf.createEntityManager();
 		@SuppressWarnings("unchecked")
-		List<CallFailure> callfailures = (List<CallFailure>) em
+		List<Callfailure> callfailures = (List<Callfailure>) em
 				.createNamedQuery("Callfailure.findAllBetween")
 				.setParameter("startDateTime", startDateTime)
 				.setParameter("endDateTime", endDateTime).getResultList();
@@ -268,10 +268,10 @@ public class PersistenceUtil implements Serializable {
 			return callfailures;
 	}
 
-	public static List<CallFailure> findAllCallfailures() {
+	public static List<Callfailure> findAllCallfailures() {
 		EntityManager em = emf.createEntityManager();
 		@SuppressWarnings("unchecked")
-		List<CallFailure> callfailures = (List<CallFailure>) em
+		List<Callfailure> callfailures = (List<Callfailure>) em
 				.createNamedQuery("Callfailure.findAll").getResultList();
 		em.close();
 		if (callfailures.size() == 0)

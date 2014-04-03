@@ -26,12 +26,12 @@ public class Cause implements Serializable {
 	//bi-directional many-to-one association to Callfailure
 	@JsonIgnore
 	@OneToMany(mappedBy="cause")
-	private List<CallFailure> callfailures;
+	private List<Callfailure> callfailures;
 
 	public Cause() {
 	}
 	
-	public Cause(CausePK id, String description, List<CallFailure> callfailures){
+	public Cause(CausePK id, String description, List<Callfailure> callfailures){
 		this.id = id;
 		this.description = description;
 		this.callfailures = callfailures;
@@ -99,22 +99,22 @@ public class Cause implements Serializable {
 		this.description = description;
 	}
 
-	public List<CallFailure> getCallfailures() {
+	public List<Callfailure> getCallfailures() {
 		return this.callfailures;
 	}
 
-	public void setCallfailures(List<CallFailure> callfailures) {
+	public void setCallfailures(List<Callfailure> callfailures) {
 		this.callfailures = callfailures;
 	}
 
-	public CallFailure addCallfailure(CallFailure callfailure) {
+	public Callfailure addCallfailure(Callfailure callfailure) {
 		getCallfailures().add(callfailure);
 		callfailure.setCause(this);
 
 		return callfailure;
 	}
 
-	public CallFailure removeCallfailure(CallFailure callfailure) {
+	public Callfailure removeCallfailure(Callfailure callfailure) {
 		getCallfailures().remove(callfailure);
 		callfailure.setCause(null);
 

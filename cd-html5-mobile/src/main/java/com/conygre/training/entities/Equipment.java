@@ -41,12 +41,12 @@ public class Equipment implements Serializable {
 	//bi-directional many-to-one association to Callfailure
 	@JsonIgnore
 	@OneToMany(mappedBy="equipment")
-	private List<CallFailure> callfailures;
+	private List<Callfailure> callfailures;
 
 	public Equipment() {
 	}
 	
-	public Equipment(int tAC, String accessCapability, String equipmentType, String inputMode, String manufacturer, String marketingName, String model, String operatingSystem, String vendorName, List<CallFailure> callfailures){
+	public Equipment(int tAC, String accessCapability, String equipmentType, String inputMode, String manufacturer, String marketingName, String model, String operatingSystem, String vendorName, List<Callfailure> callfailures){
 		this.tAC = tAC;
 		this.accessCapability = accessCapability;
 		this.equipmentType = equipmentType;
@@ -216,22 +216,22 @@ public class Equipment implements Serializable {
 		this.vendorName = vendorName;
 	}
 
-	public List<CallFailure> getCallfailures() {
+	public List<Callfailure> getCallfailures() {
 		return this.callfailures;
 	}
 
-	public void setCallfailures(List<CallFailure> callfailures) {
+	public void setCallfailures(List<Callfailure> callfailures) {
 		this.callfailures = callfailures;
 	}
 
-	public CallFailure addCallfailure(CallFailure callfailure) {
+	public Callfailure addCallfailure(Callfailure callfailure) {
 		getCallfailures().add(callfailure);
 		callfailure.setEquipment(this);
 
 		return callfailure;
 	}
 
-	public CallFailure removeCallfailure(CallFailure callfailure) {
+	public Callfailure removeCallfailure(Callfailure callfailure) {
 		getCallfailures().remove(callfailure);
 		callfailure.setEquipment(null);
 
