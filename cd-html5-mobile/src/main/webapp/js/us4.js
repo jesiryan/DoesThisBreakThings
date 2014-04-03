@@ -4,18 +4,18 @@
     function getIMSIResultTemplate(imsi) {
     	
         $.ajax({
-            url: "tmpl/imsi.tmpl",
+            url: "tmpl/us04.tmpl",
             dataType: "html",
             success: function( data ) {
             	
                 $( "head" ).append( data );
-                updateMemberTable(imsi);
+                updateImsiTable(imsi);
             }
         });
     }
     
     /* Uses JAX-RS GET to retrieve given imsi Number */
-    function updateMemberTable(imsi) {
+    function updateImsiTable(imsi) {
 
         $.ajax({
             url: "rest/cust/us04/"+imsi,
@@ -31,7 +31,7 @@
             	} else {
             		$('#info').addClass("hidden");
                     $('#hidden-container').removeClass("hidden");
-                	$('#results').empty().append(buildMemberRows(data));
+                	$('#results').empty().append(buildResultsRows(data));
                     document.forms["us04Form"].reset();
                     console.log("The data being added is : " + data);
                 }
@@ -44,6 +44,6 @@
     }
 
 	/* Builds the updated table for the callfailures list */
-	function buildMemberRows(callfailures) {
-	    return _.template( $( "#imsi-tmpl" ).html(), {"callfailures": callfailures});
+	function buildResultsRows(callfailures) {
+	    return _.template( $( "#us04-tmpl" ).html(), {"callfailures": callfailures});
 	}
