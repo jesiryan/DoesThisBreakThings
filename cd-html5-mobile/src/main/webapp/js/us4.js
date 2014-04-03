@@ -22,11 +22,19 @@
             type: "GET",
             cache: false,
             data:{imsi: imsi },
-            success: function(data) {            	
-                $('#results').empty().append(buildMemberRows(data));
-                document.forms["us04Form"].reset();
-                $('#hidden-container').removeClass("hidden");
-                console.log("The data being added is : " + data);
+            success: function(data) {
+            	if (data.length < 1) {
+                    $('#info').removeClass("hidden");
+                    $('#hidden-container').addClass("hidden");
+            		$('#info').empty().append("Information: The query for '" + imsi + "' has returned no results.");
+					document.forms["us04Form"].reset();
+            	} else {
+            		$('#info').addClass("hidden");
+                    $('#hidden-container').removeClass("hidden");
+                	$('#results').empty().append(buildMemberRows(data));
+                    document.forms["us04Form"].reset();
+                    console.log("The data being added is : " + data);
+                }
             },
             error: function(error) {
 //                document.forms["us04Form"].reset();

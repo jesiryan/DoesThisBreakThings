@@ -76,6 +76,15 @@
 		              });
 		          }
 		      },
+			complete: function() {
+			    $( document ).ready( function() {
+			        $('#us04Form').submit(function(event) {
+			        	var imsi = document.getElementById('imsi').value;
+			        	getIMSIResultTemplate(imsi);
+			            return false;
+			        });
+			    });
+			}
 		}]);
 		</script>
 	</head>
@@ -101,8 +110,9 @@
 			<div class='wrapper' id='inner-container' >  
 				<form id='us04Form'>
 					<strong>Enter IMSI:</strong><input class='submissionfield' type='text' name='imsi' id='imsi' placeholder='Please Enter an IMSI number Here' required>
-					<input type='button' class='button' value="Submit" onclick="getIMSIResultTemplate(document.getElementById('imsi').value)"  >
-					</form>
+					<input type='submit' class='button' value="Submit">
+				</form>
+				<div id="info" class="hidden"></div>
 			</div>
 			
 				
