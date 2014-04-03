@@ -18,6 +18,19 @@
     width: auto; 
 }
 
+#hidden-container {
+   
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 2px solid #EEEEEE;
+    box-shadow: 5px 5px 5px #888888;
+    border-radius: 5px;
+    float: none;
+    margin: 0 0 1.5em !important;
+    overflow: hidden;
+    padding: 1em;
+    width: auto; 
+}
+
 #login-container {
    
     background: none repeat scroll 0 0 #FFFFFF;
@@ -189,6 +202,11 @@ margin-top: 13px;
     padding-left: 10px;
     display:block;
 }
+
+.hidden{
+	display: none;
+}
+
 
 /*Table for incoming Data Styling*/
 

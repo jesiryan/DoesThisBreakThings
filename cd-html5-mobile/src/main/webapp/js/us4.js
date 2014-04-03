@@ -1,9 +1,6 @@
-
-
-   //****************************User  Story 4*******************************//
+//****************************User  Story 4*******************************//
     
-/*Pass imisi into this function which is called from the submit when you enter an imsi*/
-
+	/*Pass imisi into this function which is called from the submit when you enter an imsi*/
     function getIMSIResultTemplate(imsi) {
     	
         $.ajax({
@@ -17,35 +14,28 @@
         });
     }
     
-    
     /* Uses JAX-RS GET to retrieve given imsi Number */
-    
     function updateMemberTable(imsi) {
 
         $.ajax({
-            url: "rest/callfailures",
+            url: "rest/cust/us04/"+imsi,
             type: "GET",
             cache: false,
             data:{imsi: imsi },
-            success: function(data) {
-            	
+            success: function(data) {            	
                 $('#results').empty().append(buildMemberRows(data));
+                document.forms["us04Form"].reset();
+                $('#hidden-container').removeClass("hidden");
+                console.log("The data being added is : " + data);
             },
             error: function(error) {
+//                document.forms["us04Form"].reset();
                 //console.log("error updating table -" + error.status);
             }
         });
     }
 
-
-/* Builds the updated table for the callfailures list */
-function buildMemberRows(callfailures) {
-    return _.template( $( "#imsi-tmpl" ).html(), {"callfailures": callfailures});
-}
-
-
-
- 
-   
-    
-
+	/* Builds the updated table for the callfailures list */
+	function buildMemberRows(callfailures) {
+	    return _.template( $( "#imsi-tmpl" ).html(), {"callfailures": callfailures});
+	}

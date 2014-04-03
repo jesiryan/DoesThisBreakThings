@@ -30,7 +30,7 @@ import com.conygre.training.entities.Callfailure;
  * <p/>
  * This class produces a RESTful service to read/write the contents of the members table.
  */
-@Path("/callfailures")
+@Path("/cust")
 @RequestScoped
 @Stateful
 public class CustomerServiceRepService {
@@ -47,12 +47,13 @@ public class CustomerServiceRepService {
     MemberRegistration upload;
   
     @GET
-    @Path("/{imsi}")
+    @Path("/us04/{imsi}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Callfailure> findCauseCode_EventIDByIMSI(@PathParam("imsi") String IMSI) {	
     	List<Callfailure> callfailures = repository.findCauseCode_EventIDByIMSI(IMSI);
         if (callfailures == null) {
-        	throw new WebApplicationException(Response.Status.NOT_FOUND);
+        	return null;
+//        	throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         return callfailures;
     }  

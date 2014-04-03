@@ -5,103 +5,79 @@
 
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <!-- Set the tab, home page, shortcut icons -->
-    <link rel="Shortcut Icon" href="img/aerogear_icon_16x.png">
-    <link rel="apple-touch-icon" href="img/aerogear_avatar_48px.png"/>
-
-    <!-- For minification, comment out this link -->
-    <!-- Shared styles -->
-    <link rel="stylesheet" href="css/screen.css"/>
-
-    <!-- Set viewport scaling and zoom features -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <script type="text/javascript" src="js/libs/modernizr-2.5.3.min.js"></script>
+	    <!-- Set the tab, home page, shortcut icons -->
+	    <link rel="Shortcut Icon" href="img/aerogear_icon_16x.png">
+	    <link rel="apple-touch-icon" href="img/aerogear_avatar_48px.png"/>
+	
+	    <!-- For minification, comment out this link -->
+	    <!-- Shared styles -->
+	    <link rel="stylesheet" href="css/screen.css"/>
+	
+	    <!-- Set viewport scaling and zoom features -->
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	    <script type="text/javascript" src="js/libs/modernizr-2.5.3.min.js"></script>
 		
-				<link rel='stylesheet' type='text/css' href='css/mystyle.css'>
+		<link rel='stylesheet' type='text/css' href='css/mystyle.css'>
 		
 		
 		<script type="text/javascript">
-        Modernizr.load([{
-            //Load CDN hosted jQuery or fall back to local file.
-            /*--------Note-----------
-            This approach should only be used if you trust the source of where the resource (JavaScript) is located.
-            In this case, use of the jquery CDN is much faster if your user's browser already has this file cached.
-            If they don't have it cached, try to load it from the CDN as this will be faster if the user is
-            located closer to a CDN than you currently hosted server.
-            */
-            load: [
-                "http://code.jquery.com/jquery-1.7.1.min.js",
-                "js/libs/underscore-min.js",
-                // Minification - See Readme for details
-                // For minification, comment out this file
-                "js/us4.js"
-                // For minification, uncomment this file
-                // "js/app.min.js"
-            ],
-            complete: function() {
-                if ( !window.jQuery ) {
-                    //In production, you would want to fall back to a minified file.
-                    //We fall back to the full version because Eclipse reports false errors in some minified JavaScript files.
-                    yepnope( "js/libs/jquery-1.7.1.min.js" );
-                }
-            }
-        },{
-            //device detection and asynchronous script loading
-            /*--------Note-----------
-            Here we're using the yepnope framework which gives us the ability to load scripts dynamically, based on
-            Modernizr's results.
-            With Modernizr, we use media queries and touch detection to see if we are on a mobile, touch based device
-            or if we're at anything less than 480px.. this gives us a mobile ui on desktop browsers when resized to <480px
-            width for testing.
-            */
-            test: Modernizr.mq( "only all and (max-width: 640px)" ),
-            yep: {
-                //assign labeled callbacks for later execution after script loads.
-                //we are on mobile device so load appropriate CSS
-                "jqmcss": "css/jquery.mobile-1.1.0.min.css",
-                // For minification, uncomment this line
-                //"mcss": "css/m.screen.min.css"
-                // For minification, comment out this line
-                "mcss": "css/m.screen.css"
-            },
-            nope: {
-                //we are on desktop
-                // For minification, uncomment this line
-                //"scss": "css/d.screen.min.css"
-                // For minification, comment out this line
-            	"scss": "css/d.screen.css"
-            },
-            callback: {
-                //use the labeled callbacks from above, and load jQuery Mobile
-                "jqmcss": function( url, result, key ) {
-                    yepnope({
-                        load: "http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js",
-                        complete: function() {
-                            if ( !$.mobile ) {
-                                yepnope.injectJs( "js/libs/jquery.mobile-1.1.0.min.js" );
-                            }
-                        }
-                    });
-                },
-                "scss": function( url, result, key ) {
-                    $( document ).ready( function() {
-                        //here we are moving content around based on the browser/device.
-                        $( "aside" ).insertAfter( $( "section" ) );
-                    });
-                }
-            },
-      }]);
-    </script>
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		  Modernizr.load([{
+		      load: [
+		          "http://code.jquery.com/jquery-1.7.1.min.js",
+		          "js/libs/underscore-min.js",
+		          // Minification - See Readme for details
+		          // For minification, comment out this file
+		          "js/us4.js"
+		          // For minification, uncomment this file
+		          // "js/app.min.js"
+		      ],
+		      complete: function() {
+		          if ( !window.jQuery ) {
+		              //In production, you would want to fall back to a minified file.
+		              //We fall back to the full version because Eclipse reports false errors in some minified JavaScript files.
+		              yepnope( "js/libs/jquery-1.7.1.min.js" );
+		          }
+		      }
+		  },{
+		      test: Modernizr.mq( "only all and (max-width: 640px)" ),
+		      yep: {
+		          //assign labeled callbacks for later execution after script loads.
+		          //we are on mobile device so load appropriate CSS
+		          "jqmcss": "css/jquery.mobile-1.1.0.min.css",
+		          // For minification, uncomment this line
+		          //"mcss": "css/m.screen.min.css"
+		          // For minification, comment out this line
+		          "mcss": "css/m.screen.css"
+		      },
+		      nope: {
+		          //we are on desktop
+		          // For minification, uncomment this line
+		          //"scss": "css/d.screen.min.css"
+		          // For minification, comment out this line
+		      	"scss": "css/d.screen.css"
+		      },
+		      callback: {
+		          //use the labeled callbacks from above, and load jQuery Mobile
+		          "jqmcss": function( url, result, key ) {
+		              yepnope({
+		                  load: "http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js",
+		                  complete: function() {
+		                      if ( !$.mobile ) {
+		                          yepnope.injectJs( "js/libs/jquery.mobile-1.1.0.min.js" );
+		                      }
+		                  }
+		              });
+		          },
+		          "scss": function( url, result, key ) {
+		              $( document ).ready( function() {
+		                  //here we are moving content around based on the browser/device.
+		                  $( "aside" ).insertAfter( $( "section" ) );
+		              });
+		          }
+		      },
+		}]);
+		</script>
 	</head>
     
 	<body>
@@ -123,7 +99,7 @@
 
 			</div>
 			<div class='wrapper' id='inner-container' >  
-				<form >
+				<form id='us04Form'>
 					<strong>Enter IMSI:</strong><input class='submissionfield' type='text' name='imsi' id='imsi' placeholder='Please Enter an IMSI number Here' required>
 					<input type='button' class='button' value="Submit" onclick="getIMSIResultTemplate(document.getElementById('imsi').value)"  >
 					</form>
@@ -131,8 +107,9 @@
 			
 				
 			
-			
-			<div id="results"></div>
+			<div class='wrapper hidden' id='hidden-container'>
+				<div id="results"></div>
+			</div>
 		</div>
 		<div id='eric-multi'>
 			<img src='images/ebottomgrad.jpg' >
