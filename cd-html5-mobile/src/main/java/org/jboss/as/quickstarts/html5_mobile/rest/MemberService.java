@@ -86,13 +86,8 @@ public class MemberService {
     @GET
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
-    public Member lookupMemberByNameAndPass(@QueryParam("name") String name,@QueryParam("password") String password) {
-        Member member = repository.findByNameAndPass(name,password);
-        if (member == null) {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
-       
-        return member;
+    public String[] lookupMemberByNameAndPass(@QueryParam("name") String name,@QueryParam("password") String password) {
+        return repository.getUserByNameAndPass(name,password);
     }
     /**
      * Creates a new member from the values provided.  Performs validation, and will return a JAX-RS response with either
