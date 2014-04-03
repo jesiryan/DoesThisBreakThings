@@ -32,7 +32,16 @@ public class MemberRepository {
         criteria.select(member).where(cb.equal(member.get("name"), name));
         return em.createQuery(criteria).getSingleResult();
     }
-
+    public Member findByNameAndPass(String name, String password) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Member> criteria = cb.createQuery(Member.class);
+        Root<Member> member = criteria.from(Member.class);
+        // Swap criteria statements if you would like to try out type-safe criteria queries, a new
+        // feature in JPA 2.0
+        // criteria.select(member).where(cb.equal(member.get(Member_.name), email));
+        criteria.select(member).where(cb.equal(member.get("name"), name)).where(cb.equal(member.get("password"), password));
+        return em.createQuery(criteria).getSingleResult();
+    }
     public List<Member> findAllOrderedByName() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Member> criteria = cb.createQuery(Member.class);
