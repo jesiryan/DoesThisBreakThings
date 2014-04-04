@@ -55,6 +55,17 @@ public class CustomerServiceRepService {
         	return null;
         }
         return callfailures;
+    }     
+    
+    @GET
+    @Path("/us06/{imsi}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Callfailure> test(@PathParam("imsi") String IMSI) {	
+    	List<Callfailure> callfailures = repository.findCauseCode_EventIDByIMSI(IMSI);
+        if (callfailures == null) {
+        	return null;
+        }
+        return callfailures;
     }  
     
 }

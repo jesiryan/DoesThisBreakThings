@@ -28,7 +28,7 @@
 		          "js/libs/underscore-min.js",
 		          // Minification - See Readme for details
 		          // For minification, comment out this file
-		          "js/us4.js"
+		          "js/us9.js"
 		          // For minification, uncomment this file
 		          // "js/app.min.js"
 		      ],
@@ -112,7 +112,7 @@
 				<form id="us09Form">
 	                <strong>From (date and time):</strong> <input class='submissionfield' type='datetime-local' name='startdate' id='startdate' value="2013-01-01T00:00" required>
 	                <strong>To (date and time):</strong> <input class='submissionfield' type='datetime-local' name='enddate' id='enddate' value="2014-01-01T00:00" required>
-					<input type='submit' class='button' value="Submit">
+					<input type='button' class='button' value="Submit" onclick="getUS09ResultTemplate(document.getElementById('startdate').value, document.getElementById('enddate').value)">
                 </form>
 				<div id="info" class="hidden"></div>
 			</div>

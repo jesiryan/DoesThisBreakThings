@@ -1,0 +1,26 @@
+<script type="text/template" id="us09-tmpl">
+<% var addHeader = true;
+_.each(userStory09Structures, function(userStory09Structures) { 
+    if ( Modernizr.mq( "only all and (max-width: 640px)" ) ) {
+        addHeader = true;
+    }
+    %>
+	
+	<% if ( addHeader ) { %><thead>
+								<tr>
+									<th>Imsi</th>
+									<th>Number of Call Failures</th>
+									<th>Total Call Failure Duration</th>
+									<th>Average Call Failure Duration</th>
+								</tr>
+							</thead>
+							<tbody><% } %>
+								<tr>
+									<td><%=userStory09Structures.imsi%></td>
+									<td><%=userStory09Structures.count%></td>
+									<td><%=userStory09Structures.duration%></td>
+									<td><%=(userStory09Structures.duration/userStory09Structures.count)%></td>
+								</tr>	
+<% addHeader = false;
+}); %>
+</script>

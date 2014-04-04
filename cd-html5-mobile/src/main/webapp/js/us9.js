@@ -4,7 +4,7 @@
     function getUS09ResultTemplate(startdate,enddate) {
     	
         $.ajax({
-            url: "tmpl/us04.tmpl",
+            url: "tmpl/us09.tmpl",
             dataType: "html",
             success: function( data ) {
             	
@@ -18,16 +18,14 @@
     function updateUS09Table(startdate,enddate) {
 
         $.ajax({
-            url: "rest/cust/us09/"+startdate+"/"+enddate,
+            url: "rest/net/us09/"+startdate+"/"+enddate,
             type: "GET",
             cache: false,
-            data:{	startdate: startdate,
-            		enddate: enddate},
             success: function(data) {
             	if (data.length < 1) {
                     $('#info').removeClass("hidden");
                     $('#hidden-container').addClass("hidden");
-            		$('#info').empty().append("Information: The query for '" + imsi + "' has returned no results.");
+            		$('#info').empty().append("Information: The query between dates " + startdate + " and " + enddate + " has returned no results.");
 					document.forms["us09Form"].reset();
             	} else {
             		$('#info').addClass("hidden");
@@ -45,6 +43,6 @@
     }
 
 	/* Builds the updated table for the callfailures list */
-	function buildUS09ResultsRows(callfailures) {
-	    return _.template( $( "#us04-tmpl" ).html(), {"callfailures": callfailures});
+	function buildUS09ResultsRows(userStory09Structures) {
+	    return _.template( $( "#us09-tmpl" ).html(), {"userStory09Structures": userStory09Structures});
 	}

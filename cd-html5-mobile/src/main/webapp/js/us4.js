@@ -21,7 +21,6 @@
             url: "rest/cust/us04/"+imsi,
             type: "GET",
             cache: false,
-            data:{imsi: imsi },
             success: function(data) {
             	if (data.length < 1) {
                     $('#info').removeClass("hidden");
