@@ -185,7 +185,21 @@ public class CallfailureRepository {
     public List<UserStory12Structure> findTop10CountBetweenTimesTotalDuration(String startDateTime, String endDateTime) {
 		List<UserStory12Structure> us12List = new ArrayList<UserStory12Structure>();
 
-		String loginQueryString = "SELECT iMSI, COUNT(*)FROM callfailure WHERE dateTime > ? AND dateTime < ? GROUP BY iMSI ORDER BY count(*) DESC LIMIT 10";
+		String loginQueryString = "SELECT iMSI, COUNT(*),"
+				+ " count(case when failureClass_failureClass = 0 then 1 else null end) as class0,"
+				+" count(case when failureClass_failureClass = 1 then 1 else null end) as class1,"
+				+" count(case when failureClass_failureClass = 2 then 1 else null end) as class2,"
+				+" count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
+				+" count(case when failureClass_failureClass = 4 then 1 else null end) as class4"
+				+" FROM callfailure WHERE dateTime > ? AND dateTime < ? GROUP BY iMSI ORDER BY count(*) DESC LIMIT 10";
+		
+//		String loginQueryString = "SELECT iMSI,count(iMSI) AS totalFAILS,  count(case when failureClass_failureClass = 0 then 1 else null end) as class0,"
+//		+"count(case when failureClass_failureClass = 1 then 1 else null end) as class1,"
+//		+"count(case when failureClass_failureClass = 2 then 1 else null end) as class2,"
+//		+"count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
+//		+"count(case when failureClass_failureClass = 4 then 1 else null end) as class4"
+//		+" FROM sprint1.callfailure WHERE sprint1.callfailure.dateTime >= '"+startDate + "'"
+//		+" AND sprint1.callfailure.dateTime <= '"+endDate+"' GROUP BY iMSI ORDER BY totalFAILS DESC LIMIT 10";
 		
 		try {
 			connection = ConnectionFactory.getInstance().getConnection();
