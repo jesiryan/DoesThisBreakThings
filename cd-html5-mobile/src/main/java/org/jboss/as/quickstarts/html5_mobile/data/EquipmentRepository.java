@@ -19,7 +19,7 @@ import com.conygre.training.entities.Equipment;
 public class EquipmentRepository {
 
     //@Inject
-    @PersistenceContext(unitName="conygreChapter8")
+    @PersistenceContext(unitName="sprint2")
     private EntityManager em;
 
     public Equipment findByTac(int tAC) {

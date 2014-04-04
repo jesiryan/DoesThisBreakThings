@@ -16,9 +16,9 @@ public class EquipmentReader {
 	}
 
 	// possibly this should be a set. not sure.
-	public List<Object> getAllEquipmentRows() {
+	public List<Equipment> getAllEquipmentRows() {
 		int length = fileReader.getSheetColumnLength(3);
-		ArrayList<Object> equipment = new ArrayList<Object>(length);
+		ArrayList<Equipment> equipment = new ArrayList<Equipment>(length);
 		for (int i = 1; i < length + 1; i++) {
 			equipment.add(getOneEquipmentRow(i));
 		}

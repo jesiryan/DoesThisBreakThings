@@ -20,7 +20,7 @@ public class FailureclassDAO {
 		
 	}
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="sprint2")
 	private EntityManager em;
 	
 	public Failureclass getFailureclassesById(String id) {
@@ -46,14 +46,14 @@ public class FailureclassDAO {
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void mergeEfailureclasses(List<Failureclass> failureclasses) {
+	public void mergeFailureclasses(List<Failureclass> failureclasses) {
 		for (Failureclass failureclass : failureclasses) {
 			em.merge(failureclass);
 		}
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void mergeFailureclasses(Failureclass failureclass) {
+	public void mergeFailureclass(Failureclass failureclass) {
 		em.merge(failureclass);
 	}
 	

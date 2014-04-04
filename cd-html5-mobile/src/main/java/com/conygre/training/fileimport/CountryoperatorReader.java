@@ -16,9 +16,9 @@ public class CountryoperatorReader {
 	}
 
 	// possibly this should be a set. not sure.
-	public List<Object> getAllCountryoperatorRows() {
+	public List<Countryoperator> getAllCountryoperatorRows() {
 		int length = fileReader.getSheetColumnLength(4);
-		ArrayList<Object> countryoperators = new ArrayList<Object>(length);
+		ArrayList<Countryoperator> countryoperators = new ArrayList<Countryoperator>(length);
 		for (int i = 1; i < length + 1; i++) {
 			countryoperators.add(getOneCountryoperatorRow(i));
 		}

@@ -10,10 +10,10 @@ import com.conygre.training.entities.*;
 public class CallfailureReader {
 
 	private FileReader fileReader;
-	private List<Object> failureclasses;
-	private List<Object> causes;
-	private List<Object> countryoperators;
-	private List<Object> equipmentList;
+	private List<Failureclass> failureclasses;
+	private List<Cause> causes;
+	private List<Countryoperator> countryoperators;
+	private List<Equipment> equipmentList;
 	private static int numOfInvalidRows;
 	private static int numOfValidRows;
 	
@@ -22,13 +22,13 @@ public class CallfailureReader {
 	}
 
 	// possibly this should be a set. not sure.
-	public List<Object> getAllCallfailureRows(
+	public List<Callfailure> getAllCallfailureRows(
 			AllMasterTableRows allMasterTableRows) {
 		setLocalTableLists(allMasterTableRows);
 		int length = fileReader.getSheetColumnLength(0);
 		numOfInvalidRows=0;
 		numOfValidRows=0;
-		ArrayList<Object> callFailures = new ArrayList<Object>(length);
+		ArrayList<Callfailure> callFailures = new ArrayList<Callfailure>(length);
 		for (int i = 1; i < length + 1; i++) {
 			try {
 				callFailures.add(getOneCallfailureRow(i));

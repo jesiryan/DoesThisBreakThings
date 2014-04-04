@@ -22,10 +22,15 @@
    xsi:schemaLocation="
         http://java.sun.com/xml/ns/persistence
         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-   <persistence-unit name="conygreChapter8">
+   <persistence-unit name="sprint2">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
       <jta-data-source>java:/MySQL</jta-data-source>     
       <class>com.conygre.training.entities.CompactDisc</class>
+      <class>com.conygre.training.entities.Failureclass</class>
+      <class>com.conygre.training.entities.Equipment</class>
+      <class>com.conygre.training.entities.Countryoperator</class>
+      <class>com.conygre.training.entities.Cause</class>
+      <class>com.conygre.training.entities.Callfailure</class>
       <class>org.jboss.as.quickstarts.html5_mobile.model.Member</class>
       <class>com.conygre.training.entities.Track</class>
       <properties>
