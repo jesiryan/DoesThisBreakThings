@@ -21,6 +21,7 @@ import com.conygre.training.entities.query.UserStory05Structure;
 import com.conygre.training.entities.query.UserStory06Structure;
 import com.conygre.training.entities.query.UserStory07Structure;
 import com.conygre.training.entities.query.UserStory09Structure;
+import com.conygre.training.entities.query.UserStory12Structure;
 
 @ApplicationScoped
 public class CallfailureRepository {
@@ -177,6 +178,34 @@ public class CallfailureRepository {
 			return null;
 		else
 			return us09List;
+	}
+    
+    
+    // User story 12
+    public List<UserStory12Structure> findTop10CountBetweenTimesTotalDuration(String startDateTime, String endDateTime) {
+		List<UserStory12Structure> us12List = new ArrayList<UserStory12Structure>();
+
+		String loginQueryString = "SELECT iMSI, COUNT(*)FROM callfailure WHERE dateTime > ? AND dateTime < ? GROUP BY iMSI ORDER BY count(*) DESC LIMIT 10";
+		
+		try {
+			connection = ConnectionFactory.getInstance().getConnection();
+			loginStatement = connection.prepareStatement(loginQueryString);
+			loginStatement.setString(1, startDateTime);
+			loginStatement.setString(2, endDateTime);
+			loginResultSet = loginStatement.executeQuery();
+			
+			while (loginResultSet.next()) {
+				us12List.add(new UserStory12Structure((String)loginResultSet.getString(1), Integer.parseInt(loginResultSet.getString(2))));
+			}
+			
+			
+			
+		} catch (SQLException e) { e.printStackTrace(); }		
+
+		if (us12List.size() == 0)
+			return null;
+		else
+			return us12List;
 	}
 
 }

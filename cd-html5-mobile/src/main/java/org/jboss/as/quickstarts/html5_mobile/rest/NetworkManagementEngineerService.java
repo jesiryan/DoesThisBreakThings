@@ -20,6 +20,7 @@ import org.jboss.as.quickstarts.html5_mobile.data.CallfailureRepository;
 import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 
 import com.conygre.training.entities.query.UserStory09Structure;
+import com.conygre.training.entities.query.UserStory12Structure;
 
 
 @Path("/net")
@@ -58,15 +59,15 @@ public class NetworkManagementEngineerService {
     @GET
     @Path("/us12/{start}/{end}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<UserStory09Structure> findAllCallFailuresBetween(	@PathParam("start") String startString,
+    public List<UserStory12Structure> findAllCallFailuresBetween(	@PathParam("start") String startString,
     																@PathParam("end") String endString) {
     	startString = startString.replaceAll("T", " ");
     	endString = endString.replaceAll("T", " ");
 
-    	List<UserStory09Structure> userStory09Structures = repository.findCountBetweenTimesTotalDuration(startString, endString);
-        if (userStory09Structures == null) {
+    	List<UserStory12Structure> userStory12Structures = repository.findTop10CountBetweenTimesTotalDuration(startString, endString);
+        if (userStory12Structures == null) {
         	return null;
         }
-        return userStory09Structures;
+        return userStory12Structures;
     }
 }
