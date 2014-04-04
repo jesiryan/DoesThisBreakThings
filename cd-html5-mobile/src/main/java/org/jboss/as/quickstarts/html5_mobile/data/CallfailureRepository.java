@@ -193,12 +193,8 @@ public class CallfailureRepository {
 				+" count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
 				+" count(case when failureClass_failureClass = 4 then 1 else null end) as class4"
 				+" FROM callfailure WHERE dateTime > ? AND dateTime < ? GROUP BY iMSI ORDER BY count(*) DESC LIMIT 10";
-<<<<<<< HEAD
+
 				
-=======
-		
-		
->>>>>>> branch 'master' of https://github.com/jesiryan/DoesThisBreakThings.git
 		try {
 			connection = ConnectionFactory.getInstance().getConnection();
 			loginStatement = connection.prepareStatement(loginQueryString);
@@ -219,11 +215,11 @@ public class CallfailureRepository {
 		else
 			return us12List;
 	}
+    
     // User story 11
     public List<UserStory11Structure> findTop10failsForENodeB(String startDateTime, String endDateTime) {
 		List<UserStory11Structure> us11List = new ArrayList<UserStory11Structure>();
 
-<<<<<<< HEAD
 		String loginQueryString = "SELECT count(*) as totalFAILS,countryOperator_mCC, countryOperator_mNC, cellId, country, operator, "
 				+" count(case when failureClass_failureClass = 0 then 1 else null end) as class0,"
 				+" count(case when failureClass_failureClass = 1 then 1 else null end) as class1,"
@@ -256,6 +252,6 @@ public class CallfailureRepository {
 			return us11List;
 	}
 }
-=======
-}
->>>>>>> branch 'master' of https://github.com/jesiryan/DoesThisBreakThings.git
+
+
+
