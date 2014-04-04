@@ -1,8 +1,5 @@
 package org.jboss.as.quickstarts.html5_mobile.rest;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -21,7 +18,7 @@ import org.jboss.as.quickstarts.html5_mobile.data.EquipmentRepository;
 import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 
 import com.conygre.training.entities.Callfailure;
-import com.conygre.training.entities.Equipment;
+import com.conygre.training.entities.query.UserStory07Structure;
 
 
 @Path("/supp")
@@ -46,22 +43,17 @@ public class SupportEngineerService {
     @GET
     @Path("/us07/{start}/{end}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Callfailure> findAllCallFailuresBetween(	@PathParam("start") String startString,
-    														@PathParam("end") String endString) {
+    public List<UserStory07Structure> findAllCallFailuresBetween(	@PathParam("start") String startString,
+    																@PathParam("end") String endString) {
     	
-    	Date startDateTime=null, endDateTime=null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");      
-		try {
-		    startDateTime = sdf.parse(startString);
-		    endDateTime = sdf.parse(endString);
-		} catch (ParseException e) {
-		    e.printStackTrace();
-		}
-    	List<Callfailure> userStory09Structures = repositoryC.findAllCallFailuresBetween(startDateTime, endDateTime);
-        if (userStory09Structures == null) {
+    	startString = startString.replaceAll("T", " ");
+    	endString = endString.replaceAll("T", " ");
+    	
+    	List<UserStory07Structure> userStory07Structures = repositoryC.findAllCallFailuresBetween(startString, endString);
+        if (userStory07Structures == null) {
         	return null;
         }
-        return userStory09Structures;
+        return userStory07Structures;
     }  
     
     

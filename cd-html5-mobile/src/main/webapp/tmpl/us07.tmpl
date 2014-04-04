@@ -1,4 +1,4 @@
-<script type="text/template" id="us06-tmpl">
+<script type="text/template" id="us07-tmpl">
 <% var addHeader = true;
 _.each(obj, function(obj) { 
     if ( Modernizr.mq( "only all and (max-width: 640px)" ) ) {
@@ -8,20 +8,22 @@ _.each(obj, function(obj) {
 	
 	<% if ( addHeader ) { %><thead>
 								<tr class='alt'>");
-								    <td>IMSI Number:</td>
-									<td><%=obj.imsi%></td>
+								    <td>Start date:</td>
+									<td><%=obj.start%></td>
 								</tr>
+								<tr class='alt'>");
+								    <td>End date:</td>
+									<td><%=obj.end%></td>
+								</tr>								
 								<tr>
-									<th>Cause Code</th>
-									<th>Event ID</th>
-									<th>Description</th>
+									<th>IMSI Number</th>
+									<th>Count</th>
 								</tr>
 							</thead>
 							<tbody><% } %>
 								<tr>
-									<td><%=obj.cause_causeCode%></td>
-									<td><%=obj.cause_eventid%></td>
-									<td><%=obj.description%></td>
+									<td><%=obj.imsi%></td>
+									<td><%=obj.count%></td>
 								</tr>	
 <% addHeader = false;
 }); %>

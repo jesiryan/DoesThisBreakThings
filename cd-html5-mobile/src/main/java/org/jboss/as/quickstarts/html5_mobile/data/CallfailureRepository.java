@@ -19,6 +19,7 @@ import javax.persistence.criteria.Root;
 import com.conygre.training.entities.Callfailure;
 import com.conygre.training.entities.query.UserStory05Structure;
 import com.conygre.training.entities.query.UserStory06Structure;
+import com.conygre.training.entities.query.UserStory07Structure;
 import com.conygre.training.entities.query.UserStory09Structure;
 
 @ApplicationScoped
@@ -129,16 +130,30 @@ public class CallfailureRepository {
 	}
 	
 	
-	// User story 7 & 12
-	public List<Callfailure> findAllCallFailuresBetween(Date startDateTime, Date endDateTime) {
-		//Query query = em.createQuery("SELECT c.iMSI, c.dateTime, c.cause.description FROM Callfailure c WHERE c.dateTime >= :startDateTime AND c.dateTime <= :endDateTime ORDER BY c.iMSI").setParameter("startDateTime", startDateTime).setParameter("endDateTime", endDateTime);
-		Query query = em.createQuery("SELECT c FROM Callfailure c WHERE c.dateTime >= :startDateTime AND c.dateTime <= :endDateTime ORDER BY c.iMSI").setParameter("startDateTime", startDateTime).setParameter("endDateTime", endDateTime);
-		List<Callfailure> callfailures = query.getResultList();
+	// User story 7
+	public List<UserStory07Structure> findAllCallFailuresBetween(String startDateTime, String endDateTime) {
+		List<UserStory07Structure> us07List = new ArrayList<UserStory07Structure>();
 
-		if (callfailures.size() == 0)
+		
+		String loginQueryString = "SELECT DISTINCT iMSI, COUNT(*) FROM callfailure WHERE dateTime > ? AND dateTime < ? GROUP BY iMSI";
+		try {
+			connection = ConnectionFactory.getInstance().getConnection();
+			loginStatement = connection.prepareStatement(loginQueryString);
+			loginStatement.setString(1, startDateTime);
+			loginStatement.setString(2, endDateTime);
+			loginResultSet = loginStatement.executeQuery();
+			
+			while (loginResultSet.next()) {
+				us07List.add(
+						new UserStory07Structure((String)loginResultSet.getString(1), Integer.parseInt(loginResultSet.getString(2)), startDateTime, endDateTime));
+			}
+		} catch (SQLException e) { e.printStackTrace(); }	
+		
+		
+		if (us07List.size() == 0)
 			return null;
 		else
-			return callfailures;
+			return us07List;
 	}
     	
     // User story 9

@@ -3,32 +3,40 @@ package com.conygre.training.entities.query;
 public class UserStory07Structure {
 	
 	private String imsi;
-	private String dateTime ;
-	private String description;
-	
-	public UserStory07Structure(String imsi, String dateTime, String description) {
+	private int count;
+	private String start;
+	private String end;
+
+	public UserStory07Structure(String imsi, int count, String start, String end) {
 		this.imsi = imsi;
-		this.dateTime = dateTime;
-		this.description = description;
+		this.count = count;
+		this.start = start;
+		this.end = end;
 	}
 	
+	public String getStart() {
+		return start;
+	}
+	public void setStart(String start) {
+		this.start = start;
+	}
+	public String getEnd() {
+		return end;
+	}
+	public void setEnd(String end) {
+		this.end = end;
+	}
 	public String getImsi() {
 		return imsi;
 	}
 	public void setImsi(String imsi) {
 		this.imsi = imsi;
 	}
-	public String getDateTime() {
-		return dateTime;
+	public int getCount() {
+		return count;
 	}
-	public void setDateTime(String dateTime) {
-		this.dateTime = dateTime;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 }
