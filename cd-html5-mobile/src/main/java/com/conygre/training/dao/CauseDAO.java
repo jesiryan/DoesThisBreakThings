@@ -33,23 +33,28 @@ public class CauseDAO {
 		return causes;
 	}
 	
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void addCauses(List<Cause> causes) {
-        for (Cause cause : causes) {
-            em.persist(cause);
-        }
-    }
-    
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void mergeCauses(List<Cause> causes) {
-        for (Cause cause : causes) {
-            em.merge(cause);
-        }
-    }
-    
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void mergeCause(Cause cause) {
-        em.merge(cause);
-    }
-    
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void addCauses(List<Cause> causes) {
+		for (Cause cause : causes) {
+			em.persist(cause);
+		}
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void addCause(Cause cause) {
+		em.persist(cause);
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void mergeCauses(List<Cause> causes) {
+		for (Cause cause : causes) {
+			em.merge(cause);
+		}
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void mergeCause(Cause cause) {
+		em.merge(cause);
+	}
+	
 }
