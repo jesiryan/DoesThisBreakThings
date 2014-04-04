@@ -11,12 +11,25 @@
             data:{name: name,password:password },
             success: function(data) {
             	alert('before');
-            	if (data.length < 1) {
+            
+            	if (data.length > 0) {
+            		alert('true');    
+            		alert(data[2]);  
+            		if(data[2]=='Support Engineer'){
+            			document.location.href = '/cd-html5-mobile/supEngMenu.html';
+            		}
+            		if(data[2]=='Customer Service'){
+            			document.location.href = '/cd-html5-mobile/custSerRepMenu.html';
+            		}
+            		if(data[2]=='Network Engineer'){
+            			document.location.href = '/cd-html5-mobile/netMgmtEngMenu.html';
+            		}
+            		if(data[2]=='Administrator'){
+            			document.location.href = '/cd-html5-mobile/adminMenu.html';
+            		}
+            	} else {
             		alert('false');
             		document.location.href = '/cd-html5-mobile/loginFail.html';
-            	} else {
-            		alert('true');
-            		document.location.href = '/cd-html5-mobile/adminMenu.html';
                 }
             },
             error: function(error) {
