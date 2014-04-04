@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.validation.Validator;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -67,5 +68,21 @@ public class CustomerServiceRepService {
         }
         return callfailures;
     }  
+
+//	public static List<Callfailure> countCauseCode(int tAC, double cause,
+//			double event) {
+//		// eventId and o.causeCode =:causeCode
+//		EntityManager em = emf.createEntityManager();
+//		List<Callfailure> causeList = (List<Callfailure>) em
+//				.createNamedQuery("CallFailure.countByEventAndCause")
+//				.setParameter("TAC", tAC).setParameter("EVENT", event)
+//				.setParameter("CAUSE", cause).getResultList();
+//		em.close();
+//
+//		if (causeList.size() == 0)
+//			return null;
+//		else
+//			return causeList;
+//	}
     
 }
