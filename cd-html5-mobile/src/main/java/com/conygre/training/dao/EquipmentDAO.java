@@ -20,7 +20,7 @@ public class EquipmentDAO {
 		
 	}
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="sprint2")
 	private EntityManager em;
 	
 	public Equipment getEquipmentById(String id) {

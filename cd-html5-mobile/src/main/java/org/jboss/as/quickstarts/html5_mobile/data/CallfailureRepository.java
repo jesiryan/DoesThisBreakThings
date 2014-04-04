@@ -34,7 +34,7 @@ public class CallfailureRepository {
 	ResultSet toDoResultSet = null;
 
     //@Inject
-    @PersistenceContext(unitName="conygreChapter8")
+    @PersistenceContext(unitName="sprint2")
     private EntityManager em;
 
     public Callfailure findByBaseDataID(int baseDataID) {
@@ -193,7 +193,12 @@ public class CallfailureRepository {
 				+" count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
 				+" count(case when failureClass_failureClass = 4 then 1 else null end) as class4"
 				+" FROM callfailure WHERE dateTime > ? AND dateTime < ? GROUP BY iMSI ORDER BY count(*) DESC LIMIT 10";
+<<<<<<< HEAD
 				
+=======
+		
+		
+>>>>>>> branch 'master' of https://github.com/jesiryan/DoesThisBreakThings.git
 		try {
 			connection = ConnectionFactory.getInstance().getConnection();
 			loginStatement = connection.prepareStatement(loginQueryString);
@@ -202,7 +207,7 @@ public class CallfailureRepository {
 			loginResultSet = loginStatement.executeQuery();
 			
 			while (loginResultSet.next()) {
-				us12List.add(new UserStory12Structure((String)loginResultSet.getString(1), Integer.parseInt(loginResultSet.getString(2))));
+				us12List.add(new UserStory12Structure((String)loginResultSet.getString(1), Integer.parseInt(loginResultSet.getString(2)), Integer.parseInt(loginResultSet.getString(3)), Integer.parseInt(loginResultSet.getString(4)), Integer.parseInt(loginResultSet.getString(5)), Integer.parseInt(loginResultSet.getString(6)), Integer.parseInt(loginResultSet.getString(7))));
 			}
 			
 			
@@ -218,6 +223,7 @@ public class CallfailureRepository {
     public List<UserStory11Structure> findTop10failsForENodeB(String startDateTime, String endDateTime) {
 		List<UserStory11Structure> us11List = new ArrayList<UserStory11Structure>();
 
+<<<<<<< HEAD
 		String loginQueryString = "SELECT count(*) as totalFAILS,countryOperator_mCC, countryOperator_mNC, cellId, country, operator, "
 				+" count(case when failureClass_failureClass = 0 then 1 else null end) as class0,"
 				+" count(case when failureClass_failureClass = 1 then 1 else null end) as class1,"
@@ -250,3 +256,6 @@ public class CallfailureRepository {
 			return us11List;
 	}
 }
+=======
+}
+>>>>>>> branch 'master' of https://github.com/jesiryan/DoesThisBreakThings.git

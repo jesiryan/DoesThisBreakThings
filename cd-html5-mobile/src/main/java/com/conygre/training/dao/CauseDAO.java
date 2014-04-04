@@ -6,6 +6,8 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -14,13 +16,15 @@ import com.conygre.training.entities.Cause;
 
 @Stateless
 @LocalBean
+//@ApplicationScoped
 public class CauseDAO {
 
 	public CauseDAO() {
 		
 	}
 	
-	@PersistenceContext
+	
+	@PersistenceContext(unitName="sprint2")
 	private EntityManager em;
 	
 	public Cause getCauseById(String id) {
@@ -47,8 +51,15 @@ public class CauseDAO {
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void mergeCauses(List<Cause> causes) {
+		Cause findCause = null;
 		for (Cause cause : causes) {
-			em.merge(cause);
+			System.out.println("Cause description before merge: " + cause.getDescription());
+			findCause = em.find(Cause.class, cause);
+			if(findCause != null){
+				em.persist(cause);
+			}
+//			em.merge(cause);
+			System.out.println("Cause description AFTER merge: " + cause.getDescription());
 		}
 	}
 	

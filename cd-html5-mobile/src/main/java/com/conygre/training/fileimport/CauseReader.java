@@ -17,9 +17,9 @@ public class CauseReader {
 	}
 
 	// possibly this should be a set. not sure.
-	public List<Object> getAllEventCauseRows() {
+	public List<Cause> getAllEventCauseRows() {
 		int length = fileReader.getSheetColumnLength(1);
-		ArrayList<Object> eventCauses = new ArrayList<Object>(length);
+		ArrayList<Cause> eventCauses = new ArrayList<Cause>(length);
 		for (int i = 1; i < length + 1; i++) {
 			eventCauses.add(getOneEventCauseRow(i));
 		}

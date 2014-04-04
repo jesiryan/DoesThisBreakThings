@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.conygre.training.dao.EntitiesDAO;
 import com.conygre.training.entities.AllMasterTableRows;
 import com.conygre.training.entities.Callfailure;
 import com.conygre.training.fileimport.CallfailureReader;
@@ -33,7 +34,8 @@ import com.conygre.training.validation.ValidateExcelFile;
 public class FileUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static String pathAndName;
-	public static List<Object> callFailures;
+	public static List<Callfailure> callFailures;
+	public static AllMasterTableRows allMasterTableRows;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -102,6 +104,11 @@ public class FileUploadServlet extends HttpServlet {
 					+ CallfailureReader.getNumOfValidRows());
 			
 			callFailures = getCallFailures();
+			
+//			com.conygre.training.dao.CauseRepository causeRepository = new
+			EntitiesDAO entitiesDAO = new EntitiesDAO();
+			entitiesDAO.persistAllMasterTableRows(allMasterTableRows, callFailures);
+			
 			Callfailure failure1 = ((Callfailure) callFailures.get(0));
 			Callfailure failure2 = ((Callfailure) callFailures.get(40));
 			System.out.println(failure1.getDateTime()+"" + failure1.getIMSI());
@@ -129,8 +136,7 @@ public class FileUploadServlet extends HttpServlet {
 		return file;
 	}
 
-	public List<Object> getCallFailures() {
-		AllMasterTableRows allMasterTableRows;
+	public List<Callfailure> getCallFailures() {
 		FailureclassReader failureClassReader;
 		CauseReader causeReader;
 		CountryoperatorReader countryOperatorReader;

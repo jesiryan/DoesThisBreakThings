@@ -15,7 +15,7 @@ import com.conygre.training.entities.Failureclass;
 public class FailureclassRepository {
 
     //@Inject
-    @PersistenceContext(unitName="conygreChapter8")
+    @PersistenceContext(unitName="sprint2")
     private EntityManager em;
 
     public Failureclass findById(int id) {
