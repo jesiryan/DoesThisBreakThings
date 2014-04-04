@@ -20,6 +20,7 @@ import org.jboss.as.quickstarts.html5_mobile.data.CallfailureRepository;
 import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 
 import com.conygre.training.entities.query.UserStory09Structure;
+import com.conygre.training.entities.query.UserStory11Structure;
 import com.conygre.training.entities.query.UserStory12Structure;
 
 
@@ -55,7 +56,20 @@ public class NetworkManagementEngineerService {
         return userStory09Structures;
     }
     
+    @GET
+    @Path("/us11/{start}/{end}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<UserStory11Structure> findTop10eNodeBFails(	@PathParam("start") String startString,
+    																@PathParam("end") String endString) {
+    	startString = startString.replaceAll("T", " ");
+    	endString = endString.replaceAll("T", " ");
 
+    	List<UserStory11Structure> userStory11Structures = repository.findTop10failsForENodeB(startString, endString);
+        if (userStory11Structures == null) {
+        	return null;
+        }
+        return userStory11Structures;
+    }
     @GET
     @Path("/us12/{start}/{end}")
     @Produces(MediaType.APPLICATION_JSON)

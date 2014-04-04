@@ -21,6 +21,7 @@ import com.conygre.training.entities.query.UserStory05Structure;
 import com.conygre.training.entities.query.UserStory06Structure;
 import com.conygre.training.entities.query.UserStory07Structure;
 import com.conygre.training.entities.query.UserStory09Structure;
+import com.conygre.training.entities.query.UserStory11Structure;
 import com.conygre.training.entities.query.UserStory12Structure;
 
 @ApplicationScoped
@@ -192,15 +193,7 @@ public class CallfailureRepository {
 				+" count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
 				+" count(case when failureClass_failureClass = 4 then 1 else null end) as class4"
 				+" FROM callfailure WHERE dateTime > ? AND dateTime < ? GROUP BY iMSI ORDER BY count(*) DESC LIMIT 10";
-		
-//		String loginQueryString = "SELECT iMSI,count(iMSI) AS totalFAILS,  count(case when failureClass_failureClass = 0 then 1 else null end) as class0,"
-//		+"count(case when failureClass_failureClass = 1 then 1 else null end) as class1,"
-//		+"count(case when failureClass_failureClass = 2 then 1 else null end) as class2,"
-//		+"count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
-//		+"count(case when failureClass_failureClass = 4 then 1 else null end) as class4"
-//		+" FROM sprint1.callfailure WHERE sprint1.callfailure.dateTime >= '"+startDate + "'"
-//		+" AND sprint1.callfailure.dateTime <= '"+endDate+"' GROUP BY iMSI ORDER BY totalFAILS DESC LIMIT 10";
-		
+				
 		try {
 			connection = ConnectionFactory.getInstance().getConnection();
 			loginStatement = connection.prepareStatement(loginQueryString);
@@ -221,5 +214,39 @@ public class CallfailureRepository {
 		else
 			return us12List;
 	}
+    // User story 11
+    public List<UserStory11Structure> findTop10failsForENodeB(String startDateTime, String endDateTime) {
+		List<UserStory11Structure> us11List = new ArrayList<UserStory11Structure>();
 
+		String loginQueryString = "SELECT count(*) as totalFAILS,countryOperator_mCC, countryOperator_mNC, cellId, country, operator, "
+				+" count(case when failureClass_failureClass = 0 then 1 else null end) as class0,"
+				+" count(case when failureClass_failureClass = 1 then 1 else null end) as class1,"
+				+" count(case when failureClass_failureClass = 2 then 1 else null end) as class2,"
+				+" count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
+				+" count(case when failureClass_failureClass = 4 then 1 else null end) as class4"
+				+" FROM sprint1.callfailure,countryoperator WHERE countryOperator_mCC = mCC "
+		+"AND countryOperator_mNC = mNC AND dateTime > ? AND dateTime < ? GROUP BY countryOperator_mCC, countryOperator_mNC, cellId ORDER BY totalFAILS DESC LIMIT 10;";
+				
+		try {
+			connection = ConnectionFactory.getInstance().getConnection();
+			loginStatement = connection.prepareStatement(loginQueryString);
+			loginStatement.setString(1, startDateTime);
+			loginStatement.setString(2, endDateTime);
+			loginResultSet = loginStatement.executeQuery();
+			
+			while (loginResultSet.next()) {
+				us11List.add(new UserStory11Structure(loginResultSet.getInt(1), loginResultSet.getDouble(2), loginResultSet.getDouble(3), loginResultSet.getInt(4), 
+						loginResultSet.getString(5), loginResultSet.getString(6),loginResultSet.getInt(7),loginResultSet.getInt(8),loginResultSet.getInt(9),
+						loginResultSet.getInt(10),loginResultSet.getInt(11)));
+			}
+			
+			
+			
+		} catch (SQLException e) { e.printStackTrace(); }		
+
+		if (us11List.size() == 0)
+			return null;
+		else
+			return us11List;
+	}
 }
