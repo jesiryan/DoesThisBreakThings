@@ -84,9 +84,9 @@ public class MemberService {
         return member;
     }
     @GET
-    @Path("/login")
+    @Path("/login/{name}/{password}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String[] lookupMemberByNameAndPass(@QueryParam("name") String name,@QueryParam("password") String password) {
+    public String[] lookupMemberByNameAndPass(@PathParam("name") String name,@PathParam("password") String password) {
         return repository.getUserByNameAndPass(name,password);
     }
     /**
