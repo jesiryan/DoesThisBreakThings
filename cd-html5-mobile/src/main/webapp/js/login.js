@@ -8,15 +8,19 @@
             url: "rest/members/login?name="+name+"&password="+password,
             type: "GET",
             cache: false,
-            data:{name: name, password: password },
+            data:{name: name,password:password },
             success: function(data) {
+            	alert('before');
             	if (data.length < 1) {
-            		document.location.href = '/loginFail.html';
+            		alert('false');
+            		document.location.href = '/cd-html5-mobile/loginFail.html';
             	} else {
-            		document.location.href = '/adminMenu.html';
+            		alert('true');
+            		document.location.href = '/cd-html5-mobile/adminMenu.html';
                 }
             },
             error: function(error) {
+            	alert('error');
 //                document.location.href = '/loginFail.html';
                 //console.log("error updating table -" + error.status);
             }
