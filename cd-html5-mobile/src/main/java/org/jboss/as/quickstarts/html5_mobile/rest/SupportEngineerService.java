@@ -17,10 +17,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.jboss.as.quickstarts.html5_mobile.data.CallfailureRepository;
+import org.jboss.as.quickstarts.html5_mobile.data.EquipmentRepository;
 import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 
 import com.conygre.training.entities.Callfailure;
-import com.conygre.training.entities.query.UserStory09Structure;
+import com.conygre.training.entities.Equipment;
 
 
 @Path("/supp")
@@ -34,30 +35,47 @@ public class SupportEngineerService {
     private Validator validator;
 
     @Inject
-    private CallfailureRepository repository;
+    private CallfailureRepository repositoryC;
+    @Inject
+    private EquipmentRepository repositoryE;
 
     @Inject
     MemberRegistration upload;
   
     
+    @GET
+    @Path("/us07/{start}/{end}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Callfailure> findAllCallFailuresBetween(	@PathParam("start") String startString,
+    														@PathParam("end") String endString) {
+    	
+    	Date startDateTime=null, endDateTime=null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");      
+		try {
+		    startDateTime = sdf.parse(startString);
+		    endDateTime = sdf.parse(endString);
+		} catch (ParseException e) {
+		    e.printStackTrace();
+		}
+    	List<Callfailure> userStory09Structures = repositoryC.findAllCallFailuresBetween(startDateTime, endDateTime);
+        if (userStory09Structures == null) {
+        	return null;
+        }
+        return userStory09Structures;
+    }  
+    
+    
 //    @GET
-//    @Path("/us07/{start}/{end}")
+//    @Path("/us08/{model}")
 //    @Produces(MediaType.APPLICATION_JSON)
-//    public List<Callfailure> findAllCallFailuresBetween(@PathParam("start") String startString,
-//    													@PathParam("end") String endString) {
-//    	Date startDateTime=null, endDateTime=null;
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");      
-//		try {
-//		    startDateTime = sdf.parse(startString);
-//		    endDateTime = sdf.parse(endString);
-//		} catch (ParseException e) {
-//		    e.printStackTrace();
-//		}
-//    	List<Callfailure> userStory09Structures = repository.findAllCallFailuresBetween(startDateTime, endDateTime);
-//        if (userStory09Structures == null) {
+//    public List<Equipment> findEquipmentByModel(@PathParam("model") String model) {
+//    	
+//    	List<Equipment> equipments = repositoryE.findEquipmentByModel(model);
+//        if (equipments == null) {
 //        	return null;
 //        }
-//        return userStory09Structures;
-//    }  
+//        return equipments;
+//    }
+    
     
 }

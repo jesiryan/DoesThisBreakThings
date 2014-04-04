@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="en">
 	<head>
 		<title>Dt340a - Group 6</title>
 		<link rel='icon' type='image/ico' href='http://www.ericsson.com/favicon.ico'/>
@@ -29,7 +28,7 @@
 		          "js/libs/underscore-min.js",
 		          // Minification - See Readme for details
 		          // For minification, comment out this file
-		          "js/login.js"
+		          "js/us5.js"
 		          // For minification, uncomment this file
 		          // "js/app.min.js"
 		      ],
@@ -79,10 +78,11 @@
 		      },
 			complete: function() {
 			    $( document ).ready( function() {
-			        $('#login').submit(function(event) {
-			        	var user = document.getElementById('userName').value;
-			        	var pass = document.getElementById('userPassWord').value;
-			        	pageRedirect(user,pass);
+			        $('#us05Form').submit(function(event) {
+			        	var imsi = document.getElementById('imsi').value;
+			        	var start = document.getElementById('start').value;
+			        	var end = document.getElementById('end').value;
+			        	getUS05ResultTemplate(imsi,start,end);
 			            return false;
 			        });
 			    });
@@ -90,51 +90,58 @@
 		}]);
 		</script>
 	</head>
-
-
-    <body>
-        <div id="main-container">
-        
-            <div id="heading-container">
-            
-                <div id="eir-image"> 
-                    <img alt="Ericsson" src="http://www.ericsson.com/shared/eipa/images/elogo.png">   
-                </div> 
-            
-                
-                <div id="dit-image"> 
-                     <img alt="DIT" src="http://www.dit.ie/media/styleimages/dit_crest.gif" width="90px" height="90px">  
-                </div> 
-               
-                
-                <h1>Call Investigation Assistant</h1> 
-                <h2>Group 6</h2> 
-              
-           
-            </div>
-            
-            <div id="inner-container" >    
-              <form name=login id="login" >
-			  <center>
-			  <table border=1>
-			  <tr><td>Enter Your Name :</td>
-			  <td><input type="text" name="userName"  id="userName"value="" required></td>
-			  </tr>
-			  <tr><td>Enter Your PassWord :</td>
-			  <td><input type="password" name="userPassWord" id="userPassWord" value="" required></td>
-			  </tr>
-			  <tr><td align=center><input type="button" name="Submit" value="Submit" class='button' ></td>
-			  <td align=center><input type="reset" name="reset" value="Refresh" class='button'></td>
-			  <table>
-			  </center>
-              </form>  
-            </div>
-        </div>
-        
-        <div id="eric-multi">
-            <img src="images/ebottomgrad.jpg" >
-        </div>
-    
-    </body>
+	
+	<body>
+		<div id='main-container'>
+			<div id='heading-container'>
+	
+				<div id='eir-image'>
+					<img alt='Ericsson'src='http://www.ericsson.com/shared/eipa/images/elogo.png'>
+				</div>
+	
+	
+				<div id='dit-image'>
+					<img alt='DIT' src='http://www.dit.ie/media/styleimages/dit_crest.gif' width='90px' height='90px'>
+				</div>
+			
+				<h1>Call Investigation Assistant</h1> 
+				<h2>Group 6</h2> 
+				<h3>Customer Service Representative</h3>
+				<div class='wrapper'>
+					<form class='alignleft' method='GET' action='logout'><input class='button' type='submit' value='Logout'/></form>				
+					<a href='custSerRepMenu.html'><button class='button alignright'>Home Page</button></a>
+					</div> 
+			</div>
+			
+	
+			<div class='wrapper' id='inner-container'>
+			<form id="us05Form">
+				<h3>Total Call Failures Over Time </h3>
+			
+				<strong>Enter IMSI: </strong><input id="imsi" class='submissionfield' type='text' name='username' 
+						placeholder='Please Enter an IMSI number Here' required>
+				<br/>
+				<br/>
+				<strong>Start Date: </strong>
+				<input class='submissionfield' type="datetime-local" name="startDate" value="2013-01-01T00:00"
+					placeholder='Please Enter a start date Here' id="start" value="" required />
+				<br/>
+				<br/>
+				<strong>End Date: </strong>
+				<input class='submissionfield' type="datetime-local" name="endDate" value="2014-01-01T00:00"
+					placeholder='Please Enter end date Here' id="end" value="" required /> 		
+				<br/>
+				<input type='submit' class='button'> 
+				</form>
+				<div id="info" class="hidden"></div>				
+			</div>
+			<div class='wrapper hidden' id='hidden-container'>
+				<div id="results"></div>
+			</div>
+		</div>
+		<div id='eric-multi'>
+			<img src='images/ebottomgrad.jpg'>
+		</div>
+	</body>
 
 </html>

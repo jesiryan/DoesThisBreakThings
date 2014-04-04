@@ -1,0 +1,29 @@
+<script type="text/template" id="us06-tmpl">
+<% var addHeader = true;
+_.each(obj, function(obj) { 
+    if ( Modernizr.mq( "only all and (max-width: 640px)" ) ) {
+        addHeader = true;
+    }
+    %>
+	
+	<% if ( addHeader ) { %><thead>
+								<tr class='alt'>");
+								    <td>IMSI Number:</td>
+									<td><%=obj.imsi%></td>
+								</tr>
+								<tr>
+									<th>Cause Code</th>
+									<th>Event ID</th>
+									<th>Description</th>
+								</tr>
+								<tr>					
+							</thead>
+							<tbody><% } %>
+								<tr>
+									<td><%=obj.cause_causeCode%></td>
+									<td><%=obj.cause_eventid%></td>
+									<td><%=obj.description%></td>
+								</tr>	
+<% addHeader = false;
+}); %>
+</script>

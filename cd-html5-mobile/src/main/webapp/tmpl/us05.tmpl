@@ -1,0 +1,26 @@
+<script type="text/template" id="us05-tmpl">
+<% var addHeader = true;
+_.each(obj, function(obj) { 
+    if ( Modernizr.mq( "only all and (max-width: 640px)" ) ) {
+        addHeader = true;
+    }
+    %>
+	
+	<% if ( addHeader ) { %><thead>
+								<tr>
+									<th>Imsi</th>
+									<th>Start Date</th>
+									<th>End Date</th>
+									<th>Total Call Failures</th>
+								</tr>
+							</thead>
+							<tbody><% } %>
+								<tr>
+									<td><%=obj.imsi%></td>
+									<td><%=obj.start%></td>
+									<td><%=obj.end%></td>
+									<td><%=obj.count%></td>
+								</tr>	
+<% addHeader = false;
+}); %>
+</script>

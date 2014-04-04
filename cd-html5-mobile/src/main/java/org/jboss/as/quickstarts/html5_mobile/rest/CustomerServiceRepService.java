@@ -1,29 +1,24 @@
 package org.jboss.as.quickstarts.html5_mobile.rest;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.validation.Validator;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import org.jboss.as.quickstarts.html5_mobile.data.CallfailureRepository;
 import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 
 import com.conygre.training.entities.Callfailure;
+import com.conygre.training.entities.query.UserStory05Structure;
+import com.conygre.training.entities.query.UserStory06Structure;
 
 
 /**
@@ -61,18 +56,12 @@ public class CustomerServiceRepService {
     @GET
     @Path("/us05/{imsi}/{start}/{end}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Callfailure> findCauseCode_EventIDByIMSI(	@PathParam("imsi") String IMSI,
-												    		@PathParam("start") String startString,
-															@PathParam("end") String endString) {
-    	Date startDateTime=null, endDateTime=null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");      
-		try {
-		    startDateTime = sdf.parse(startString);
-		    endDateTime = sdf.parse(endString);
-		} catch (ParseException e) {
-		    e.printStackTrace();
-		}
-    	List<Callfailure> callfailures = repository.findCallByIMSIBetweenDate(IMSI, startDateTime, endDateTime);
+    public List<UserStory05Structure> findCauseCode_EventIDByIMSI(	@PathParam("imsi") String IMSI,
+														    		@PathParam("start") String startString,
+																	@PathParam("end") String endString) {
+    	startString = startString.replaceAll("T", " ");
+    	endString = endString.replaceAll("T", " ");
+    	List<UserStory05Structure> callfailures = repository.findCallByIMSIBetweenDate(IMSI, startString, endString);
         if (callfailures == null) {
         	return null;
         }
@@ -82,12 +71,12 @@ public class CustomerServiceRepService {
     @GET
     @Path("/us06/{imsi}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Callfailure> test(@PathParam("imsi") String IMSI) {	
-    	List<Callfailure> callfailures = repository.findCauseCode_EventIDByIMSI(IMSI);
-        if (callfailures == null) {
+    public List<UserStory06Structure> test(@PathParam("imsi") String IMSI) {	
+    	List<UserStory06Structure> userStory06Structures = repository.findUserStory06(IMSI);
+        if (userStory06Structures == null) {
         	return null;
         }
-        return callfailures;
+        return userStory06Structures;
     }  
     
 }

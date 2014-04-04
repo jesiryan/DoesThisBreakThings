@@ -13,8 +13,13 @@ import java.util.List;
  * The persistent class for the equipment database table.
  * 
  */
+@NamedQueries({
+	 @NamedQuery(name = "Equipment.findAll", query="SELECT e FROM Equipment e"),
+	 @NamedQuery(name = "Equipment.findByTac", query = "SELECT e FROM Equipment e WHERE e.tAC=:Tac"),
+	 @NamedQuery(name = "Equipment.findByModel", query = "SELECT e FROM Equipment e WHERE e.model=:MODEL"),
+})
+
 @Entity
-@NamedQuery(name="Equipment.findAll", query="SELECT e FROM Equipment e")
 public class Equipment implements Serializable {
 	private static final long serialVersionUID = 1L;
 

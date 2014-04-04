@@ -1,14 +1,17 @@
 package org.jboss.as.quickstarts.html5_mobile.data;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import com.conygre.training.entities.Callfailure;
 import com.conygre.training.entities.Equipment;
 
 
@@ -44,4 +47,17 @@ public class EquipmentRepository {
         criteria.select(equipment).orderBy(cb.asc(equipment.get("equipmentType")));
         return em.createQuery(criteria).getResultList();
     }
+    
+	// User Story 8
+//	public List<Equipment> findEquipmentByModel(String model) {
+//		System.out.println("equip");
+//		Query query = em.createQuery("SELECT e FROM Equipment e WHERE e.model=:MODEL").setParameter("MODEL", model);
+//		List<Equipment> equipment = query.getResultList();
+//		System.out.println("size="+equipment.size());
+//		if (equipment.size() == 0)
+//			return null;
+//		else
+//			return equipment;
+//	}
+
 }

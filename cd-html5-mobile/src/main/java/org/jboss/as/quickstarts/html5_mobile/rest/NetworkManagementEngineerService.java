@@ -44,19 +44,29 @@ public class NetworkManagementEngineerService {
     @Produces(MediaType.APPLICATION_JSON)
     public List<UserStory09Structure> findCauseCode_EventIDByIMSI(	@PathParam("start") String startString,
     																@PathParam("end") String endString) {
-    	Date startDateTime=null, endDateTime=null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");      
-		try {
-		    startDateTime = sdf.parse(startString);
-		    endDateTime = sdf.parse(endString);
-		} catch (ParseException e) {
-		    e.printStackTrace();
-		}
-    	List<UserStory09Structure> userStory09Structures = repository.findCountBetweenTimesTotalDuration(startDateTime, endDateTime);
+    	startString = startString.replaceAll("T", " ");
+    	endString = endString.replaceAll("T", " ");
+
+    	List<UserStory09Structure> userStory09Structures = repository.findCountBetweenTimesTotalDuration(startString, endString);
         if (userStory09Structures == null) {
         	return null;
         }
         return userStory09Structures;
-    }  
+    }
     
+
+    @GET
+    @Path("/us12/{start}/{end}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<UserStory09Structure> findAllCallFailuresBetween(	@PathParam("start") String startString,
+    																@PathParam("end") String endString) {
+    	startString = startString.replaceAll("T", " ");
+    	endString = endString.replaceAll("T", " ");
+
+    	List<UserStory09Structure> userStory09Structures = repository.findCountBetweenTimesTotalDuration(startString, endString);
+        if (userStory09Structures == null) {
+        	return null;
+        }
+        return userStory09Structures;
+    }
 }

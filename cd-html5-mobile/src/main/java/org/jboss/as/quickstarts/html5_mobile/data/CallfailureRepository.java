@@ -9,14 +9,16 @@ import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.jms.Session;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import com.conygre.training.entities.Callfailure;
+import com.conygre.training.entities.query.UserStory05Structure;
+import com.conygre.training.entities.query.UserStory06Structure;
 import com.conygre.training.entities.query.UserStory09Structure;
 
 @ApplicationScoped
@@ -80,71 +82,75 @@ public class CallfailureRepository {
 	}
     
     // User story 5
-	public List<Callfailure> findCallByIMSIBetweenDate(String IMSI, Date startDateTime, Date endDateTime) {
-		List<Callfailure> callFailures = (List<Callfailure>) em
-				.createNamedQuery("Callfailure.findImsiBetween")
-				.setParameter("IMSI", IMSI)
-				.setParameter("startDateTime", startDateTime)
-				.setParameter("endDateTime", endDateTime).getResultList();
+	public List<UserStory05Structure> findCallByIMSIBetweenDate(String IMSI, String startDateTime, String endDateTime) {
+		List<UserStory05Structure> us05List = new ArrayList<UserStory05Structure>();
+		
+		String loginQueryString = "SELECT iMSI, COUNT(*) FROM callfailure WHERE dateTime > ? AND dateTime < ? AND iMSI=?";
+		try {
+			connection = ConnectionFactory.getInstance().getConnection();
+			loginStatement = connection.prepareStatement(loginQueryString);
+			loginStatement.setString(1, startDateTime);
+			loginStatement.setString(2, endDateTime);
+			loginStatement.setString(3, IMSI);
+			loginResultSet = loginStatement.executeQuery();
+			
+			while (loginResultSet.next()) {
+				us05List.add(new UserStory05Structure(startDateTime, endDateTime, (String)loginResultSet.getString(1), Integer.parseInt(loginResultSet.getString(2))));
+			}
+		} catch (SQLException e) { e.printStackTrace(); }		
 
-		if (callFailures.size() == 0)
+		if (us05List.size() == 0)
 			return null;
 		else
-			return callFailures;
+			return us05List;
 	}
 	
 	// User story 6
+	public List<UserStory06Structure> findUserStory06(String imsi) {
+		List<UserStory06Structure> userStory06Structures = new ArrayList<UserStory06Structure>();
+		
+		String loginQueryString = "SELECT DISTINCT iMSI, cause_causeCode, cause_eventid, cause.description FROM callfailure, cause where iMSI = ? and callfailure.cause_causeCode = cause.causeCode and callfailure.cause_eventid = cause.eventid ORDER BY cause_causeCode";
+		try {
+			connection = ConnectionFactory.getInstance().getConnection();
+			loginStatement = connection.prepareStatement(loginQueryString);
+			loginStatement.setString(1, imsi);
+			loginResultSet = loginStatement.executeQuery();
+			
+			while (loginResultSet.next()) {
+				userStory06Structures.add(new UserStory06Structure((String)loginResultSet.getString(1), Double.parseDouble(loginResultSet.getString(2)), Double.parseDouble(loginResultSet.getString(3)), (String)loginResultSet.getString(4)));
+			}
+		} catch (SQLException e) { e.printStackTrace(); }	
+		
+		
+		if (userStory06Structures.size() == 0)
+			return null;
+		else
+			return userStory06Structures;
+	}
 	
 	
-	
-	// User story 7
-//	public List<Callfailure> findAllCallFailuresBetween(Date startDateTime, Date endDateTime) {
-//		String loginQueryString = "SELECT * FROM Callfailure WHERE dateTime > ? AND dateTime < ? ORDER BY iMSI"),	
-//		try {
-//			connection = ConnectionFactory.getInstance().getConnection();
-//			loginStatement = connection.prepareStatement(loginQueryString);
-//			loginStatement.setString(1, "2013-01-01 00:00");
-//			loginStatement.setString(2, "2014-01-01 00:00");
-//			loginResultSet = loginStatement.executeQuery();
-//			
-//			while (loginResultSet.next()) {
-//				us09List.add(new UserStory09Structure((String)loginResultSet.getString(1), Integer.parseInt(loginResultSet.getString(2)), Integer.parseInt(loginResultSet.getString(3))));
-//			}
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		List<Callfailure> callFailures = (List<Callfailure>) em
-//				.createNamedQuery("Callfailure.findAllBetween")
-//				.setParameter("startDateTime", startDateTime)
-//				.setParameter("endDateTime", endDateTime).getResultList();
-//		if (callFailures.size() == 0)
-//			return null;
-//		else
-//			return callFailures;
-//	}
-    
+	// User story 7 & 12
+	public List<Callfailure> findAllCallFailuresBetween(Date startDateTime, Date endDateTime) {
+		//Query query = em.createQuery("SELECT c.iMSI, c.dateTime, c.cause.description FROM Callfailure c WHERE c.dateTime >= :startDateTime AND c.dateTime <= :endDateTime ORDER BY c.iMSI").setParameter("startDateTime", startDateTime).setParameter("endDateTime", endDateTime);
+		Query query = em.createQuery("SELECT c FROM Callfailure c WHERE c.dateTime >= :startDateTime AND c.dateTime <= :endDateTime ORDER BY c.iMSI").setParameter("startDateTime", startDateTime).setParameter("endDateTime", endDateTime);
+		List<Callfailure> callfailures = query.getResultList();
+
+		if (callfailures.size() == 0)
+			return null;
+		else
+			return callfailures;
+	}
+    	
     // User story 9
-    public List<UserStory09Structure> findCountBetweenTimesTotalDuration(Date startDateTime, Date endDateTime) {
+    public List<UserStory09Structure> findCountBetweenTimesTotalDuration(String startDateTime, String endDateTime) {
 		List<UserStory09Structure> us09List = new ArrayList<UserStory09Structure>();
 
 		String loginQueryString = "SELECT iMSI, COUNT(*), SUM(duration) FROM callfailure WHERE dateTime > ? AND dateTime < ? GROUP BY iMSI";
 		try {
 			connection = ConnectionFactory.getInstance().getConnection();
 			loginStatement = connection.prepareStatement(loginQueryString);
-			loginStatement.setString(1, "2013-01-01 00:00");
-			loginStatement.setString(2, "2014-01-01 00:00");
+			loginStatement.setString(1, startDateTime);
+			loginStatement.setString(2, endDateTime);
 			loginResultSet = loginStatement.executeQuery();
 			
 			while (loginResultSet.next()) {

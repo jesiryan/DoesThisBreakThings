@@ -1,24 +1,24 @@
-//****************************User Story 9*******************************//
+//****************************User Story 5*******************************//
     
 	/*Pass start and end dateTimes into this function which is called from the submit when you enter start and end dateTimes*/
-    function getUS09ResultTemplate(startdate,enddate) {
+    function getUS05ResultTemplate(imsi,startdate,enddate) {
     	
         $.ajax({
-            url: "tmpl/us09.tmpl",
+            url: "tmpl/us05.tmpl",
             dataType: "html",
             success: function( data ) {
             	
                 $( "head" ).append( data );
-                updateUS09Table(startdate,enddate);
+                updateUS05Table(imsi,startdate,enddate);
             }
         });
     }
     
     /* Uses JAX-RS GET to retrieve all imsi Numbers for start and end dateTimes*/
-    function updateUS09Table(startdate,enddate) {
+    function updateUS05Table(imsi,startdate,enddate) {
 
         $.ajax({
-            url: "rest/net/us09/"+startdate+"/"+enddate,
+            url: "rest/cust/us05/"+imsi+"/"+startdate+"/"+enddate,
             type: "GET",
             cache: false,
             success: function(data) {
@@ -26,23 +26,26 @@
                     $('#info').removeClass("hidden");
                     $('#hidden-container').addClass("hidden");
             		$('#info').empty().append("Information: The query between dates " + startdate + " and " + enddate + " has returned no results.");
-					document.forms["us09Form"].reset();
+					document.forms["us05Form"].reset();
             	} else {
             		$('#info').addClass("hidden");
                     $('#hidden-container').removeClass("hidden");
-                	$('#results').empty().append(buildUS09ResultsRows(data));
-                    document.forms["us09Form"].reset();
+//                    var json = JSON.stringify('{"imsi":'+imsi+', "startdate":'+startdate+', "enddate":'+enddate+', "count":'+data+'}'); 
+//                    var obj = eval(json);
+//                    alert(obj);
+                    $('#results').empty().append(buildUS05ResultsRows(data));
+                    document.forms["us05Form"].reset();
                     console.log("The data being added is : " + data);
                 }
             },
             error: function(error) {
-//                document.forms["us09Form"].reset();
+//                document.forms["us05Form"].reset();
                 //console.log("error updating table -" + error.status);
             }
         });
     }
 
 	/* Builds the updated table for the callfailures list */
-	function buildUS09ResultsRows(userStory09Structures) {
-	    return _.template( $( "#us09-tmpl" ).html(), {"userStory09Structures": userStory09Structures});
+	function buildUS05ResultsRows(obj) {
+	    return _.template( $( "#us05-tmpl" ).html(), {"obj": obj});
 	}
