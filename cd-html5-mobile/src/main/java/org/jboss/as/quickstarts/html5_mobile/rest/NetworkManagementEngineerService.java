@@ -39,13 +39,11 @@ public class NetworkManagementEngineerService {
     MemberRegistration upload;
   
     
-    // EXAMPLE METHOD - path consists of user story number and variable to send to query; can also use @QueryParam instead
     @GET
     @Path("/us09/{start}/{end}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<UserStory09Structure> findCauseCode_EventIDByIMSI(	@PathParam("start") String startString,
     																@PathParam("end") String endString) {
-    	System.out.println("net mgmt");
     	Date startDateTime=null, endDateTime=null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");      
 		try {
@@ -56,10 +54,8 @@ public class NetworkManagementEngineerService {
 		}
     	List<UserStory09Structure> userStory09Structures = repository.findCountBetweenTimesTotalDuration(startDateTime, endDateTime);
         if (userStory09Structures == null) {
-        	System.out.println("null ret");
         	return null;
         }
-    	System.out.println("full ret");
         return userStory09Structures;
     }  
     

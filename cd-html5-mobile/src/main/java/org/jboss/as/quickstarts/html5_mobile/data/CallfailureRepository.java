@@ -79,6 +79,62 @@ public class CallfailureRepository {
 			return callfailures;
 	}
     
+    // User story 5
+	public List<Callfailure> findCallByIMSIBetweenDate(String IMSI, Date startDateTime, Date endDateTime) {
+		List<Callfailure> callFailures = (List<Callfailure>) em
+				.createNamedQuery("Callfailure.findImsiBetween")
+				.setParameter("IMSI", IMSI)
+				.setParameter("startDateTime", startDateTime)
+				.setParameter("endDateTime", endDateTime).getResultList();
+
+		if (callFailures.size() == 0)
+			return null;
+		else
+			return callFailures;
+	}
+	
+	// User story 6
+	
+	
+	
+	// User story 7
+//	public List<Callfailure> findAllCallFailuresBetween(Date startDateTime, Date endDateTime) {
+//		String loginQueryString = "SELECT * FROM Callfailure WHERE dateTime > ? AND dateTime < ? ORDER BY iMSI"),	
+//		try {
+//			connection = ConnectionFactory.getInstance().getConnection();
+//			loginStatement = connection.prepareStatement(loginQueryString);
+//			loginStatement.setString(1, "2013-01-01 00:00");
+//			loginStatement.setString(2, "2014-01-01 00:00");
+//			loginResultSet = loginStatement.executeQuery();
+//			
+//			while (loginResultSet.next()) {
+//				us09List.add(new UserStory09Structure((String)loginResultSet.getString(1), Integer.parseInt(loginResultSet.getString(2)), Integer.parseInt(loginResultSet.getString(3))));
+//			}
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//		List<Callfailure> callFailures = (List<Callfailure>) em
+//				.createNamedQuery("Callfailure.findAllBetween")
+//				.setParameter("startDateTime", startDateTime)
+//				.setParameter("endDateTime", endDateTime).getResultList();
+//		if (callFailures.size() == 0)
+//			return null;
+//		else
+//			return callFailures;
+//	}
+    
     // User story 9
     public List<UserStory09Structure> findCountBetweenTimesTotalDuration(Date startDateTime, Date endDateTime) {
 		List<UserStory09Structure> us09List = new ArrayList<UserStory09Structure>();

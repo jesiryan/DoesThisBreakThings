@@ -1,5 +1,8 @@
 package org.jboss.as.quickstarts.html5_mobile.rest;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -17,6 +20,7 @@ import org.jboss.as.quickstarts.html5_mobile.data.CallfailureRepository;
 import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 
 import com.conygre.training.entities.Callfailure;
+import com.conygre.training.entities.query.UserStory09Structure;
 
 
 @Path("/supp")
@@ -36,16 +40,24 @@ public class SupportEngineerService {
     MemberRegistration upload;
   
     
-    // EXAMPLE METHOD - path consists of user story number and variable to send to query; can also use @QueryParam instead
-    @GET
-    @Path("/usXX/{imsi}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Callfailure> findCauseCode_EventIDByIMSI(@PathParam("imsi") String IMSI) {	
-    	List<Callfailure> callfailures = repository.findCauseCode_EventIDByIMSI(IMSI);
-        if (callfailures == null) {
-        	return null;
-        }
-        return callfailures;
-    }  
+//    @GET
+//    @Path("/us07/{start}/{end}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public List<Callfailure> findAllCallFailuresBetween(@PathParam("start") String startString,
+//    													@PathParam("end") String endString) {
+//    	Date startDateTime=null, endDateTime=null;
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");      
+//		try {
+//		    startDateTime = sdf.parse(startString);
+//		    endDateTime = sdf.parse(endString);
+//		} catch (ParseException e) {
+//		    e.printStackTrace();
+//		}
+//    	List<Callfailure> userStory09Structures = repository.findAllCallFailuresBetween(startDateTime, endDateTime);
+//        if (userStory09Structures == null) {
+//        	return null;
+//        }
+//        return userStory09Structures;
+//    }  
     
 }

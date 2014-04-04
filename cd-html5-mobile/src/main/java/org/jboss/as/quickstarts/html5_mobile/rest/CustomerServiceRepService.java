@@ -56,7 +56,28 @@ public class CustomerServiceRepService {
         	return null;
         }
         return callfailures;
-    }     
+    }
+    
+    @GET
+    @Path("/us05/{imsi}/{start}/{end}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Callfailure> findCauseCode_EventIDByIMSI(	@PathParam("imsi") String IMSI,
+												    		@PathParam("start") String startString,
+															@PathParam("end") String endString) {
+    	Date startDateTime=null, endDateTime=null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");      
+		try {
+		    startDateTime = sdf.parse(startString);
+		    endDateTime = sdf.parse(endString);
+		} catch (ParseException e) {
+		    e.printStackTrace();
+		}
+    	List<Callfailure> callfailures = repository.findCallByIMSIBetweenDate(IMSI, startDateTime, endDateTime);
+        if (callfailures == null) {
+        	return null;
+        }
+        return callfailures;
+    }
     
     @GET
     @Path("/us06/{imsi}")
@@ -68,21 +89,5 @@ public class CustomerServiceRepService {
         }
         return callfailures;
     }  
-
-//	public static List<Callfailure> countCauseCode(int tAC, double cause,
-//			double event) {
-//		// eventId and o.causeCode =:causeCode
-//		EntityManager em = emf.createEntityManager();
-//		List<Callfailure> causeList = (List<Callfailure>) em
-//				.createNamedQuery("CallFailure.countByEventAndCause")
-//				.setParameter("TAC", tAC).setParameter("EVENT", event)
-//				.setParameter("CAUSE", cause).getResultList();
-//		em.close();
-//
-//		if (causeList.size() == 0)
-//			return null;
-//		else
-//			return causeList;
-//	}
     
 }
