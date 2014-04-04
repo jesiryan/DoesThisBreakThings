@@ -20,7 +20,7 @@ public class CountryoperatorDAO {
 		
 	}
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="sprint2")
 	private EntityManager em;
 	
 	public Countryoperator getCountryoperatorById(String id) {

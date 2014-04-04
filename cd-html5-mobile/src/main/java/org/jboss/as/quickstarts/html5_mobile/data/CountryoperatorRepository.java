@@ -15,7 +15,7 @@ import com.conygre.training.entities.Countryoperator;
 public class CountryoperatorRepository {
 
     //@Inject
-    @PersistenceContext(unitName="conygreChapter8")
+    @PersistenceContext(unitName="sprint2")
     private EntityManager em;
 
     public Countryoperator findById(int id) {

@@ -20,7 +20,7 @@ public class CallfailureDAO {
 		
 	}
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="sprint2")
 	private EntityManager em;
 	
 	public Callfailure getCallfailureById(String id) {

@@ -24,7 +24,7 @@ public class MemberRepository {
 
 
     //@Inject
-    @PersistenceContext(unitName="conygreChapter8")
+    @PersistenceContext(unitName="sprint2")
     private EntityManager em;
 
     public Member findById(Long id) {

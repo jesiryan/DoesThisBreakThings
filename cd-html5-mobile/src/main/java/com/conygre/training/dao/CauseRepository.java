@@ -1,4 +1,4 @@
-package org.jboss.as.quickstarts.html5_mobile.data;
+package com.conygre.training.dao;
 
 import java.util.List;
 

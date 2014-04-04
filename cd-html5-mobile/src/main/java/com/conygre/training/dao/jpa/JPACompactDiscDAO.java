@@ -19,7 +19,7 @@ import com.conygre.training.entities.CompactDisc;
 @JPA
 public class JPACompactDiscDAO implements CompactDiscDAO {
 
-	@PersistenceContext(unitName="conygreChapter8")
+	@PersistenceContext(unitName="sprint2")
 	private EntityManager em;
 	
 	public Boolean addCompactDisc(CompactDisc disc) {
