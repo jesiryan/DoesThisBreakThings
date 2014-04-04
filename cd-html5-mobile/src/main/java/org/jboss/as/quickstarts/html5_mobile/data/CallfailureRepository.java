@@ -193,13 +193,6 @@ public class CallfailureRepository {
 				+" count(case when failureClass_failureClass = 4 then 1 else null end) as class4"
 				+" FROM callfailure WHERE dateTime > ? AND dateTime < ? GROUP BY iMSI ORDER BY count(*) DESC LIMIT 10";
 		
-//		String loginQueryString = "SELECT iMSI,count(iMSI) AS totalFAILS,  count(case when failureClass_failureClass = 0 then 1 else null end) as class0,"
-//		+"count(case when failureClass_failureClass = 1 then 1 else null end) as class1,"
-//		+"count(case when failureClass_failureClass = 2 then 1 else null end) as class2,"
-//		+"count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
-//		+"count(case when failureClass_failureClass = 4 then 1 else null end) as class4"
-//		+" FROM sprint1.callfailure WHERE sprint1.callfailure.dateTime >= '"+startDate + "'"
-//		+" AND sprint1.callfailure.dateTime <= '"+endDate+"' GROUP BY iMSI ORDER BY totalFAILS DESC LIMIT 10";
 		
 		try {
 			connection = ConnectionFactory.getInstance().getConnection();
@@ -209,7 +202,7 @@ public class CallfailureRepository {
 			loginResultSet = loginStatement.executeQuery();
 			
 			while (loginResultSet.next()) {
-				us12List.add(new UserStory12Structure((String)loginResultSet.getString(1), Integer.parseInt(loginResultSet.getString(2))));
+				us12List.add(new UserStory12Structure((String)loginResultSet.getString(1), Integer.parseInt(loginResultSet.getString(2)), Integer.parseInt(loginResultSet.getString(3)), Integer.parseInt(loginResultSet.getString(4)), Integer.parseInt(loginResultSet.getString(5)), Integer.parseInt(loginResultSet.getString(6)), Integer.parseInt(loginResultSet.getString(7))));
 			}
 			
 			
