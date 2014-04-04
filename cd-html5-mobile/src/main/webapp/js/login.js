@@ -5,15 +5,15 @@
     function pageRedirect(name, password) {
 
         $.ajax({
-            url: "rest/members/login/"+name+"/"+password,
+            url: "rest/members/login?name="+name+"&password="+password,
             type: "GET",
             cache: false,
+            data:{name: name, password: password },
             success: function(data) {
-            	alert(data);
             	if (data.length < 1) {
-            		document.location.href = '/cd-html5-mobile/loginFail.html';
+            		document.location.href = '/loginFail.html';
             	} else {
-            		document.location.href = '/cd-html5-mobile/adminMenu.html';
+            		document.location.href = '/adminMenu.html';
                 }
             },
             error: function(error) {
