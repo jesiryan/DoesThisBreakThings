@@ -33,6 +33,7 @@ import com.conygre.training.validation.ValidateExcelFile;
 public class FileUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static String pathAndName;
+	public static List<Object> callFailures;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -100,7 +101,7 @@ public class FileUploadServlet extends HttpServlet {
 					+ CallfailureReader.getNumOfInvalidRows() + "&validCount="
 					+ CallfailureReader.getNumOfValidRows());
 			
-			List<Object> callFailures = getCallFailures();
+			callFailures = getCallFailures();
 			Callfailure failure1 = ((Callfailure) callFailures.get(0));
 			Callfailure failure2 = ((Callfailure) callFailures.get(40));
 			System.out.println(failure1.getDateTime()+"" + failure1.getIMSI());

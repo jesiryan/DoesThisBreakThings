@@ -27,7 +27,6 @@ public class CauseReader {
 	}
 
 	public Cause getOneEventCauseRow(int rowNumber) {
-		System.out.println(getDescription(rowNumber));
 		return new Cause.Builder().eventId(getEventId(rowNumber))
 				.causeCode(getCauseCode(rowNumber))
 				.description(getDescription(rowNumber)).build();

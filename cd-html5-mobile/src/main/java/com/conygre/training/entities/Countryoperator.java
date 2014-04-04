@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
+import com.conygre.training.entities.Cause.Builder;
+
 import java.util.List;
 
 
@@ -40,15 +42,13 @@ public class Countryoperator implements Serializable {
 	}
 	
 	private Countryoperator(Builder builder) {
-		this.id.setMCC(builder.mCC);
-		this.id.setMNC(builder.mNC);
+		this.id = builder.countryoperatorPK;
 		this.country = builder.country;
 		this.operator = builder.operator;
 	}
 
 	public static class Builder {
-		private double mCC;
-		private double mNC;
+		private CountryoperatorPK countryoperatorPK = new CountryoperatorPK();
 		private String country;
 		private String operator;
 
@@ -57,12 +57,12 @@ public class Countryoperator implements Serializable {
 		}
 
 		public Builder mCC(double mCC) {
-			this.mCC = mCC;
+			this.countryoperatorPK.setMCC(mCC);
 			return this;
 		}
 
 		public Builder mNC(double mNC) {
-			this.mNC = mNC;
+			this.countryoperatorPK.setMNC(mNC);
 			return this;
 		}
 

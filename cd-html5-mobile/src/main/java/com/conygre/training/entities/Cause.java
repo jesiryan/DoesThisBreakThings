@@ -38,30 +38,28 @@ public class Cause implements Serializable {
 	}
 	
 	private Cause(Builder builder) {
-		this.id.setEventId(builder.eventId);
-		this.id.setCauseCode(builder.causeCode);
+		this.id = builder.causePK;
 		this.description = builder.description;
 	}
 
 	public static class Builder {
-		private double eventId;
-		private double causeCode;
+		private CausePK causePK = new CausePK();
 		private String description;
-
+		
 		public Builder() {
 			super();
 		}
-
+		
 		public Builder eventId(double eventId) {
-			this.eventId = eventId;
+			this.causePK.setEventId(eventId);
 			return this;
 		}
 
 		public Builder causeCode(double causeCode) {
-			this.causeCode = causeCode;
+			this.causePK.setCauseCode(causeCode);
 			return this;
 		}
-
+		
 		public Builder description(String description) {
 			this.description = description;
 			return this;
