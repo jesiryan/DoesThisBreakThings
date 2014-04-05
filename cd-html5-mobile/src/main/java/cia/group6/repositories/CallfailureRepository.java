@@ -289,40 +289,44 @@ public class CallfailureRepository {
 			return us12List;
 	}
     
-    // User story 13
-    public List<UserStory13Structure> findAllTimeTop() {
-		List<UserStory13Structure> us13List = new ArrayList<UserStory13Structure>();
 
-		String loginQueryString = "SELECT count(*) as totalFAILS,countryOperator_mCC, countryOperator_mNC, cellId, country, operator, "
-				+"count(case when failureClass_failureClass = 0 then 1 else null end) as class0,"
-				+"count(case when failureClass_failureClass = 1 then 1 else null end) as class1,"
-				+"count(case when failureClass_failureClass = 2 then 1 else null end) as class2,"
-				+"count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
-				+"count(case when failureClass_failureClass = 4 then 1 else null end) as class4,"
-				+"(COUNT(*)/ T.total * 100) AS percent"
-				+" FROM callfailure,countryoperator, (SELECT COUNT(*) AS total FROM callfailure) AS T WHERE countryOperator_mCC = mCC "
-		+"AND countryOperator_mNC = mNC  GROUP BY countryOperator_mCC, countryOperator_mNC, cellId ORDER BY totalFAILS DESC LIMIT 10;";
-				
-		try {
-			connection = ConnectionFactory.getInstance().getConnection();
-			loginStatement = connection.prepareStatement(loginQueryString);
-			loginResultSet = loginStatement.executeQuery();
-			
-			while (loginResultSet.next()) {
-				us13List.add(new UserStory13Structure(loginResultSet.getInt(1), loginResultSet.getDouble(2), loginResultSet.getDouble(3), loginResultSet.getInt(4), 
-						loginResultSet.getString(5), loginResultSet.getString(6),loginResultSet.getInt(7),loginResultSet.getInt(8),loginResultSet.getInt(9),
-						loginResultSet.getInt(10),loginResultSet.getInt(11), loginResultSet.getDouble(12)));
-			}
-			
-			
-			
-		} catch (SQLException e) { e.printStackTrace(); }		
+ // User story 13
+     public List<UserStory13Structure> findAllTimeTop(String startDateTime, String endDateTime) {
+ 		List<UserStory13Structure> us13List = new ArrayList<UserStory13Structure>();
 
-		if (us13List.size() == 0)
-			return null;
-		else
-			return us13List;
-	}
+ 		String loginQueryString = "SELECT count(*) as totalFAILS,countryOperator_mCC, countryOperator_mNC, cellId, country, operator, "
+ 				+"count(case when failureClass_failureClass = 0 then 1 else null end) as class0,"
+ 				+"count(case when failureClass_failureClass = 1 then 1 else null end) as class1,"
+ 				+"count(case when failureClass_failureClass = 2 then 1 else null end) as class2,"
+ 				+"count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
+ 				+"count(case when failureClass_failureClass = 4 then 1 else null end) as class4,"
+ 				+"(COUNT(*)/ T.total * 100) AS percent"
+ 				+" FROM callfailure,countryoperator, (SELECT COUNT(*) AS total FROM callfailure) AS T WHERE countryOperator_mCC = mCC "
+ 		+"AND countryOperator_mNC = mNC AND dateTime > ? AND dateTime < ? GROUP BY countryOperator_mCC, countryOperator_mNC, cellId ORDER BY totalFAILS DESC LIMIT 10;";
+ 				
+ 		try {
+ 			connection = ConnectionFactory.getInstance().getConnection();
+ 			loginStatement = connection.prepareStatement(loginQueryString);
+ 			loginStatement.setString(1, startDateTime);
+ 			loginStatement.setString(2, endDateTime);
+ 			loginResultSet = loginStatement.executeQuery();
+ 			
+ 			while (loginResultSet.next()) {
+ 				us13List.add(new UserStory13Structure(loginResultSet.getInt(1), loginResultSet.getDouble(2), loginResultSet.getDouble(3), loginResultSet.getInt(4), 
+ 						loginResultSet.getString(5), loginResultSet.getString(6),loginResultSet.getInt(7),loginResultSet.getInt(8),loginResultSet.getInt(9),
+ 						loginResultSet.getInt(10),loginResultSet.getInt(11), loginResultSet.getDouble(12)));
+ 			}
+ 			
+ 			
+ 			
+ 		} catch (SQLException e) { e.printStackTrace(); }		
+
+ 		if (us13List.size() == 0)
+ 			return null;
+ 		else
+ 			return us13List;
+ 	}
+
     
     // User story 14
  	public List<UserStory14Structure> findAffectedIMSIsGivenCauseClass(double causeCode, double eventId) {

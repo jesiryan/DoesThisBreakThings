@@ -103,12 +103,15 @@ public class NetworkManagementEngineerService {
 	}
 
 	@GET
-	@Path("/us13/")
+	@Path("/us13/{start}/{end}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String findAllTimeTop() {
+	public String findAllTimeTop(
+			@PathParam("start") String startString,
+			@PathParam("end") String endString) {
+		startString = startString.replaceAll("T", " ");
+		endString = endString.replaceAll("T", " ");
 
-		List<UserStory13Structure> userStory13Structures = repository
-				.findAllTimeTop();
+		List<UserStory13Structure> userStory13Structures = repository.findAllTimeTop(startString, endString);
 		
 		String labelTag= "",valueSet1 ="", valueSet2 ="",linkedChart= "", eNodeB = "";
 		for(UserStory13Structure current : userStory13Structures){
@@ -173,9 +176,7 @@ public class NetworkManagementEngineerService {
 			    +"]"
 			    +"	}";
 		
-		String finalChart = "<script type=\"text/javascript\" src=\"FusionCharts.js\"></script>"					
-				+ "<div id=\"chartContainer\" align=\"center\">FusionCharts will load here</div>"
-				+ "<script type=\"text/javascript\">"
+		String finalChart ="<script type=\"text/javascript\">"
 				+"FusionCharts.setCurrentRenderer('javascript');"
 				+ "	var myChart = new FusionCharts(\"MSColumn3DLineDY\", \"myChartId\", \"800\", \"600\", \"0\", \"1\");	"	
 				+ "FusionCharts(\"myChartId\").configureLink ("
