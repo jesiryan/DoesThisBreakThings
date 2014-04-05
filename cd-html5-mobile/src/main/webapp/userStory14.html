@@ -78,10 +78,10 @@
 		      },
 			complete: function() {
 			    $( document ).ready( function() {
-			        $('#us07Form').submit(function(event) {
-			        	var start = document.getElementById('start').value;
-			        	var end = document.getElementById('end').value;
-			        	getUS07ResultTemplate(start,end);
+			        $('#us14Form').submit(function(event) {
+			        	var causeCode = document.getElementById('causeCode').value;
+			        	var eventId = document.getElementById('eventId').value;
+			        	getUS14ResultTemplate(causeCode, eventId);
 			            return false;
 			        });
 			    });
@@ -114,9 +114,9 @@
 			
 	
 			<div class='wrapper' id='inner-container'>
-			<form id="us07Form">
-					<strong>From (date and time):</strong> <input id="start" class='submissionfield' type="datetime-local" name="from" value='2013-01-01T00:00'>
-					<strong>To (date and time):</strong> <input id="end" class='submissionfield' type="datetime-local" name="to" value='2014-01-01T00:00'>
+			<form id="us14Form">
+					<strong>Please Enter cause code: </strong> <input id="causeCode" class='submissionfield' type="text" name="causeCode" placeholder='causeCode'>
+					<strong>Please Enter event id:</strong> <input id="eventId" class='submissionfield' type="text" name="eventId" value='eventId'>
 					<input type="submit" class="button">
 				</form>
 				<div id="info" class="hidden"></div>				

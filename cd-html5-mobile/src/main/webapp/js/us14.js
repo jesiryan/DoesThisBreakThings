@@ -1,4 +1,4 @@
-//****************************User Story 7*******************************//
+//****************************User Story 14*******************************//
     
 	/*Pass start and end dateTimes into this function which is called from the submit when you enter start and end dateTimes*/
     function getUS14ResultTemplate(start,end) {

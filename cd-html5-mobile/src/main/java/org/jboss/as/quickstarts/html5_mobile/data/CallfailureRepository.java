@@ -266,10 +266,10 @@ public class CallfailureRepository {
  			loginStatement.setString(2, ""+eventId);
  			loginResultSet = loginStatement.executeQuery();
  			
- 			while (loginResultSet.next()) {
- 				us14List.add(
- 						new UserStory14Structure(Double.parseDouble(loginResultSet.getString(1)), Double.parseDouble(loginResultSet.getString(2)), causeCode, eventId));
- 			}
+// 			while (loginResultSet.next()) {
+// 				us14List.add(
+// 						new UserStory14Structure(Double.parseDouble(loginResultSet.getString(1)), Double.parseDouble(loginResultSet.getString(2)), causeCode, eventId));
+// 			}
  		} catch (SQLException e) { e.printStackTrace(); }	
  		 		
  		if (us14List.size() == 0)
