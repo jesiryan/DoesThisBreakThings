@@ -32,12 +32,10 @@
                     $('#hidden-container').removeClass("hidden");
                 	$('#results').empty().append(buildResultsRows(data));
                     document.forms["us04Form"].reset();
-                    console.log("The data being added is : " + data);
                 }
             },
             error: function(error) {
-//                document.forms["us04Form"].reset();
-                //console.log("error updating table -" + error.status);
+
             }
         });
     }
