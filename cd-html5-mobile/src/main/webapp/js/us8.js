@@ -18,7 +18,7 @@
     function updateUS08Table(start,end) {
 
         $.ajax({
-            url: "rest/supp/us08/"+start+"/"+end,
+            url: "rest/supp/us08/"+start+"/"+end+"/"+model,
             type: "GET",
             cache: false,
             success: function(data) {

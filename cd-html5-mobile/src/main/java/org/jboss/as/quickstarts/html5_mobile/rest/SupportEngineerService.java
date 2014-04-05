@@ -60,7 +60,7 @@ public class SupportEngineerService {
     
     
     @GET
-    @Path("/us08/{start}/{end}.{model}")
+    @Path("/us08/{start}/{end}/{model}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<UserStory08Structure> findEquipmentByModel(@PathParam("start") String startString,
 															@PathParam("end") String endString,

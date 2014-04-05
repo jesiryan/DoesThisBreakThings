@@ -257,7 +257,7 @@ public class CallfailureRepository {
 				+" count(case when failureClass_failureClass = 2 then 1 else null end) as class2,"
 				+" count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
 				+" count(case when failureClass_failureClass = 4 then 1 else null end) as class4"
-				+" FROM sprint1.callfailure,countryoperator WHERE countryOperator_mCC = mCC "
+				+" FROM callfailure,countryoperator WHERE countryOperator_mCC = mCC "
 		+"AND countryOperator_mNC = mNC AND dateTime > ? AND dateTime < ? GROUP BY countryOperator_mCC, countryOperator_mNC, cellId ORDER BY totalFAILS DESC LIMIT 10;";
 				
 		try {
