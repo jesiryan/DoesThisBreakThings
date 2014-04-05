@@ -4,10 +4,11 @@ public class UserStory14Structure {
 	
 	private String imsi;
 	private int count;
-	private String causeCode;
-	private String eventId;
+	private double causeCode;
+	private double eventId;
+	private String description;
 
-	public UserStory14Structure(String imsi, int count, String causeCode, String eventId) {
+	public UserStory14Structure(String imsi, int count, double causeCode, double eventId, String description) {
 		this.imsi = imsi;
 		this.count = count;
 		this.causeCode = causeCode;
@@ -30,20 +31,28 @@ public class UserStory14Structure {
 		this.count = count;
 	}
 
-	public String getCauseCode() {
+	public double getCauseCode() {
 		return causeCode;
 	}
 
-	public void setCauseCode(String causeCode) {
+	public void setCauseCode(double causeCode) {
 		this.causeCode = causeCode;
 	}
 
-	public String getEventId() {
+	public double getEventId() {
 		return eventId;
 	}
 
-	public void setEventId(String eventId) {
+	public void setEventId(double eventId) {
 		this.eventId = eventId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

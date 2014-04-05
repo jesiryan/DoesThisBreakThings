@@ -23,6 +23,7 @@ import com.conygre.training.entities.query.UserStory07Structure;
 import com.conygre.training.entities.query.UserStory09Structure;
 import com.conygre.training.entities.query.UserStory11Structure;
 import com.conygre.training.entities.query.UserStory12Structure;
+import com.conygre.training.entities.query.UserStory14Structure;
 
 @ApplicationScoped
 public class CallfailureRepository {
@@ -251,6 +252,31 @@ public class CallfailureRepository {
 		else
 			return us11List;
 	}
+    
+    // User story 14
+ 	public List<UserStory14Structure> findAffectedIMSIsGivenCauseClass(double causeCode, double eventId) {
+ 		List<UserStory14Structure> us14List = new ArrayList<UserStory14Structure>();
+
+ 		
+ 		String loginQueryString = "SELECT DISTINCT iMSI, COUNT(*) FROM callfailure WHERE callfailure.eventId = eventId AND callfailure.causeCode = causeCode GROUP BY iMSI";
+ 		try {
+ 			connection = ConnectionFactory.getInstance().getConnection();
+ 			loginStatement = connection.prepareStatement(loginQueryString);
+ 			loginStatement.setString(1, ""+causeCode);
+ 			loginStatement.setString(2, ""+eventId);
+ 			loginResultSet = loginStatement.executeQuery();
+ 			
+ 			while (loginResultSet.next()) {
+ 				us14List.add(
+ 						new UserStory14Structure(Double.parseDouble(loginResultSet.getString(1)), Double.parseDouble(loginResultSet.getString(2)), causeCode, eventId));
+ 			}
+ 		} catch (SQLException e) { e.printStackTrace(); }	
+ 		 		
+ 		if (us14List.size() == 0)
+ 			return null;
+ 		else
+ 			return us14List;
+ 	}
 }
 
 
