@@ -289,7 +289,7 @@ public class CallfailureRepository {
  		List<UserStory14Structure> us14List = new ArrayList<UserStory14Structure>();
 
  		
- 		String loginQueryString = "SELECT DISTINCT iMSI, COUNT(*) FROM callfailure WHERE callfailure.eventId = eventId AND callfailure.causeCode = causeCode GROUP BY iMSI";
+ 		String loginQueryString = "SELECT DISTINCT callfailure.iMSI, COUNT(*), callfailure.cause_causeCode, callfailure.cause_eventId, cause.description FROM callfailure, cause WHERE callfailure.cause_eventId = eventId AND callfailure.cause_causeCode = causeCode AND cause.eventId = callfailure.cause_eventId AND cause.causeCode = callfailure.cause_causeCode GROUP BY iMSI;";
  		try {
  			connection = ConnectionFactory.getInstance().getConnection();
  			loginStatement = connection.prepareStatement(loginQueryString);
