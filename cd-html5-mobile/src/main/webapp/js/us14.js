@@ -1,7 +1,7 @@
 //****************************User Story 14*******************************//
     
-	/*Pass start and end dateTimes into this function which is called from the submit when you enter start and end dateTimes*/
-    function getUS14ResultTemplate(start,end) {
+	/*Pass causeCode and eventId into this function which is called from the submit when you enter causeCode and eventId*/
+    function getUS14ResultTemplate(causeCode,eventId) {
     	
         $.ajax({
             url: "tmpl/us14.tmpl",
@@ -14,7 +14,7 @@
         });
     }
     
-    /* Uses JAX-RS GET to retrieve all imsi Numbers for start and end dateTimes*/
+    /* Uses JAX-RS GET to retrieve all imsi Numbers and count*/
     function updateUS14Table(causeCode,eventId) {
 
         $.ajax({
@@ -36,7 +36,7 @@
                 }
             },
             error: function(error) {
-//                document.forms["us05Form"].reset();
+//                document.forms["us14Form"].reset();
                 //console.log("error updating table -" + error.status);
             }
         });
