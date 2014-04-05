@@ -77,16 +77,16 @@ public class SupportEngineerService {
     }
 
     
-//    @GET
-//    @Path("/us14/{start}/{end}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public List<UserStory14Structure> findAffectedIMSIsGivenCauseClass(	@PathParam("causeCode") String causeCode,
-//    																@PathParam("eventId") String eventId) {
-//    	
-//    	List<UserStory14Structure> userStory14Structures = repositoryC.findAffectedIMSIsGivenCauseClass(Double.parseDouble(causeCode), Double.parseDouble(eventId));
-//        if (userStory14Structures == null) {
-//        	return null;
-//        }
-//        return userStory14Structures;
-//    }  
+    @GET
+    @Path("/us14/{causeCode}/{eventId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<UserStory14Structure> findAffectedIMSIsGivenCauseClass(	@PathParam("causeCode") String causeCode,
+    																@PathParam("eventId") String eventId) {
+    	
+    	List<UserStory14Structure> userStory14Structures = repositoryC.findAffectedIMSIsGivenCauseClass(Double.parseDouble(causeCode), Double.parseDouble(eventId));
+        if (userStory14Structures == null) {
+        	return null;
+        }
+        return userStory14Structures;
+    }  
 }

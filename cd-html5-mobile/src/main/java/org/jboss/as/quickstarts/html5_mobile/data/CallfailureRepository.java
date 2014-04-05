@@ -288,7 +288,7 @@ public class CallfailureRepository {
  		List<UserStory14Structure> us14List = new ArrayList<UserStory14Structure>();
 
  		
- 		String loginQueryString = "SELECT DISTINCT callfailure.iMSI, COUNT(*), callfailure.cause_causeCode, callfailure.cause_eventId, cause.description FROM callfailure, cause WHERE callfailure.cause_eventId = eventId AND callfailure.cause_causeCode = causeCode AND cause.eventId = callfailure.cause_eventId AND cause.causeCode = callfailure.cause_causeCode GROUP BY iMSI;";
+ 		String loginQueryString = "SELECT DISTINCT callfailure.iMSI, COUNT(*), callfailure.cause_causeCode, callfailure.cause_eventId, cause.description FROM callfailure, cause WHERE callfailure.cause_causeCode = ? AND callfailure.cause_eventId = ? AND cause.eventId = callfailure.cause_eventId AND cause.causeCode = callfailure.cause_causeCode GROUP BY iMSI;";
  		try {
  			connection = ConnectionFactory.getInstance().getConnection();
  			loginStatement = connection.prepareStatement(loginQueryString);
@@ -296,10 +296,10 @@ public class CallfailureRepository {
  			loginStatement.setString(2, ""+eventId);
  			loginResultSet = loginStatement.executeQuery();
  			
-// 			while (loginResultSet.next()) {
-// 				us14List.add(
-// 						new UserStory14Structure(Double.parseDouble(loginResultSet.getString(1)), Double.parseDouble(loginResultSet.getString(2)), causeCode, eventId));
-// 			}
+ 			while (loginResultSet.next()) {
+ 				us14List.add(
+ 						new UserStory14Structure(loginResultSet.getString(1), Integer.parseInt(loginResultSet.getString(2)), Double.parseDouble(loginResultSet.getString(3)), Double.parseDouble(loginResultSet.getString(4)), loginResultSet.getString(5)));
+ 			}
  		} catch (SQLException e) { e.printStackTrace(); }	
  		 		
  		if (us14List.size() == 0)

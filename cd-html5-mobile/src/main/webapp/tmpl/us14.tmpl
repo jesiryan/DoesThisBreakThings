@@ -7,13 +7,17 @@ _.each(obj, function(obj) {
     %>
 	
 	<% if ( addHeader ) { %><thead>
-								<tr class='alt'>");
+								<tr class='alt'>
 								    <td>Cause code:</td>
 									<td><%=obj.causeCode%></td>
 								</tr>
-								<tr class='alt'>");
+								<tr class='alt'>
 								    <td>Event id:</td>
 									<td><%=obj.eventId%></td>
+								</tr>
+								<tr class='alt'>
+								    <td>Description:</td>
+									<td><%=obj.description%></td>
 								</tr>								
 								<tr>
 									<th>IMSI Number</th>
@@ -24,7 +28,7 @@ _.each(obj, function(obj) {
 								<tr>
 									<td><%=obj.imsi%></td>
 									<td><%=obj.count%></td>
-								</tr>	
+								</tr>
 <% addHeader = false;
 }); %>
 </script>
