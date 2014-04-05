@@ -176,7 +176,7 @@ public class CallfailureRepository {
 		
 				loginResultSet = loginStatement.executeQuery();
 					while (loginResultSet.next()){
-						us08List.add(new UserStory08Structure(model, loginResultSet.getInt(1)));
+						us08List.add(new UserStory08Structure(model, loginResultSet.getInt(1),startDateTime,endDateTime));
 								
 				}
 				} catch (SQLException e) { e.printStackTrace(); }	
