@@ -85,10 +85,12 @@ function validate() {
 	var passwordRetype = $("#passwordRetype").val();
 	
 	if(password == passwordRetype) {
-		$("#validate-status").text("passwords match :)");        
+		$("#validate-status").text("passwords match :)"); 
+		document.getElementById("validate-status").style.color= "#14993E";
 	}
 	else {
 		$("#validate-status").text("passwords don't match");  
+		document.getElementById("validate-status").style.color= "#CC0000";
 	}
 }
 
@@ -98,7 +100,6 @@ the refresh the member table, or process JAX-RS response codes to update
 the validation errors.
  */
 function registerMember(memberData) {
-	alert("got into register member");
     //clear existing  msgs
     $('span.invalid').remove();
     $('span.success').remove();
