@@ -18,7 +18,7 @@
     function updateUS11Table(startdate,enddate) {
 
         $.ajax({
-            url: "rest/net/us11/"+startdate+"/"+enddate,
+            url: "rest/net/us13/",
             type: "GET",
             cache: false,
             success: function(data) {

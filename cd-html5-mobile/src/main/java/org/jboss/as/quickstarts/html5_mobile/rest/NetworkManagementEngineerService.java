@@ -97,10 +97,7 @@ public class NetworkManagementEngineerService {
 	public List<UserStory13Structure> findAllTimeTop() {
 
 		List<UserStory13Structure> userStory13Structures = repository
-				.findTop10failsForENodeB(startString, endString);
-		if (userStory11Structures == null) {
-			return null;
-		}
-		return userStory11Structures;
+				.findAllTimeTop();
+		return userStory13Structures;
 	}
 }
