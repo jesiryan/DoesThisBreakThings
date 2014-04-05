@@ -166,7 +166,6 @@ public class CallfailureRepository {
 
 			List<UserStory08Structure> us08List = new ArrayList<UserStory08Structure>();
 
-			//String loginQueryString = "SELECT DISTINCT iMSI, COUNT(*) FROM callfailure WHERE dateTime > ? AND dateTime < ? AND model > ? GROUP BY iMSI";
 			String loginQueryString ="SELECT count(*) FROM Callfailure, Equipment WHERE dateTime > ? AND dateTime < ? AND Equipment.tAC = Callfailure.equipment_tAC  AND Equipment.model = ?";	
 			try {
 					connection = ConnectionFactory.getInstance().getConnection();
