@@ -89,11 +89,11 @@
 					$('#reg').submit(function(event) {
 						event.preventDefault();
 						
-						var memberData = $(this).serializeObject();
-						//var memberData ={
-						//		  "name":"John Johnson",
-						//		  "password":"Oslo West 16", 
-						//		  "userType":33};
+						//var memberData = $(this).serializeObject();
+						var memberData ={
+								  "name":document.getElementById("name").value,
+								  "password":document.getElementById("password").value, 
+								  "userType":document.getElementById("userType").value};
 						
 						if(document.getElementById("validate-status").innerHTML == "passwords match :)"){
 							alert("valid password");
@@ -184,7 +184,7 @@
 							<p id="validate-status"></p>
 							<div>
 								<label for="userType">Status:</label>
-									<select name="userType">
+									<select name="userType" id="userType">
 										<option value="Support Engineer">Support Engineer</option>
 										<option value="Customer Service Rep">Customer Service Rep</option>
 										<option value="Network Management Engineer">Network Management Engineer</option>
