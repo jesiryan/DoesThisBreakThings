@@ -16,12 +16,15 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+
+
 import com.conygre.training.entities.Callfailure;
 import com.conygre.training.entities.query.UserStory05Structure;
 import com.conygre.training.entities.query.UserStory06Structure;
 import com.conygre.training.entities.query.UserStory07Structure;
 import com.conygre.training.entities.query.UserStory08Structure;
 import com.conygre.training.entities.query.UserStory09Structure;
+import com.conygre.training.entities.query.UserStory10Structure;
 import com.conygre.training.entities.query.UserStory11Structure;
 import com.conygre.training.entities.query.UserStory12Structure;
 import com.conygre.training.entities.query.UserStory13Structure;
@@ -342,6 +345,33 @@ public class CallfailureRepository {
  		else
  			return us14List;
  	}
+
+	public List<UserStory10Structure> findEventCauseForModel(String modelString) {
+		List<UserStory10Structure> us10List = new ArrayList<UserStory10Structure>();
+
+		String loginQueryString = "SELECT cause_causeCode, cause_eventid, cause.description, count(*)" 
+				+" FROM callfailure, cause, equipment where equipment_tac = tac"  
+				+" AND callfailure.cause_causeCode = cause.causeCode AND callfailure.cause_eventid = cause.eventid" 
+				+" AND model = ? group by cause_causeCode, cause_eventid;";			
+		try {
+			connection = ConnectionFactory.getInstance().getConnection();
+			loginStatement = connection.prepareStatement(loginQueryString);
+			loginStatement.setString(1, modelString);
+			loginResultSet = loginStatement.executeQuery();
+			
+			
+			while (loginResultSet.next()) {
+				us10List.add(new UserStory10Structure(loginResultSet.getDouble(1),loginResultSet.getDouble(2),loginResultSet.getString(3),loginResultSet.getInt(4)));
+			}
+						
+			
+		} catch (SQLException e) { e.printStackTrace(); }		
+
+		if (us10List.size() == 0)
+			return null;
+		else
+			return us10List;
+	}
 }
 
 
