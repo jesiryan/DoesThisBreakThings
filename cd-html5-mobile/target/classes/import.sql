@@ -16,5 +16,7 @@
 --
 
 -- You can use this file to load seed data into the database using SQL statements
-insert into Member_html5mobi (id, name, email, phone_number) values (0, 'John Smith', 'john.smith@mailinator.com', '2125551212');
-insert into Member_html5mobi (id, name, email, phone_number) values (1, 'Michael Callaghan', 'j.m.c@gmail.com', '15471212');
+insert into Member_html5mobi (id, name, password, userType) values (0, 'admin', 'admin', 'Administrator');
+insert into Member_html5mobi (id, name, password, userType) values (1, 'TestCSR', 'pass', 'Customer Service Rep');
+insert into Member_html5mobi (id, name, password, userType) values (2, 'TestSE', 'pass', 'Support Engineer');
+insert into Member_html5mobi (id, name, password, userType) values (3, 'TestNME', 'pass', 'Network Management Engineer');
