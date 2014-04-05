@@ -1,0 +1,31 @@
+<script type="text/template" id="us13-tmpl">
+<% var addHeader = true;
+_.each(obj, function(obj) { 
+    if ( Modernizr.mq( "only all and (max-width: 640px)" ) ) {
+        addHeader = true;
+    }
+    %>
+	
+	<% if ( addHeader ) { %><thead>
+								<tr>
+									  <th>MCC</th>
+									  <th>MNC</th>
+									  <th>cellID</th>
+									  <th>Country</th>
+									  <th>Operator</th>
+									  <th>Total Call Failures</th>
+								</tr>
+							</thead>
+							<tbody><% } %>
+								<tr>
+									<td><%=obj.mcc%></td>
+									<td><%=obj.mnc%></td>
+									<td><%=obj.cellID%></td>
+									<td><%=obj.country%></td>
+									<td><%=obj.operator%></td>
+									<td><%=obj.totalFails%></td>
+								</tr>	
+<% addHeader = false;
+}); %>
+</script>
+

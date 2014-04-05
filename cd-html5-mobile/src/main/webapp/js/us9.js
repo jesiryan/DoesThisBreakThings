@@ -32,7 +32,7 @@
                     $('#hidden-container').removeClass("hidden");
                 	$('#results').empty().append(buildUS09ResultsRows(data));
                     document.forms["us09Form"].reset();
-                    console.log("The data being added is : " + data);
+                    //console.log("The data being added is : " + data);
                 }
             },
             error: function(error) {

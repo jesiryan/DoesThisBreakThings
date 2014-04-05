@@ -16,14 +16,18 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+
+
 import com.conygre.training.entities.Callfailure;
 import com.conygre.training.entities.query.UserStory05Structure;
 import com.conygre.training.entities.query.UserStory06Structure;
 import com.conygre.training.entities.query.UserStory07Structure;
 import com.conygre.training.entities.query.UserStory08Structure;
 import com.conygre.training.entities.query.UserStory09Structure;
+import com.conygre.training.entities.query.UserStory10Structure;
 import com.conygre.training.entities.query.UserStory11Structure;
 import com.conygre.training.entities.query.UserStory12Structure;
+import com.conygre.training.entities.query.UserStory13Structure;
 import com.conygre.training.entities.query.UserStory14Structure;
 
 @ApplicationScoped
@@ -282,6 +286,40 @@ public class CallfailureRepository {
 			return us12List;
 	}
     
+    // User story 13
+    public List<UserStory13Structure> findAllTimeTop() {
+		List<UserStory13Structure> us13List = new ArrayList<UserStory13Structure>();
+
+		String loginQueryString = "SELECT count(*) as totalFAILS,countryOperator_mCC, countryOperator_mNC, cellId, country, operator, "
+				+"count(case when failureClass_failureClass = 0 then 1 else null end) as class0,"
+				+"count(case when failureClass_failureClass = 1 then 1 else null end) as class1,"
+				+"count(case when failureClass_failureClass = 2 then 1 else null end) as class2,"
+				+"count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
+				+"count(case when failureClass_failureClass = 4 then 1 else null end) as class4,"
+				+"(COUNT(*)/ T.total * 100) AS percent"
+				+" FROM callfailure,countryoperator, (SELECT COUNT(*) AS total FROM callfailure) AS T WHERE countryOperator_mCC = mCC "
+		+"AND countryOperator_mNC = mNC  GROUP BY countryOperator_mCC, countryOperator_mNC, cellId ORDER BY totalFAILS DESC LIMIT 10;";
+				
+		try {
+			connection = ConnectionFactory.getInstance().getConnection();
+			loginStatement = connection.prepareStatement(loginQueryString);
+			loginResultSet = loginStatement.executeQuery();
+			
+			while (loginResultSet.next()) {
+				us13List.add(new UserStory13Structure(loginResultSet.getInt(1), loginResultSet.getDouble(2), loginResultSet.getDouble(3), loginResultSet.getInt(4), 
+						loginResultSet.getString(5), loginResultSet.getString(6),loginResultSet.getInt(7),loginResultSet.getInt(8),loginResultSet.getInt(9),
+						loginResultSet.getInt(10),loginResultSet.getInt(11), loginResultSet.getDouble(12)));
+			}
+			
+			
+			
+		} catch (SQLException e) { e.printStackTrace(); }		
+
+		if (us13List.size() == 0)
+			return null;
+		else
+			return us13List;
+	}
     
     // User story 14
  	public List<UserStory14Structure> findAffectedIMSIsGivenCauseClass(double causeCode, double eventId) {
@@ -307,6 +345,33 @@ public class CallfailureRepository {
  		else
  			return us14List;
  	}
+
+	public List<UserStory10Structure> findEventCauseForModel(String modelString) {
+		List<UserStory10Structure> us10List = new ArrayList<UserStory10Structure>();
+
+		String loginQueryString = "SELECT cause_causeCode, cause_eventid, cause.description, count(*)" 
+				+" FROM callfailure, cause, equipment where equipment_tac = tac"  
+				+" AND callfailure.cause_causeCode = cause.causeCode AND callfailure.cause_eventid = cause.eventid" 
+				+" AND model = ? group by cause_causeCode, cause_eventid;";			
+		try {
+			connection = ConnectionFactory.getInstance().getConnection();
+			loginStatement = connection.prepareStatement(loginQueryString);
+			loginStatement.setString(1, modelString);
+			loginResultSet = loginStatement.executeQuery();
+			
+			
+			while (loginResultSet.next()) {
+				us10List.add(new UserStory10Structure(loginResultSet.getDouble(1),loginResultSet.getDouble(2),loginResultSet.getString(3),loginResultSet.getInt(4)));
+			}
+						
+			
+		} catch (SQLException e) { e.printStackTrace(); }		
+
+		if (us10List.size() == 0)
+			return null;
+		else
+			return us10List;
+	}
 }
 
 

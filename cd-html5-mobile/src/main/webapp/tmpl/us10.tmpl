@@ -1,0 +1,27 @@
+<script type="text/template" id="us10-tmpl">
+<% var addHeader = true;
+_.each(obj, function(obj) { 
+    if ( Modernizr.mq( "only all and (max-width: 640px)" ) ) {
+        addHeader = true;
+    }
+    %>
+	
+	<% if ( addHeader ) { %><thead>
+								<tr>
+									  <th>Cause Code</th>
+									  <th>Event ID</th>
+									  <th>Cause Description</th>
+									  <th>Fail Count</th>
+								</tr>
+							</thead>
+							<tbody><% } %>
+								<tr>
+									<td><%=obj.causecode%></td>
+									<td><%=obj.eventId%></td>
+									<td><%=obj.causeDescription%></td>
+									<td><%=obj.count%></td>
+								</tr>	
+<% addHeader = false;
+}); %>
+</script>
+

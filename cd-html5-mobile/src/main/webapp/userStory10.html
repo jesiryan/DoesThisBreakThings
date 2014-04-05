@@ -1,0 +1,128 @@
+<html lang="en">
+	<head>
+		<title>Dt340a - Group 6</title>
+		<link rel='icon' type='image/ico' href='http://www.ericsson.com/favicon.ico'/>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	    <!-- Set the tab, home page, shortcut icons -->
+	    <link rel="Shortcut Icon" href="img/aerogear_icon_16x.png">
+	    <link rel="apple-touch-icon" href="img/aerogear_avatar_48px.png"/>
+	
+	    <!-- For minification, comment out this link -->
+	    <!-- Shared styles -->
+	    <link rel="stylesheet" href="css/screen.css"/>
+	
+	    <!-- Set viewport scaling and zoom features -->
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	    <script type="text/javascript" src="js/libs/modernizr-2.5.3.min.js"></script>
+		
+		<link rel='stylesheet' type='text/css' href='css/mystyle.css'>
+		
+		
+		<script type="text/javascript">
+		  Modernizr.load([{
+		      load: [
+		          "http://code.jquery.com/jquery-1.7.1.min.js",
+		          "js/libs/underscore-min.js",
+		          // Minification - See Readme for details
+		          // For minification, comment out this file
+		          "js/us10.js"
+		          // For minification, uncomment this file
+		          // "js/app.min.js"
+		      ],
+		      complete: function() {
+		          if ( !window.jQuery ) {
+		              //In production, you would want to fall back to a minified file.
+		              //We fall back to the full version because Eclipse reports false errors in some minified JavaScript files.
+		              yepnope( "js/libs/jquery-1.7.1.min.js" );
+		          }
+		      }
+		  },{
+		      test: Modernizr.mq( "only all and (max-width: 640px)" ),
+		      yep: {
+		          //assign labeled callbacks for later execution after script loads.
+		          //we are on mobile device so load appropriate CSS
+		          "jqmcss": "css/jquery.mobile-1.1.0.min.css",
+		          // For minification, uncomment this line
+		          //"mcss": "css/m.screen.min.css"
+		          // For minification, comment out this line
+		          "mcss": "css/m.screen.css"
+		      },
+		      nope: {
+		          //we are on desktop
+		          // For minification, uncomment this line
+		          //"scss": "css/d.screen.min.css"
+		          // For minification, comment out this line
+		      	"scss": "css/d.screen.css"
+		      },
+		      callback: {
+		          //use the labeled callbacks from above, and load jQuery Mobile
+		          "jqmcss": function( url, result, key ) {
+		              yepnope({
+		                  load: "http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js",
+		                  complete: function() {
+		                      if ( !$.mobile ) {
+		                          yepnope.injectJs( "js/libs/jquery.mobile-1.1.0.min.js" );
+		                      }
+		                  }
+		              });
+		          },
+		          "scss": function( url, result, key ) {
+		              $( document ).ready( function() {
+		                  //here we are moving content around based on the browser/device.
+		                  $( "aside" ).insertAfter( $( "section" ) );
+		              });
+		          }
+		      },
+			complete: function() {
+			    $( document ).ready( function() {
+			        $('#us10Form').submit(function(event) {
+			        	var modelString = document.getElementById('model').value;
+			        	getUS10ResultTemplate(modelString);
+			            return false;
+			        });
+			    });
+			}
+		}]);
+		</script>
+	</head>
+	
+	<body>
+		<div id='main-container'>
+			<div id='heading-container'>
+				<div id='eir-image'> 
+					<img alt='Ericsson' src='http://www.ericsson.com/shared/eipa/images/elogo.png'>   
+				</div>
+				<div id='dit-image'> 
+					<img alt='DIT' src='http://www.dit.ie/media/styleimages/dit_crest.gif' width='90px' height='90px'>  
+				</div> 
+				
+				<h1>Call Investigation Assistant</h1> 
+				<h2>Group 6</h2> 
+                <h3>Network Management Engineer</h3>                
+				<div class='wrapper'>
+					<form class='alignleft' method='GET' action='logout'><input class='button' type='submit' value='Logout'/></form>				
+					<a href='netMgmtEngMenu.html'><button class='button alignright'>Home Page</button></a>
+				</div>
+          </div>
+            
+			<div class='wrapper' id='inner-container' >
+              <div><h3>Please select the Model to query for eventID, causeCode fails:</h3></div>			
+				<form id="us10Form">
+					<input id="model" class='submissionfield' type="text" name="model" required>
+					<input type='Submit' class='button' value="Submit" onclick="getUS10ResultTemplate(document.getElementById('model').value)">
+				</form>
+			</div>
+			
+			<div class='wrapper hidden' id='hidden-container'>
+				<div id="results"></div>
+			</div>
+			
+		</div>
+		<div id='eric-multi'>
+			<img src='images/ebottomgrad.jpg' >
+		</div>
+	</body>
+</html>

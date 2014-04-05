@@ -1,36 +1,37 @@
-//****************************User Story 6*******************************//
+//****************************User Story 13*******************************//
     
-    function getUS06ResultTemplate(imsi) {
+	/*This function is called from the submit*/
+    function getUS13ResultTemplate() {
     	
         $.ajax({
-            url: "tmpl/us06.tmpl",
+            url: "tmpl/us13.tmpl",
             dataType: "html",
             success: function( data ) {
             	
                 $( "head" ).append( data );
-                updateUS06Table(imsi);
+                updateUS13Table();
             }
         });
     }
     
-    /* Uses JAX-RS GET to retrieve all imsi Numbers for start and end dateTimes*/
-    function updateUS06Table(imsi) {
+    /* Uses JAX-RS GET to retrieve all country, operator, cell combinations*/
+    function updateUS13Table() {
 
         $.ajax({
-            url: "rest/cust/us06/"+imsi,
+            url: "rest/net/us13/",
             type: "GET",
             cache: false,
             success: function(data) {
             	if (data.length < 1) {
                     $('#info').removeClass("hidden");
                     $('#hidden-container').addClass("hidden");
-            		$('#info').empty().append("Information: The query for IMSI " + imsi + " has returned no results.");
-					document.forms["us06Form"].reset();
+            		$('#info').empty().append("Information: The query has returned no results.");
+					document.forms["us13Form"].reset();
             	} else {
             		$('#info').addClass("hidden");
                     $('#hidden-container').removeClass("hidden");
-                    $('#results').empty().append(buildUS06ResultsRows(data));
-                    document.forms["us06Form"].reset();
+                    $('#results').empty().append(buildUS13ResultsRows(data));
+                    document.forms["us13Form"].reset();
                 }
             },
             error: function(error) {
@@ -39,6 +40,6 @@
     }
 
 	/* Builds the updated table for the callfailures list */
-	function buildUS06ResultsRows(obj) {
-	    return _.template( $( "#us06-tmpl" ).html(), {"obj": obj});
+	function buildUS13ResultsRows(obj) {
+	    return _.template( $( "#us13-tmpl" ).html(), {"obj": obj});
 	}
