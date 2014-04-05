@@ -88,10 +88,16 @@
                     //Register an event listener on the sumbit action
                     $('#reg').submit(function(event) {
                         event.preventDefault();
-
+						
                         var memberData = $(this).serializeObject();
 
-                        registerMember(memberData);
+                    	var password = document.getElementById("password").value;
+                    	var passwordRetype = document.getElementById("passwordRetype").value;
+                    	
+						if(checkPasswordMatch(password,passwordRetype)){
+							alert(password + " " + passwordRetype);
+							registerMember(memberData);
+						}
                     });
 
                     //Register the cancel listener
@@ -164,22 +170,22 @@
                             <legend>Register a member:</legend>
                             <div>
                                 <label for="name">Username:</label>
-                                <input type="text" name="name" id="name" placeholder="Username" required autofocus/>
+                                <input type="text" name="name" id="name" placeholder="enter username" required autofocus/>
                             </div>
                             <div>
                                 <label for="password">Password:</label>
-                                <input type="password" name="password" id="password" placeholder="User Password" required/>
+                                <input type="password" name="password" id="password" placeholder="enter password" required/>
                             </div>
-                            <!-- <div>
-                                <label for="repassword">Re-Enter Password:</label>
-                                <input type="password" name="userRePassWord" id="password" placeholder="Repeat Password " required/>
-                            </div> -->
                             <div>
-                            <label for="userType">Status:</label>
-                            <select name="userType">
+                                <label for="passwordRetype">Re-Enter Password:</label>
+                                <input type="password" name="passwordRetype" id="passwordRetype" placeholder="repeat password " required/>
+                            </div>
+                            <div>
+	                            <label for="userType">Status:</label>
+	                            	<select name="userType">
 										<option value="Support Engineer">Support Engineer</option>
-										<option value="Customer Service">Customer Service</option>
-										<option value="Network Engineer">Network Engineer</option>
+										<option value="Customer Service Rep">Customer Service Rep</option>
+										<option value="Network Management Engineer">Network Management Engineer</option>
 									</select>
                                 </div>
                                 <br>

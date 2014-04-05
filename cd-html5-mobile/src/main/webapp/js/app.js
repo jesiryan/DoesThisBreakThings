@@ -75,6 +75,22 @@ function updateCdTable() {
     });
 }
 
+function checkPasswordMatch(password, passwordRetype){
+	alert(password + ". ." + passwordRetype );
+	if(password.equals(passwordRetype)){
+		alert("Passwords match");
+		//clear existing  msgs
+	    $('span.fail').remove();
+		return true;
+	}
+	else{
+		//clear existing  msgs
+	    $('span.fail').remove();
+	    $('#formMsgs').append($('<span class="fail">Passwords do not match.</span>'));
+		return false;
+	}
+}
+
 /*
 Attempts to register a new member using a JAX-RS POST.  The callbacks
 the refresh the member table, or process JAX-RS response codes to update
