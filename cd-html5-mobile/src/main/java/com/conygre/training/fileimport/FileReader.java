@@ -3,7 +3,7 @@ package com.conygre.training.fileimport;
 import com.conygre.training.entities.*;
 import com.conygre.training.dao.jpa.PersistenceUtil;
 //import org.dt340a.group6.sprint1.persistence.test.*;
-import com.conygre.training.services.FileUploadServlet;
+//import com.conygre.training.services.FileUploadServlet;
 import com.conygre.training.validation.ValidateExcelFile;
 
 import java.io.File;
@@ -38,7 +38,7 @@ public class FileReader {
 	}
 
 	public FileReader() {
-		this(FileUploadServlet.pathAndName);
+//		this(FileUploadServlet.pathAndName);
 	}
 
 
