@@ -20,6 +20,7 @@ import com.conygre.training.entities.Callfailure;
 import com.conygre.training.entities.query.UserStory05Structure;
 import com.conygre.training.entities.query.UserStory06Structure;
 import com.conygre.training.entities.query.UserStory07Structure;
+import com.conygre.training.entities.query.UserStory08Structure;
 import com.conygre.training.entities.query.UserStory09Structure;
 import com.conygre.training.entities.query.UserStory11Structure;
 import com.conygre.training.entities.query.UserStory12Structure;
@@ -158,6 +159,36 @@ public class CallfailureRepository {
 		else
 			return us07List;
 	}
+	
+	
+	// User story 8
+		public List<UserStory08Structure> findAllCallFailuresBetweenDatesByModel(String startDateTime, String endDateTime, String model) {
+
+			List<UserStory08Structure> us08List = new ArrayList<UserStory08Structure>();
+
+			//String loginQueryString = "SELECT DISTINCT iMSI, COUNT(*) FROM callfailure WHERE dateTime > ? AND dateTime < ? AND model > ? GROUP BY iMSI";
+			String loginQueryString ="SELECT count(*) FROM Callfailure, Equipment WHERE dateTime > ? AND dateTime < ? AND Equipment.tAC = Callfailure.equipment_tAC  AND Equipment.model = ?";	
+			try {
+					connection = ConnectionFactory.getInstance().getConnection();
+					loginStatement = connection.prepareStatement(loginQueryString);
+				loginStatement.setString(1, startDateTime);
+				loginStatement.setString(2, endDateTime);
+				loginStatement.setString(3, model);
+		
+				loginResultSet = loginStatement.executeQuery();
+					while (loginResultSet.next()){
+						us08List.add(new UserStory08Structure(model, loginResultSet.getInt(1)));
+								
+				}
+				} catch (SQLException e) { e.printStackTrace(); }	
+			
+			
+			if (us08List.size() == 0)
+				return null;
+			else
+				return us08List;
+		}
+
     	
     // User story 9
     public List<UserStory09Structure> findCountBetweenTimesTotalDuration(String startDateTime, String endDateTime) {

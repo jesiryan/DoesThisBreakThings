@@ -19,6 +19,7 @@ import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 
 import com.conygre.training.entities.Callfailure;
 import com.conygre.training.entities.query.UserStory07Structure;
+import com.conygre.training.entities.query.UserStory08Structure;
 import com.conygre.training.entities.query.UserStory14Structure;
 
 
@@ -58,17 +59,23 @@ public class SupportEngineerService {
     }  
     
     
-//    @GET
-//    @Path("/us08/{model}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public List<Equipment> findEquipmentByModel(@PathParam("model") String model) {
-//    	
-//    	List<Equipment> equipments = repositoryE.findEquipmentByModel(model);
-//        if (equipments == null) {
-//        	return null;
-//        }
-//        return equipments;
-//    }
+    @GET
+    @Path("/us08/{start}/{end}.{model}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<UserStory08Structure> findEquipmentByModel(@PathParam("start") String startString,
+															@PathParam("end") String endString,
+															@PathParam("model") String model) {
+    	
+    	startString = startString.replaceAll("T", " ");
+    	endString = endString.replaceAll("T", " ");
+    	
+    	List<UserStory08Structure> UserStory08Structures = repositoryC.findAllCallFailuresBetweenDatesByModel(startString, endString, model);
+      if (UserStory08Structures == null) {
+        	return null;
+       }
+        return UserStory08Structures;
+    }
+
     
     @GET
     @Path("/us14/{start}/{end}")
