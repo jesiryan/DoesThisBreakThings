@@ -212,41 +212,6 @@ public class CallfailureRepository {
 			return us09List;
 	}
     
-    
-    // User story 12
-    public List<UserStory12Structure> findTop10CountBetweenTimesTotalDuration(String startDateTime, String endDateTime) {
-		List<UserStory12Structure> us12List = new ArrayList<UserStory12Structure>();
-
-		String loginQueryString = "SELECT iMSI, COUNT(*),"
-				+ " count(case when failureClass_failureClass = 0 then 1 else null end) as class0,"
-				+" count(case when failureClass_failureClass = 1 then 1 else null end) as class1,"
-				+" count(case when failureClass_failureClass = 2 then 1 else null end) as class2,"
-				+" count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
-				+" count(case when failureClass_failureClass = 4 then 1 else null end) as class4"
-				+" FROM callfailure WHERE dateTime > ? AND dateTime < ? GROUP BY iMSI ORDER BY count(*) DESC LIMIT 10";
-
-				
-		try {
-			connection = ConnectionFactory.getInstance().getConnection();
-			loginStatement = connection.prepareStatement(loginQueryString);
-			loginStatement.setString(1, startDateTime);
-			loginStatement.setString(2, endDateTime);
-			loginResultSet = loginStatement.executeQuery();
-			
-			while (loginResultSet.next()) {
-				us12List.add(new UserStory12Structure((String)loginResultSet.getString(1), Integer.parseInt(loginResultSet.getString(2)), Integer.parseInt(loginResultSet.getString(3)), Integer.parseInt(loginResultSet.getString(4)), Integer.parseInt(loginResultSet.getString(5)), Integer.parseInt(loginResultSet.getString(6)), Integer.parseInt(loginResultSet.getString(7))));
-			}
-			
-			
-			
-		} catch (SQLException e) { e.printStackTrace(); }		
-
-		if (us12List.size() == 0)
-			return null;
-		else
-			return us12List;
-	}
-    
     // User story 11
     public List<UserStory11Structure> findTop10failsForENodeB(String startDateTime, String endDateTime) {
 		List<UserStory11Structure> us11List = new ArrayList<UserStory11Structure>();
@@ -282,6 +247,41 @@ public class CallfailureRepository {
 		else
 			return us11List;
 	}
+    
+    // User story 12
+    public List<UserStory12Structure> findTop10CountBetweenTimesTotalDuration(String startDateTime, String endDateTime) {
+		List<UserStory12Structure> us12List = new ArrayList<UserStory12Structure>();
+
+		String loginQueryString = "SELECT iMSI, COUNT(*),"
+				+ " count(case when failureClass_failureClass = 0 then 1 else null end) as class0,"
+				+" count(case when failureClass_failureClass = 1 then 1 else null end) as class1,"
+				+" count(case when failureClass_failureClass = 2 then 1 else null end) as class2,"
+				+" count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
+				+" count(case when failureClass_failureClass = 4 then 1 else null end) as class4"
+				+" FROM callfailure WHERE dateTime > ? AND dateTime < ? GROUP BY iMSI ORDER BY count(*) DESC LIMIT 10";
+
+				
+		try {
+			connection = ConnectionFactory.getInstance().getConnection();
+			loginStatement = connection.prepareStatement(loginQueryString);
+			loginStatement.setString(1, startDateTime);
+			loginStatement.setString(2, endDateTime);
+			loginResultSet = loginStatement.executeQuery();
+			
+			while (loginResultSet.next()) {
+				us12List.add(new UserStory12Structure((String)loginResultSet.getString(1), Integer.parseInt(loginResultSet.getString(2)), Integer.parseInt(loginResultSet.getString(3)), Integer.parseInt(loginResultSet.getString(4)), Integer.parseInt(loginResultSet.getString(5)), Integer.parseInt(loginResultSet.getString(6)), Integer.parseInt(loginResultSet.getString(7))));
+			}
+			
+			
+			
+		} catch (SQLException e) { e.printStackTrace(); }		
+
+		if (us12List.size() == 0)
+			return null;
+		else
+			return us12List;
+	}
+    
     
     // User story 14
  	public List<UserStory14Structure> findAffectedIMSIsGivenCauseClass(double causeCode, double eventId) {
