@@ -13,6 +13,7 @@ public class UserStory14Structure {
 		this.count = count;
 		this.causeCode = causeCode;
 		this.eventId = eventId;
+		this.description = description;
 	}
 
 	public String getImsi() {

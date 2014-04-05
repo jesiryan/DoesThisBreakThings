@@ -1,7 +1,7 @@
 //****************************User Story 8******************************//
     
 	/*Pass start and end dateTimes into this function which is called from the submit when you enter start and end dateTimes*/
-    function getUS08ResultTemplate(start,end) {
+    function getUS08ResultTemplate(start,end, model) {
     	
         $.ajax({
             url: "tmpl/us08.tmpl",
@@ -9,16 +9,16 @@
             success: function( data ) {
             	
                 $( "head" ).append( data );
-                updateUS08Table(start,end);
+                updateUS08Table(start,end, model);
             }
         });
     }
     
     /* Uses JAX-RS GET to retrieve all imsi Numbers for start and end dateTimes*/
-    function updateUS08Table(start,end) {
+    function updateUS08Table(start,end, model) {
 
         $.ajax({
-            url: "rest/supp/us08/"+start+"/"+end,
+            url: "rest/supp/us08/"+start+"/"+end+"/"+model,
             type: "GET",
             cache: false,
             success: function(data) {

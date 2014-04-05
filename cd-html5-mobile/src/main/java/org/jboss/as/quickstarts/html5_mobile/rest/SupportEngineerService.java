@@ -60,7 +60,7 @@ public class SupportEngineerService {
     
     
     @GET
-    @Path("/us08/{start}/{end}.{model}")
+    @Path("/us08/{start}/{end}/{model}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<UserStory08Structure> findEquipmentByModel(@PathParam("start") String startString,
 															@PathParam("end") String endString,
@@ -77,16 +77,16 @@ public class SupportEngineerService {
     }
 
     
-//    @GET
-//    @Path("/us14/{start}/{end}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public List<UserStory14Structure> findAffectedIMSIsGivenCauseClass(	@PathParam("causeCode") String causeCode,
-//    																@PathParam("eventId") String eventId) {
-//    	
-//    	List<UserStory14Structure> userStory14Structures = repositoryC.findAffectedIMSIsGivenCauseClass(Double.parseDouble(causeCode), Double.parseDouble(eventId));
-//        if (userStory14Structures == null) {
-//        	return null;
-//        }
-//        return userStory14Structures;
-//    }  
+    @GET
+    @Path("/us14/{causeCode}/{eventId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<UserStory14Structure> findAffectedIMSIsGivenCauseClass(	@PathParam("causeCode") String causeCode,
+    																@PathParam("eventId") String eventId) {
+    	
+    	List<UserStory14Structure> userStory14Structures = repositoryC.findAffectedIMSIsGivenCauseClass(Double.parseDouble(causeCode), Double.parseDouble(eventId));
+        if (userStory14Structures == null) {
+        	return null;
+        }
+        return userStory14Structures;
+    }  
 }

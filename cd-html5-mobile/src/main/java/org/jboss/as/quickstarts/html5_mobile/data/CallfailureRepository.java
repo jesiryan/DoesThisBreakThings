@@ -177,7 +177,7 @@ public class CallfailureRepository {
 		
 				loginResultSet = loginStatement.executeQuery();
 					while (loginResultSet.next()){
-						us08List.add(new UserStory08Structure(model, loginResultSet.getInt(1)));
+						us08List.add(new UserStory08Structure(model, loginResultSet.getInt(1),startDateTime,endDateTime));
 								
 				}
 				} catch (SQLException e) { e.printStackTrace(); }	
@@ -213,7 +213,6 @@ public class CallfailureRepository {
 			return us09List;
 	}
     
-    
     // User story 11
     public List<UserStory11Structure> findTop10failsForENodeB(String startDateTime, String endDateTime) {
 		List<UserStory11Structure> us11List = new ArrayList<UserStory11Structure>();
@@ -224,7 +223,7 @@ public class CallfailureRepository {
 				+" count(case when failureClass_failureClass = 2 then 1 else null end) as class2,"
 				+" count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
 				+" count(case when failureClass_failureClass = 4 then 1 else null end) as class4"
-				+" FROM sprint1.callfailure,countryoperator WHERE countryOperator_mCC = mCC "
+				+" FROM callfailure,countryoperator WHERE countryOperator_mCC = mCC "
 		+"AND countryOperator_mNC = mNC AND dateTime > ? AND dateTime < ? GROUP BY countryOperator_mCC, countryOperator_mNC, cellId ORDER BY totalFAILS DESC LIMIT 10;";
 				
 		try {
@@ -324,7 +323,7 @@ public class CallfailureRepository {
  		List<UserStory14Structure> us14List = new ArrayList<UserStory14Structure>();
 
  		
- 		String loginQueryString = "SELECT DISTINCT iMSI, COUNT(*) FROM callfailure WHERE callfailure.eventId = eventId AND callfailure.causeCode = causeCode GROUP BY iMSI";
+ 		String loginQueryString = "SELECT DISTINCT callfailure.iMSI, COUNT(*), callfailure.cause_causeCode, callfailure.cause_eventId, cause.description FROM callfailure, cause WHERE callfailure.cause_causeCode = ? AND callfailure.cause_eventId = ? AND cause.eventId = callfailure.cause_eventId AND cause.causeCode = callfailure.cause_causeCode GROUP BY iMSI;";
  		try {
  			connection = ConnectionFactory.getInstance().getConnection();
  			loginStatement = connection.prepareStatement(loginQueryString);
@@ -332,10 +331,10 @@ public class CallfailureRepository {
  			loginStatement.setString(2, ""+eventId);
  			loginResultSet = loginStatement.executeQuery();
  			
-// 			while (loginResultSet.next()) {
-// 				us14List.add(
-// 						new UserStory14Structure(Double.parseDouble(loginResultSet.getString(1)), Double.parseDouble(loginResultSet.getString(2)), causeCode, eventId));
-// 			}
+ 			while (loginResultSet.next()) {
+ 				us14List.add(
+ 						new UserStory14Structure(loginResultSet.getString(1), Integer.parseInt(loginResultSet.getString(2)), Double.parseDouble(loginResultSet.getString(3)), Double.parseDouble(loginResultSet.getString(4)), loginResultSet.getString(5)));
+ 			}
  		} catch (SQLException e) { e.printStackTrace(); }	
  		 		
  		if (us14List.size() == 0)
