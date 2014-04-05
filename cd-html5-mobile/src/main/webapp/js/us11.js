@@ -32,7 +32,7 @@
                     $('#hidden-container').removeClass("hidden");
                     $('#results').empty().append(buildUS11ResultsRows(data));
                     document.forms["us11Form"].reset();
-                    console.log("The data being added is : " + data[0] + data[1] + data[2] + data[3]+ data[4] + data[5]);
+                   // console.log("The data being added is : " + data[0] + data[1] + data[2] + data[3]+ data[4] + data[5]);
                 }
             },
             error: function(error) {

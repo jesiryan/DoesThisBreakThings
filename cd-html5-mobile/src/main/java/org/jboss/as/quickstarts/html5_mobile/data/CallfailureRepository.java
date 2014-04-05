@@ -176,7 +176,7 @@ public class CallfailureRepository {
 		
 				loginResultSet = loginStatement.executeQuery();
 					while (loginResultSet.next()){
-						us08List.add(new UserStory08Structure(model, loginResultSet.getInt(1)));
+						us08List.add(new UserStory08Structure(model, loginResultSet.getInt(1),startDateTime,endDateTime));
 								
 				}
 				} catch (SQLException e) { e.printStackTrace(); }	
@@ -212,6 +212,41 @@ public class CallfailureRepository {
 			return us09List;
 	}
     
+    // User story 11
+    public List<UserStory11Structure> findTop10failsForENodeB(String startDateTime, String endDateTime) {
+		List<UserStory11Structure> us11List = new ArrayList<UserStory11Structure>();
+
+		String loginQueryString = "SELECT count(*) as totalFAILS,countryOperator_mCC, countryOperator_mNC, cellId, country, operator, "
+				+" count(case when failureClass_failureClass = 0 then 1 else null end) as class0,"
+				+" count(case when failureClass_failureClass = 1 then 1 else null end) as class1,"
+				+" count(case when failureClass_failureClass = 2 then 1 else null end) as class2,"
+				+" count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
+				+" count(case when failureClass_failureClass = 4 then 1 else null end) as class4"
+				+" FROM callfailure,countryoperator WHERE countryOperator_mCC = mCC "
+		+"AND countryOperator_mNC = mNC AND dateTime > ? AND dateTime < ? GROUP BY countryOperator_mCC, countryOperator_mNC, cellId ORDER BY totalFAILS DESC LIMIT 10;";
+				
+		try {
+			connection = ConnectionFactory.getInstance().getConnection();
+			loginStatement = connection.prepareStatement(loginQueryString);
+			loginStatement.setString(1, startDateTime);
+			loginStatement.setString(2, endDateTime);
+			loginResultSet = loginStatement.executeQuery();
+			
+			while (loginResultSet.next()) {
+				us11List.add(new UserStory11Structure(loginResultSet.getInt(1), loginResultSet.getDouble(2), loginResultSet.getDouble(3), loginResultSet.getInt(4), 
+						loginResultSet.getString(5), loginResultSet.getString(6),loginResultSet.getInt(7),loginResultSet.getInt(8),loginResultSet.getInt(9),
+						loginResultSet.getInt(10),loginResultSet.getInt(11)));
+			}
+			
+			
+			
+		} catch (SQLException e) { e.printStackTrace(); }		
+
+		if (us11List.size() == 0)
+			return null;
+		else
+			return us11List;
+	}
     
     // User story 12
     public List<UserStory12Structure> findTop10CountBetweenTimesTotalDuration(String startDateTime, String endDateTime) {
@@ -247,41 +282,6 @@ public class CallfailureRepository {
 			return us12List;
 	}
     
-    // User story 11
-    public List<UserStory11Structure> findTop10failsForENodeB(String startDateTime, String endDateTime) {
-		List<UserStory11Structure> us11List = new ArrayList<UserStory11Structure>();
-
-		String loginQueryString = "SELECT count(*) as totalFAILS,countryOperator_mCC, countryOperator_mNC, cellId, country, operator, "
-				+" count(case when failureClass_failureClass = 0 then 1 else null end) as class0,"
-				+" count(case when failureClass_failureClass = 1 then 1 else null end) as class1,"
-				+" count(case when failureClass_failureClass = 2 then 1 else null end) as class2,"
-				+" count(case when failureClass_failureClass = 3 then 1 else null end) as class3,"
-				+" count(case when failureClass_failureClass = 4 then 1 else null end) as class4"
-				+" FROM sprint1.callfailure,countryoperator WHERE countryOperator_mCC = mCC "
-		+"AND countryOperator_mNC = mNC AND dateTime > ? AND dateTime < ? GROUP BY countryOperator_mCC, countryOperator_mNC, cellId ORDER BY totalFAILS DESC LIMIT 10;";
-				
-		try {
-			connection = ConnectionFactory.getInstance().getConnection();
-			loginStatement = connection.prepareStatement(loginQueryString);
-			loginStatement.setString(1, startDateTime);
-			loginStatement.setString(2, endDateTime);
-			loginResultSet = loginStatement.executeQuery();
-			
-			while (loginResultSet.next()) {
-				us11List.add(new UserStory11Structure(loginResultSet.getInt(1), loginResultSet.getDouble(2), loginResultSet.getDouble(3), loginResultSet.getInt(4), 
-						loginResultSet.getString(5), loginResultSet.getString(6),loginResultSet.getInt(7),loginResultSet.getInt(8),loginResultSet.getInt(9),
-						loginResultSet.getInt(10),loginResultSet.getInt(11)));
-			}
-			
-			
-			
-		} catch (SQLException e) { e.printStackTrace(); }		
-
-		if (us11List.size() == 0)
-			return null;
-		else
-			return us11List;
-	}
     
     // User story 14
  	public List<UserStory14Structure> findAffectedIMSIsGivenCauseClass(double causeCode, double eventId) {
