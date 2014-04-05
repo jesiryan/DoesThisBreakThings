@@ -18,8 +18,12 @@ _.each(obj, function(obj) {
 							</thead>
 							<tbody><% } %>
 								<tr>
-									<td><%=obj.imsi%></td>
-									<td><%=obj.count%></td>
+									<td><%=obj.MCC%></td>
+									<td><%=obj.MNC%></td>
+									<td><%=obj.cellID%></td>
+									<td><%=obj.Country%></td>
+									<td><%=obj.Operator%></td>
+									<td><%=obj.totalFails%></td>
 								</tr>	
 <% addHeader = false;
 }); %>
