@@ -75,19 +75,20 @@ function updateCdTable() {
     });
 }
 
-function checkPasswordMatch(password, passwordRetype){
-	alert(password + ". ." + passwordRetype );
-	if(password.equals(passwordRetype)){
-		alert("Passwords match");
-		//clear existing  msgs
-	    $('span.fail').remove();
-		return true;
+$(document).ready(function() {
+	$("#passwordRetype").keyup(validate);
+});
+
+
+function validate() {
+	var password = $("#password").val();
+	var passwordRetype = $("#passwordRetype").val();
+	
+	if(password == passwordRetype) {
+		$("#validate-status").text("passwords match :)");        
 	}
-	else{
-		//clear existing  msgs
-	    $('span.fail').remove();
-	    $('#formMsgs').append($('<span class="fail">Passwords do not match.</span>'));
-		return false;
+	else {
+		$("#validate-status").text("passwords don't match");  
 	}
 }
 
@@ -97,6 +98,7 @@ the refresh the member table, or process JAX-RS response codes to update
 the validation errors.
  */
 function registerMember(memberData) {
+	alert("got into register member");
     //clear existing  msgs
     $('span.invalid').remove();
     $('span.success').remove();

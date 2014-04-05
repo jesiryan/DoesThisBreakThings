@@ -68,6 +68,12 @@ public class Member implements Serializable {
 	   this.userType = userType;
    }
    
+   public Member(String name, String password, String passwordRetype, String userType){
+	   this.name = name;
+	   this.password = password;
+	   this.userType = userType;
+   }
+   
    public Long getId() {
       return id;
    }
