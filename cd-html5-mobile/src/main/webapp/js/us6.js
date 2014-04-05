@@ -1,6 +1,5 @@
 //****************************User Story 6*******************************//
     
-	/*Pass start and end dateTimes into this function which is called from the submit when you enter start and end dateTimes*/
     function getUS06ResultTemplate(imsi) {
     	
         $.ajax({
@@ -32,12 +31,9 @@
                     $('#hidden-container').removeClass("hidden");
                     $('#results').empty().append(buildUS06ResultsRows(data));
                     document.forms["us06Form"].reset();
-                    console.log("The data being added is : " + data);
                 }
             },
             error: function(error) {
-//                document.forms["us05Form"].reset();
-                //console.log("error updating table -" + error.status);
             }
         });
     }

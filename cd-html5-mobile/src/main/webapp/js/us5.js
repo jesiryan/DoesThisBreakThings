@@ -30,17 +30,12 @@
             	} else {
             		$('#info').addClass("hidden");
                     $('#hidden-container').removeClass("hidden");
-//                    var json = JSON.stringify('{"imsi":'+imsi+', "startdate":'+startdate+', "enddate":'+enddate+', "count":'+data+'}'); 
-//                    var obj = eval(json);
-//                    alert(obj);
                     $('#results').empty().append(buildUS05ResultsRows(data));
                     document.forms["us05Form"].reset();
-                    console.log("The data being added is : " + data);
                 }
             },
             error: function(error) {
-//                document.forms["us05Form"].reset();
-                //console.log("error updating table -" + error.status);
+
             }
         });
     }
