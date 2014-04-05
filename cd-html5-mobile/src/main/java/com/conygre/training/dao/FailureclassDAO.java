@@ -12,17 +12,19 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.conygre.training.dao.jpa.JPA;
 import com.conygre.training.entities.Failureclass;
 
 @Stateless
-@LocalBean
+//@LocalBean
+@JPA
 public class FailureclassDAO {
 
 	public FailureclassDAO() {
 		
 	}
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="sprint2")
     private EntityManager em;
 	
 	public Failureclass getFailureclassesById(String id) {
@@ -35,28 +37,28 @@ public class FailureclassDAO {
 		return failureclasses;
 	}
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void addEfailureclasses(List<Failureclass> failureclasses) {
-		for (Failureclass failureclass : failureclasses) {
-			em.persist(failureclass);
-		}
-	}
+//	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+//	public void addEfailureclasses(List<Failureclass> failureclasses) {
+//		for (Failureclass failureclass : failureclasses) {
+//			em.persist(failureclass);
+//		}
+//	}
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void addFailureclasses(Failureclass failureclass) {
-		em.persist(failureclass);
-	}
+//	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+//	public void addFailureclasses(Failureclass failureclass) {
+//		em.persist(failureclass);
+//	}
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+//	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void mergeFailureclasses(List<Failureclass> failureclasses) {
 		for (Failureclass failureclass : failureclasses) {
 			em.merge(failureclass);
 		}
 	}
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void mergeFailureclass(Failureclass failureclass) {
-		em.merge(failureclass);
-	}
+//	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+//	public void mergeFailureclass(Failureclass failureclass) {
+//		em.merge(failureclass);
+//	}
 	
 }

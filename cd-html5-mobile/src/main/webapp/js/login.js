@@ -1,7 +1,8 @@
 //****************************LOGIN*******************************//
 
+	// Length of time (in minutes before logout)
+	var maxTime = 15;
     
-    /* Uses JAX-RS GET to retrieve given imsi Number */
     function pageRedirect(name, password) {
 
         $.ajax({
@@ -10,11 +11,8 @@
             cache: false,
             data:{name: name,password:password },
             success: function(data) {
-            	alert('before');
-            
             	if (data.length > 0) {
-            		alert('true');    
-            		alert(data[2]);  
+            		$('#info').empty();
             		if(data[2]=='Support Engineer'){
             			document.location.href = '/cd-html5-mobile/supEngMenu.html';
             		}
@@ -27,20 +25,20 @@
             		if(data[2]=='Administrator'){
             			document.location.href = '/cd-html5-mobile/adminMenu.html';
             		}
+            		addCurrentUserToLocalStorage(data);
             	} else {
-            		alert('false');
-            		document.location.href = '/cd-html5-mobile/loginFail.html';
+            		$('#info').removeClass("hidden");
+            		$('#info').empty().append("<br/>Login for Username: '"+name+"' failed. Please try again.");
                 }
             },
             error: function(error) {
             	alert('error');
 //                document.location.href = '/loginFail.html';
-                //console.log("error updating table -" + error.status);
             }
         });
     }
-
-	/* Builds the updated table for the callfailures list */
-//	function buildResultsRows(callfailures) {
-//	    return _.template( $( "#us04-tmpl" ).html(), {"callfailures": callfailures});
-//	}
+    
+    function addCurrentUserToLocalStorage(data) {
+    	localStorage.setItem("currentUserName", data[0]);
+    	localStorage.setItem("currentUserType", data[2]);
+    }

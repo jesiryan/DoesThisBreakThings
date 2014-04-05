@@ -12,17 +12,19 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.conygre.training.dao.jpa.JPA;
 import com.conygre.training.entities.Callfailure;
 
-@Stateless
-@LocalBean
+//@Stateless
+//@LocalBean
+@JPA
 public class CallfailureDAO {
 
 	public CallfailureDAO() {
 		
 	}
 
-	@PersistenceContext
+	@PersistenceContext(unitName="sprint2")
     private EntityManager em;
 	
 	public Callfailure getCallfailureById(String id) {

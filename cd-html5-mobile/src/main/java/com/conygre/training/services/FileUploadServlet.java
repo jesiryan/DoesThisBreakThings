@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.conygre.training.dao.EntitiesDAO;
+import com.conygre.training.dao.EntitiesService;
 import com.conygre.training.entities.AllMasterTableRows;
 import com.conygre.training.entities.Callfailure;
 import com.conygre.training.fileimport.CallfailureReader;
@@ -108,9 +108,9 @@ public class FileUploadServlet extends HttpServlet {
 			
 //			com.conygre.training.dao.CauseRepository causeRepository = new
 			
-			EntitiesDAO entitiesDAO = new EntitiesDAO();
+			EntitiesService entitiesService = new EntitiesService();
 //			@EJB
-			entitiesDAO.persistAllMasterTableRows(allMasterTableRows, callFailures);
+			entitiesService.persistAllMasterTableRows(allMasterTableRows, callFailures);
 			
 			Callfailure failure1 = ((Callfailure) callFailures.get(0));
 			Callfailure failure2 = ((Callfailure) callFailures.get(40));

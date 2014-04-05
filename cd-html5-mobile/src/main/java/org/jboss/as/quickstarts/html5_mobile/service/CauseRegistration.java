@@ -52,12 +52,12 @@ public class CauseRegistration {
 	
 	@POST
 	public void addCauses(List<Cause> cause) {
-		causeDao.addCauses(cause);
+//		causeDao.addCauses(cause);
 	}
 	
 	@POST
 	public void addCause(Cause cause) {
-		causeDao.addCause(cause);
+//		causeDao.addCause(cause);
 	}
 	
 	@POST
@@ -67,6 +67,6 @@ public class CauseRegistration {
 	
 	@POST
 	public void mergeCauses(List<Cause> causes){
-		causeDao.mergeCauses(causes);
+//		causeDao.mergeCauses(causes);
 	}
 }

@@ -12,17 +12,19 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.conygre.training.dao.jpa.JPA;
 import com.conygre.training.entities.Equipment;
 
 @Stateless
-@LocalBean
+//@LocalBean
+@JPA
 public class EquipmentDAO {
 
 	public EquipmentDAO() {
 		
 	}
 
-	@PersistenceContext
+	@PersistenceContext(unitName="sprint2")
     private EntityManager em;
 	
 	public Equipment getEquipmentById(String id) {
@@ -35,28 +37,28 @@ public class EquipmentDAO {
 		return equipments;
 	}
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void addEquipments(List<Equipment> equipments) {
-		for (Equipment equipment : equipments) {
-			em.persist(equipment);
-		}
-	}
+//	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+//	public void addEquipments(List<Equipment> equipments) {
+//		for (Equipment equipment : equipments) {
+//			em.persist(equipment);
+//		}
+//	}
+//	
+//	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+//	public void addEquipment(Equipment equipment) {
+//		em.persist(equipment);
+//	}
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void addEquipment(Equipment equipment) {
-		em.persist(equipment);
-	}
-	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+//	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void mergeEquipments(List<Equipment> equipments) {
 		for (Equipment equipment : equipments) {
 			em.merge(equipment);
 		}
 	}
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void mergeEquipment(Equipment equipment) {
-		em.merge(equipment);
-	}
+//	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+//	public void mergeEquipment(Equipment equipment) {
+//		em.merge(equipment);
+//	}
 	
 }

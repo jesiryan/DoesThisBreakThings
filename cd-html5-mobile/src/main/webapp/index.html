@@ -92,7 +92,7 @@
 	</head>
 
 
-    <body>
+    <body onload="clearUser()">
         <div id="main-container">
         
             <div id="heading-container">
@@ -116,19 +116,17 @@
             <div id="inner-container" >    
               <form name=login id="login" >
 			  <center>
-			  <table border=1>
-			  <tr><td>Enter Your Name :</td>
-			  <td><input type="text" name="userName"  id="userName"value="" required></td>
-			  </tr>
-			  <tr><td>Enter Your PassWord :</td>
-			  <td><input type="password" name="userPassWord" id="userPassWord" value="" required></td>
-			  </tr>
-			  <tr>
-			  <td align=center><input type="reset" name="reset" value="Clear" class='button'></td>
-			  <td align=center><input type="Submit" name="Submit" value="Submit" class='button' ></td>
-			  <table>
+				  <table border=1>
+					  <tr><td>Enter Your Name :</td>
+						  <td><input type="text" name="userName"  id="userName"value="" required></td></tr>
+					  <tr><td>Enter Your Password :</td>
+						  <td><input type="password" name="userPassWord" id="userPassWord" value="" required></td></tr>
+					  <tr><td align=center><input type="reset" name="reset" value="Clear" class='button'></td>
+						  <td align=center><input type="Submit" name="Submit" value="Submit" class='button' ></td></tr>
+				  </table>
 			  </center>
-              </form>  
+              </form>
+              <div id="info" class="hidden"></div> 
             </div>
         </div>
         
