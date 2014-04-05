@@ -14,6 +14,7 @@ _.each(obj, function(obj) {
 									  <th>Country</th>
 									  <th>Operator</th>
 									  <th>Total Call Failures</th>
+									  <th>Percent Of Total</th>
 								</tr>
 							</thead>
 							<tbody><% } %>
@@ -24,6 +25,8 @@ _.each(obj, function(obj) {
 									<td><%=obj.country%></td>
 									<td><%=obj.operator%></td>
 									<td><%=obj.totalFails%></td>
+									<td><%=obj.percentOfTotal%></td>
+									
 								</tr>	
 <% addHeader = false;
 }); %>
