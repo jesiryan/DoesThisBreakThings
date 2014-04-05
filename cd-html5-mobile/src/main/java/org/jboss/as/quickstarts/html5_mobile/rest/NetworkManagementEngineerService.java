@@ -106,10 +106,91 @@ public class NetworkManagementEngineerService {
 	@GET
 	@Path("/us13/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<UserStory13Structure> findAllTimeTop() {
+	public String findAllTimeTop() {
 
 		List<UserStory13Structure> userStory13Structures = repository
 				.findAllTimeTop();
-		return userStory13Structures;
+		
+		String labelTag= "",valueSet1 ="", valueSet2 ="",linkedChart= "", eNodeB = "";
+		for(UserStory13Structure current : userStory13Structures){
+			eNodeB = current.getMCC()+""+current.getMNC()+""+current.getCellID();
+		
+			labelTag += "{\"label\":\""+eNodeB+"\"},";
+			valueSet1+= "{ \"value\":"+current.getTotalFails()+",  \"link\":\"newchart-json-"+eNodeB+"\"},";
+			valueSet2+= "{\"value\":"+ current.getPercentOfTotal() +" },";
+			
+			linkedChart = linkedChart +"  {\"id\":\""+eNodeB+"\","
+				    +"  \"linkedchart\":{"
+				    +"    \"chart\":{"
+				    +"      \"caption\":\"Failure Types\","
+				    +"      \"subcaption\":\"For the Global eNodeB "+eNodeB+"\","
+				    +"      \"xaxisname\":\"Type\","
+				    +"      \"yaxisname\":\"Number\","
+				    +"      \"animation\":\"0\""
+				    +"    },"
+				    +"    \"data\":[{ \"label\":\"EMERGENCY\", \"value\":\""+current.getClass0()+"\" },"
+				    +"            { \"label\":\"HIGH PRIORITY ACCESS\", \"value\":\""+current.getClass1()+"\" },"
+				    +"            { \"label\":\"MT ACCESS\", \"value\":\""+current.getClass2()+"\" },"
+				    +"            { \"label\":\"MO SIGNALLING\", \"value\":\""+current.getClass3()+"\" },"
+				    +"            { \"label\":\"MO DATA\", \"value\":\""+current.getClass4()+"\" }]"
+				    +"  }"
+				    +"},";	
+		}
+		
+		String newChart =  "{\"chart\":{"
+			    + "\"xaxisname\":\"Global eNodeB\","
+			    + "  \"seriesnameintooltip\":0,"
+			    + "  \"showvalues\":1,"
+			    + "  \"caption\":\"Call Failure Analysis\","
+			    + "  \"animation\":0,"
+			    + "  \"formatenumberscale\":0,"
+			    + "  \"showborder\":\"0\""
+			    + " },"
+			    + " \"categories\":["
+			    + "   {"
+			    + "     \"category\":["
+			    + labelTag
+			    +"         ]"
+			    +"    }"
+			    +"    ],"
+			    +"    \"dataset\":["
+			    +"       {"
+			    +"          \"seriesname\":\"Call Fails\","
+			    +"          \"data\":["
+			    + valueSet1
+			    +" ]	"		    
+			    +"     },"
+		        +"     {"
+		        +"        \"seriesname\":\"Percentage of total\", "       
+		        +"       \"parentyaxis\":\"S\","
+		        +"        \"data\":["
+		        + valueSet2
+		        +" ],"		         
+		        +" \"renderas\":\"Line\""
+		        +"}"
+		        +" ],"
+		        +"\"linkeddata\":["
+		        +linkedChart
+			    +"]"
+			    +"	}";
+		
+		String finalChart = "<script type=\"text/javascript\" src=\"FusionCharts.js\"></script>"					
+				+ "<div id=\"chartContainer\" align=\"center\">FusionCharts will load here</div>"
+				+ "<script type=\"text/javascript\">"
+				+"FusionCharts.setCurrentRenderer('javascript');"
+				+ "	var myChart = new FusionCharts(\"MSColumn3DLineDY\", \"myChartId\", \"800\", \"600\", \"0\", \"1\");	"	
+				+ "FusionCharts(\"myChartId\").configureLink ("
+				+ "		  {"
+				+ "		    type : \"Pie3d\","
+				+ "		    overlayButton:"
+				+ "		    {    "
+				+ "		      message: 'Back'"
+				+ "		    }"
+				+ "		  }, 0);"
+				+ "	myChart.setJSONData("+newChart+");"
+				+ "	myChart.render(\"chartContainer\");"
+				+ "</script>";
+		
+			return finalChart;
 	}
 }

@@ -21,20 +21,23 @@
             url: "rest/net/us13/",
             type: "GET",
             cache: false,
+            data:{},
             success: function(data) {
-            	if (data.length < 1) {
-                    $('#info').removeClass("hidden");
-                    $('#hidden-container').addClass("hidden");
-            		$('#info').empty().append("Information: The query has returned no results.");
-					document.forms["us13Form"].reset();
-            	} else {
-            		$('#info').addClass("hidden");
-                    $('#hidden-container').removeClass("hidden");
-                    $('#results').empty().append(buildUS13ResultsRows(data));
-                    document.forms["us13Form"].reset();
-                }
+            	alert(data);
+//            	if (data.length < 1) {
+//                    $('#info').removeClass("hidden");
+//                    $('#hidden-container').addClass("hidden");
+//            		$('#info').empty().append("Information: The query has returned no results.");
+//					document.forms["us13Form"].reset();
+//            	} else {
+//            		$('#info').addClass("hidden");
+//                    $('#hidden-container').removeClass("hidden");
+//                    $('#results').empty().append(buildUS13ResultsRows(data));
+//                    document.forms["us13Form"].reset();
+//                }
             },
             error: function(error) {
+            	alert(data);
             }
         });
     }
