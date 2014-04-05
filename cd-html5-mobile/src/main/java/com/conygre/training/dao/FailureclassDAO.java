@@ -50,15 +50,15 @@ public class FailureclassDAO {
 //	}
 	
 //	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void mergeFailureclasses(List<Failureclass> failureclasses) {
-		for (Failureclass failureclass : failureclasses) {
-			em.merge(failureclass);
-		}
-	}
-	
-//	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-//	public void mergeFailureclass(Failureclass failureclass) {
-//		em.merge(failureclass);
+//	public void mergeFailureclasses(List<Failureclass> failureclasses) {
+//		for (Failureclass failureclass : failureclasses) {
+//			em.merge(failureclass);
+//		}
 //	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void mergeFailureclass(Failureclass failureclass) {
+		em.merge(failureclass);
+	}
 	
 }

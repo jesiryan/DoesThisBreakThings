@@ -15,7 +15,7 @@ import javax.persistence.Query;
 import com.conygre.training.dao.jpa.JPA;
 import com.conygre.training.entities.Callfailure;
 
-//@Stateless
+@Stateless
 //@LocalBean
 @JPA
 public class CallfailureDAO {
@@ -37,26 +37,26 @@ public class CallfailureDAO {
 		return callfailures;
 	}
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void addCallfailures(List<Callfailure> callfailures) {
-		for (Callfailure callfailure : callfailures) {
-			em.persist(callfailure);
-		}
-	}
+//	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+//	public void addCallfailures(List<Callfailure> callfailures) {
+//		for (Callfailure callfailure : callfailures) {
+//			em.persist(callfailure);
+//		}
+//	}
+//	
+//	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+//	public void addCallfailure(Callfailure callfailure) {
+//		em.persist(callfailure);
+//	}
+//	
+//	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+//	public void mergeCallfailures(List<Callfailure> callfailures) {
+//		for (Callfailure callfailure : callfailures) {
+//			em.merge(callfailure);
+//		}
+//	}
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void addCallfailure(Callfailure callfailure) {
-		em.persist(callfailure);
-	}
-	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void mergeCallfailures(List<Callfailure> callfailures) {
-		for (Callfailure callfailure : callfailures) {
-			em.merge(callfailure);
-		}
-	}
-	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+//	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void mergeCallfailure(Callfailure callfailure) {
 		em.merge(callfailure);
 	}

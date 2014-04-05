@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.conygre.training.dao.EntitiesService;
 import com.conygre.training.entities.AllMasterTableRows;
 import com.conygre.training.entities.Callfailure;
 import com.conygre.training.fileimport.CallfailureReader;

@@ -50,15 +50,15 @@ public class EquipmentDAO {
 //	}
 	
 //	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void mergeEquipments(List<Equipment> equipments) {
-		for (Equipment equipment : equipments) {
-			em.merge(equipment);
-		}
-	}
-	
-//	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-//	public void mergeEquipment(Equipment equipment) {
-//		em.merge(equipment);
+//	public void mergeEquipments(List<Equipment> equipments) {
+//		for (Equipment equipment : equipments) {
+//			em.merge(equipment);
+//		}
 //	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void mergeEquipment(Equipment equipment) {
+		em.merge(equipment);
+	}
 	
 }
