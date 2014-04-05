@@ -1,5 +1,6 @@
 package com.conygre.training.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -9,6 +10,8 @@ import javax.ejb.TransactionAttributeType;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -17,15 +20,14 @@ import com.conygre.training.entities.Cause;
 @Stateless
 @LocalBean
 //@ApplicationScoped
-public class CauseDAO {
+public class CauseDAO implements Serializable{
 
 	public CauseDAO() {
 		
 	}
 	
-	
-	@PersistenceContext(unitName="sprint2")
-	private EntityManager em;
+	@PersistenceContext
+    private EntityManager em;
 	
 	public Cause getCauseById(String id) {
 		return em.find(Cause.class, id);
@@ -54,10 +56,11 @@ public class CauseDAO {
 		Cause findCause = null;
 		for (Cause cause : causes) {
 			System.out.println("Cause description before merge: " + cause.getDescription());
-			findCause = em.find(Cause.class, cause);
-			if(findCause != null){
-				em.persist(cause);
-			}
+//			findCause = em.find(Cause.class, cause);
+//			if(findCause != null){
+//				em.persist(cause);
+//			}
+			em.persist(cause);
 //			em.merge(cause);
 			System.out.println("Cause description AFTER merge: " + cause.getDescription());
 		}

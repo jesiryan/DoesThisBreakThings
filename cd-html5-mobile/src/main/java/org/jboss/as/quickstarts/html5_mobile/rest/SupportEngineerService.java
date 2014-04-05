@@ -19,6 +19,7 @@ import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 
 import com.conygre.training.entities.Callfailure;
 import com.conygre.training.entities.query.UserStory07Structure;
+import com.conygre.training.entities.query.UserStory14Structure;
 
 
 @Path("/supp")
@@ -69,5 +70,16 @@ public class SupportEngineerService {
 //        return equipments;
 //    }
     
-    
+    @GET
+    @Path("/us14/{start}/{end}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<UserStory14Structure> findAffectedIMSIsGivenCauseClass(	@PathParam("causeCode") String causeCode,
+    																@PathParam("eventId") String eventId) {
+    	
+    	List<UserStory14Structure> userStory14Structures = repositoryC.findAffectedIMSIsGivenCauseClass(Double.parseDouble(causeCode), Double.parseDouble(eventId));
+        if (userStory14Structures == null) {
+        	return null;
+        }
+        return userStory14Structures;
+    }  
 }

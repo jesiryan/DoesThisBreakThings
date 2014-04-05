@@ -32,7 +32,7 @@ import com.conygre.training.validation.ValidateExcelFile;
 
 @MultipartConfig
 @WebServlet("/upload")
-public class FileUploadServlet extends HttpServlet {
+public class JFileUploadServiceJ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static String pathAndName;
 	public static List<Callfailure> callFailures;

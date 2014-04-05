@@ -7,6 +7,8 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -21,8 +23,8 @@ public class EntitiesDAO {
 		
 	}
 	
-	@PersistenceContext(unitName="sprint2")
-	private EntityManager em;
+	@PersistenceContext
+    private EntityManager em;
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void persistAllMasterTableRows(AllMasterTableRows allMasterTableRows, List<Callfailure> callfailures) {

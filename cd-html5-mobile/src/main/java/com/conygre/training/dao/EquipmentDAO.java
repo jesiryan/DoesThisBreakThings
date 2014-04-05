@@ -7,6 +7,8 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -19,9 +21,9 @@ public class EquipmentDAO {
 	public EquipmentDAO() {
 		
 	}
-	
-	@PersistenceContext(unitName="sprint2")
-	private EntityManager em;
+
+	@PersistenceContext
+    private EntityManager em;
 	
 	public Equipment getEquipmentById(String id) {
 		return em.find(Equipment.class, id);

@@ -24,7 +24,7 @@ public class PersistenceUtil implements Serializable {
 	public static String filePath;// ="test.xls";
 
 	protected static EntityManagerFactory emf = Persistence
-			.createEntityManagerFactory("sprint1");
+			.createEntityManagerFactory("sprint2");
 
 	public PersistenceUtil() {
 		super();
