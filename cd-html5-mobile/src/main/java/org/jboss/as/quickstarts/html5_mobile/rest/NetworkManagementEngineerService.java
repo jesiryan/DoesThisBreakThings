@@ -20,6 +20,7 @@ import org.jboss.as.quickstarts.html5_mobile.data.CallfailureRepository;
 import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 
 import com.conygre.training.entities.query.UserStory09Structure;
+import com.conygre.training.entities.query.UserStory10Structure;
 import com.conygre.training.entities.query.UserStory11Structure;
 import com.conygre.training.entities.query.UserStory12Structure;
 
@@ -55,7 +56,17 @@ public class NetworkManagementEngineerService {
         }
         return userStory09Structures;
     }
-    
+    @GET
+    @Path("/us10/{model}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<UserStory10Structure> findEventCauseByModel(	@PathParam("model") String modelString) {
+
+    	List<UserStory10Structure> UserStory10Structures = repository.findEventCauseForModel(modelString);
+        if (UserStory10Structures == null) {
+        	return null;
+        }
+        return UserStory10Structures;
+    }   
     @GET
     @Path("/us11/{start}/{end}")
     @Produces(MediaType.APPLICATION_JSON)
