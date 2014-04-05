@@ -75,19 +75,22 @@ function updateCdTable() {
     });
 }
 
-function checkPasswordMatch(password, passwordRetype){
-	alert(password + ". ." + passwordRetype );
-	if(password.equals(passwordRetype)){
-		alert("Passwords match");
-		//clear existing  msgs
-	    $('span.fail').remove();
-		return true;
+$(document).ready(function() {
+	$("#passwordRetype").keyup(validate);
+});
+
+
+function validate() {
+	var password = $("#password").val();
+	var passwordRetype = $("#passwordRetype").val();
+	
+	if(password == passwordRetype) {
+		$("#validate-status").text("passwords match :)"); 
+		document.getElementById("validate-status").style.color= "#14993E";
 	}
-	else{
-		//clear existing  msgs
-	    $('span.fail').remove();
-	    $('#formMsgs').append($('<span class="fail">Passwords do not match.</span>'));
-		return false;
+	else {
+		$("#validate-status").text("passwords don't match");  
+		document.getElementById("validate-status").style.color= "#CC0000";
 	}
 }
 

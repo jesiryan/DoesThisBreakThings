@@ -97,7 +97,6 @@ public class MemberService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createMember(Member member) {
-
         Response.ResponseBuilder builder = null;
 
        // System.out.print("Hello");
