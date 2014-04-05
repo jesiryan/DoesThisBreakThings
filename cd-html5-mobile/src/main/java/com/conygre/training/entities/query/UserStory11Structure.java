@@ -12,21 +12,18 @@ public class UserStory11Structure {
 	int class1;
 	int class2;
 	int class3;
-	int class4;
-	
-	
-	
+	int class4;	
 
 	public UserStory11Structure(int totalFails, double mCC, double mNC,
 			int cellID, String country, String operator, int class0,
 			int class1, int class2, int class3, int class4) {
-		super();
+		//super();
 		this.totalFails = totalFails;
-		MCC = mCC;
-		MNC = mNC;
+		this.MCC = mCC;
+		this.MNC = mNC;
 		this.cellID = cellID;
-		Country = country;
-		Operator = operator;
+		this.Country = country;
+		this.Operator = operator;
 		this.class0 = class0;
 		this.class1 = class1;
 		this.class2 = class2;
@@ -73,13 +70,13 @@ public class UserStory11Structure {
 		return MCC;
 	}
 	public void setMCC(double mCC) {
-		MCC = mCC;
+		this.MCC = mCC;
 	}
 	public double getMNC() {
 		return MNC;
 	}
 	public void setMNC(double mNC) {
-		MNC = mNC;
+		this.MNC = mNC;
 	}
 	public int getCellID() {
 		return cellID;
@@ -91,13 +88,13 @@ public class UserStory11Structure {
 		return Country;
 	}
 	public void setCountry(String country) {
-		Country = country;
+		this.Country = country;
 	}
 	public String getOperator() {
 		return Operator;
 	}
 	public void setOperator(String operator) {
-		Operator = operator;
+		this.Operator = operator;
 	}
 
 
