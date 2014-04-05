@@ -22,66 +22,85 @@ import org.jboss.as.quickstarts.html5_mobile.service.MemberRegistration;
 import com.conygre.training.entities.query.UserStory09Structure;
 import com.conygre.training.entities.query.UserStory11Structure;
 import com.conygre.training.entities.query.UserStory12Structure;
-
+import com.conygre.training.entities.query.UserStory13Structure;
 
 @Path("/net")
 @RequestScoped
 @Stateful
 public class NetworkManagementEngineerService {
-    @Inject
-    private Logger log;
+	@Inject
+	private Logger log;
 
-    @Inject
-    private Validator validator;
+	@Inject
+	private Validator validator;
 
-    @Inject
-    private CallfailureRepository repository;
+	@Inject
+	private CallfailureRepository repository;
 
-    @Inject
-    MemberRegistration upload;
-  
-    
-    @GET
-    @Path("/us09/{start}/{end}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<UserStory09Structure> findCauseCode_EventIDByIMSI(	@PathParam("start") String startString,
-    																@PathParam("end") String endString) {
-    	startString = startString.replaceAll("T", " ");
-    	endString = endString.replaceAll("T", " ");
+	@Inject
+	MemberRegistration upload;
 
-    	List<UserStory09Structure> userStory09Structures = repository.findCountBetweenTimesTotalDuration(startString, endString);
-        if (userStory09Structures == null) {
-        	return null;
-        }
-        return userStory09Structures;
-    }
-    
-    @GET
-    @Path("/us11/{start}/{end}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<UserStory11Structure> findTop10eNodeBFails(	@PathParam("start") String startString,
-    																@PathParam("end") String endString) {
-    	startString = startString.replaceAll("T", " ");
-    	endString = endString.replaceAll("T", " ");
+	@GET
+	@Path("/us09/{start}/{end}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<UserStory09Structure> findCauseCode_EventIDByIMSI(
+			@PathParam("start") String startString,
+			@PathParam("end") String endString) {
+		startString = startString.replaceAll("T", " ");
+		endString = endString.replaceAll("T", " ");
 
-    	List<UserStory11Structure> userStory11Structures = repository.findTop10failsForENodeB(startString, endString);
-        if (userStory11Structures == null) {
-        	return null;
-        }
-        return userStory11Structures;
-    }
-    @GET
-    @Path("/us12/{start}/{end}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<UserStory12Structure> findAllCallFailuresBetween(	@PathParam("start") String startString,
-    																@PathParam("end") String endString) {
-    	startString = startString.replaceAll("T", " ");
-    	endString = endString.replaceAll("T", " ");
+		List<UserStory09Structure> userStory09Structures = repository
+				.findCountBetweenTimesTotalDuration(startString, endString);
+		if (userStory09Structures == null) {
+			return null;
+		}
+		return userStory09Structures;
+	}
 
-    	List<UserStory12Structure> userStory12Structures = repository.findTop10CountBetweenTimesTotalDuration(startString, endString);
-        if (userStory12Structures == null) {
-        	return null;
-        }
-        return userStory12Structures;
-    }
+	@GET
+	@Path("/us11/{start}/{end}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<UserStory11Structure> findTop10eNodeBFails(
+			@PathParam("start") String startString,
+			@PathParam("end") String endString) {
+		startString = startString.replaceAll("T", " ");
+		endString = endString.replaceAll("T", " ");
+
+		List<UserStory11Structure> userStory11Structures = repository
+				.findTop10failsForENodeB(startString, endString);
+		if (userStory11Structures == null) {
+			return null;
+		}
+		return userStory11Structures;
+	}
+
+	@GET
+	@Path("/us12/{start}/{end}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<UserStory12Structure> findAllCallFailuresBetween(
+			@PathParam("start") String startString,
+			@PathParam("end") String endString) {
+		startString = startString.replaceAll("T", " ");
+		endString = endString.replaceAll("T", " ");
+
+		List<UserStory12Structure> userStory12Structures = repository
+				.findTop10CountBetweenTimesTotalDuration(startString, endString);
+		if (userStory12Structures == null) {
+			return null;
+		}
+		return userStory12Structures;
+	}
+
+	@GET
+	@Path("/us13/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<UserStory13Structure> findAllTimeTop() {
+
+		List<UserStory13Structure> userStory13Structures = repository
+				.findTop10failsForENodeB(startString, endString);
+		if (userStory11Structures == null) {
+			return null;
+		}
+		return userStory11Structures;
+	}
 }
