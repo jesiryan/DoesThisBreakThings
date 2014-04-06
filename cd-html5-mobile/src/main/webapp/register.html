@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<title>Dt340a - Group 6</title>
+		<link rel="icon" type="image/ico" href="http://www.ericsson.com/favicon.ico"/>	    
 	    <script type="text/javascript" src="js/userPermissions.js"></script>
 
 		<script type="text/javascript" src="js/libs/modernizr-2.5.3.min.js"></script>
@@ -50,14 +51,14 @@
 				// For minification, uncomment this line
 				//"mcss": "css/m.screen.min.css"
 				// For minification, comment out this line
-				"mcss": "css/m.screen.css"
+				"mcss": "css/mystyle.css"
 			},
 			nope: {
 				//we are on desktop
 				// For minification, uncomment this line
 				//"scss": "css/d.screen.min.css"
 				// For minification, comment out this line
-				"scss": "css/d.screen.css"
+				"scss": "css/mystyle.css"
 			},
 			callback: {
 				//use the labeled callbacks from above, and load jQuery Mobile
@@ -165,7 +166,8 @@
 				</div>
 			</div>	
 			<div id="inner-container">
-
+			<div class='wrapper'>
+				<center>
 					<!-- For now mapping bean validation constraints from server side model is a manual task -->
 					<form name="reg" id="reg" data-ajax="false">
 						<fieldset>
@@ -174,14 +176,17 @@
 								<label for="name">Username:</label>
 								<input type="text" name="name" id="name" placeholder="enter username" required autofocus/>
 							</div>
+							<br>
 							<div>
 								<label for="password">Password:</label>
 								<input type="password" name="password" id="password" placeholder="enter password" required/>
 							</div>
+							<br>
 							<div>
 								<label for="passwordRetype">Re-Enter Password:</label>
 								<input type="password" name="passwordRetype" id="passwordRetype" placeholder="repeat password " required/>
 							</div>
+							
 							<p id="validate-status"></p>
 							<div>
 								<label for="userType">Status:</label>
@@ -193,14 +198,16 @@
 								</div>
 								<br>
 							<div data-role="controlgroup" data-type="horizontal">
-								<input type="submit" id="register" value="Register"/>
-								<input type="button" name="cancel" id="cancel" value="Cancel"/>
+								<input type="submit" class='button' id="register" value="Register"/>
+								<input type="button" name="cancel" class='button' id="cancel" value="Cancel"/>
 							</div>
 						   
 							<div id="formMsgs"></div>
 							
 						</fieldset>
 					</form>
+						<center>
+					</div>
 				</div>
 
 			<div id="eric-multi">
