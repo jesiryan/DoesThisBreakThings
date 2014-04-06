@@ -63,8 +63,8 @@ public class EntitiesEJB {
 	public void persistAllCallfailures(List<Callfailure> callfailures){
 		int i = 0;
 		for(Callfailure callfailure : callfailures) {
-//			callfailureRepository.mergeCallfailure(callfailure);			
-//			i++;
+			callfailureRepository.mergeCallfailure(callfailure);			
+			i++;
 		}
 		System.out.println("Persisted Callfailures = "+i);
 	}
