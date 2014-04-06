@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -39,9 +38,7 @@ import cia.group6.fileimport.FailureclassReader;
 import cia.group6.fileimport.FileReader;
 import cia.group6.registration.MemberRegistration;
 import cia.group6.repositories.CallfailureRepository;
-import cia.group6.services.CompactDiscService;
 import cia.group6.services.EntitiesEJB;
-import cia.group6.validation.ValidateExcelFile;
 
 @Path("/admin")
 @RequestScoped
@@ -131,7 +128,7 @@ public class SystemAdministratorService {
 		try {
 			response =  Response.temporaryRedirect(new URI("../success.html?invalidCount="+CallfailureReader.getNumOfInvalidRows()+"&validCount="+ CallfailureReader.getNumOfValidRows())).build();
 		} catch (URISyntaxException e) {e.printStackTrace();}
-		return response; 
+		return response;
 	}
     
     public List<Callfailure> getCallFailures(FileReader fileReader, AllMasterTableRows allMasterTableRows) {
