@@ -30,25 +30,12 @@ function getMemberTemplate() {
         }
     });
 }
-function getCdTemplate() {
-    $.ajax({
-        url: "tmpl/cd.tmpl",
-        dataType: "html",
-        success: function( data ) {
-            $( "head" ).append( data );
-            updateCdTable();
-        }
-    });
-}
 
 /* Builds the updated table for the member list */
 function buildMemberRows(members) {
     return _.template( $( "#member-tmpl" ).html(), {"members": members});
 }
-/* Builds the updated table for the cd list */
-function buildCdRows(cds) {
-    return _.template( $( "#cd-tmpl" ).html(), {"cds": cds});
-}
+
 /* Uses JAX-RS GET to retrieve current member list */
 function updateMemberTable() {
     $.ajax({
@@ -56,18 +43,6 @@ function updateMemberTable() {
         cache: false,
         success: function(data) {
             $('#members').empty().append(buildMemberRows(data));
-        },
-        error: function(error) {
-            //console.log("error updating table -" + error.status);
-        }
-    });
-}
-function updateCdTable() {
-    $.ajax({
-        url: "rest/cds",
-        cache: false,
-        success: function(data) {
-            $('#cds').empty().append(buildCdRows(data));
         },
         error: function(error) {
             //console.log("error updating table -" + error.status);

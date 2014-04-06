@@ -86,7 +86,6 @@
 					$( "#container" ).show();
 					//Fetches the initial member data and populates the table using jquery templates
 					getMemberTemplate();
-					getCdTemplate();
 
 					//Register an event listener on the sumbit action
 					$('#reg').submit(function(event) {
@@ -115,7 +114,6 @@
 
 					$("#refreshButtonD, #refreshButtonM").click(function(event) {
 						updateMemberTable();
-						updateCdTable();
 					});
 
 					//Clear member registration and error messages on page change
