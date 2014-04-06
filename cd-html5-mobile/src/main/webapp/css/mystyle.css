@@ -240,4 +240,30 @@ color:#000000;
 background-color:#B7CFE6;
 }
 
+fieldset {
+    border: 1px solid #D5D5D5;
+    font: 80%/1 sans-serif;
+    padding: 1em;
+    width: 375px;
+}
+label {
+    color: #363636;
+    float: left;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-right: 0.5em;
+    padding-top: 0.2em;
+    text-align: right;
+    width: 15%;
+}
+
+legend {
+    color: #4A5D75;
+    font-size: 1.5em;
+    padding: 0.2em 0.5em;
+}
+#register {
+    float: left;
+    margin-left: 85px;
+}
 
