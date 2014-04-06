@@ -113,10 +113,10 @@ public class SystemAdministratorService {
 //			else{
 //				System.out.println("The Excel file was not valid");
 //			}
+			System.out.println(fileName);
 			FileReader fileReader = new FileReader(fileName);
 			AllMasterTableRows allMasterTableRows = new AllMasterTableRows();
 			List<Callfailure> callfailures = getCallFailures(fileReader, allMasterTableRows);
-			
 			entEJB.persistAllMasterTableRows(allMasterTableRows, callfailures);
 			
 			System.out.println("Done");			
@@ -126,8 +126,7 @@ public class SystemAdministratorService {
  
 		}
  
-		return Response.status(200)
-		    .entity("uploadFile is called, Uploaded file name : " + fileName).build();
+		return Response.status(200).entity("uploadFile is called, Uploaded file name : " + fileName).build();
  
 	}
     
@@ -138,8 +137,6 @@ public class SystemAdministratorService {
 		EquipmentReader equipmentReader = new EquipmentReader(fileReader);
 		CallfailureReader callFailureReader = new CallfailureReader(fileReader);
 		
-		allMasterTableRows = new AllMasterTableRows();
-
 		allMasterTableRows.setFailureclasses(failureClassReader.getAllFailureclassRows());
 		allMasterTableRows.setCauses(causeReader.getAllEventCauseRows());
 		allMasterTableRows.setCountryoperators(countryOperatorReader.getAllCountryoperatorRows());

@@ -14,6 +14,19 @@
         });
     }
     
+    function startDateError() {
+    	
+        $.ajax({
+            url: "tmpl/us12.tmpl",
+            dataType: "html",
+            success: function( data ) {
+            	
+                $( "head" ).append( data );
+                badInput();
+            }
+        });
+    }
+    
     /* Uses JAX-RS GET to retrieve all imsi Numbers for start and end dateTimes*/
     function updateUS12Table(startdate,enddate) {
 
@@ -31,6 +44,32 @@
             		$('#info').addClass("hidden");
                     $('#hidden-container').removeClass("hidden");
                     $('#results').empty().append(buildUS12ResultsRows(data));
+                    document.forms["us12Form"].reset();
+                }
+            },
+            error: function(error) {
+
+            }
+        });
+    }
+    
+    /* Uses JAX-RS GET to retrieve all imsi Numbers for start and end dateTimes*/
+    function badInput() {
+
+        $.ajax({
+            url: "rest/net/us12/"+startdate+"/"+enddate,
+            type: "GET",
+            cache: false,
+            success: function(data) {
+            	if (data.length < 1) {
+                    $('#info').removeClass("hidden");
+                    $('#hidden-container').addClass("hidden");
+            		$('#info').empty().append("Start date was not before end date");
+					document.forms["us12Form"].reset();
+            	} else {
+            		$('#info').addClass("hidden");
+                    $('#hidden-container').removeClass("hidden");
+                    $('#results').empty();
                     document.forms["us12Form"].reset();
                 }
             },

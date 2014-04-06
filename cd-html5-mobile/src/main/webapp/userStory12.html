@@ -74,7 +74,12 @@
 			        $('#us12Form').submit(function(event) {
 			        	var start = document.getElementById('start').value;
 			        	var end = document.getElementById('end').value;
-			        	getUS12ResultTemplate(start,end);
+			        	if(startBeforeEnd(start, end)){
+			        		getUS12ResultTemplate(start,end);
+					    }
+			        	else{
+			        		startDateError();
+				        }
 			            return false;
 			        });
 			    });

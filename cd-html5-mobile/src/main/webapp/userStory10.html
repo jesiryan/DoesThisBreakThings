@@ -73,9 +73,7 @@
 					$( document ).ready( function() {
 						$('#us10Form').submit(function(event) {
 							var modelString = document.getElementById('model').value;
-							if(isValidModelInput(modelString)){
-								getUS10ResultTemplate(modelString);
-							}
+							getUS10ResultTemplate(modelString);
 							return false;
 						});
 					});

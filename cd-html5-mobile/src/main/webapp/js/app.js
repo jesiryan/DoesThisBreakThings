@@ -91,7 +91,15 @@ function containsColon(stringInput){
 }
 
 function startBeforeEnd(startDateTime, endDateTime){
-	
+	alert("checking startBeforeEnd");
+	var start = new Date(startDateTime);
+	var end = new Date(endDateTime);
+	var today = new Date();
+	alert(start);
+	if(start < end){
+		return true;
+	}
+	return false;
 }
 
 $(document).ready(function() {

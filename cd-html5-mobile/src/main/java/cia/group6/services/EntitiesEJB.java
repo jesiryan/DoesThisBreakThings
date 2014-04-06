@@ -43,42 +43,61 @@ public class EntitiesEJB {
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void persistAllMasterTableRows(AllMasterTableRows allMasterTableRows, List<Callfailure> callfailures) {
 		persistAllCauses(allMasterTableRows);
-		
+		persistAllCountryoperator(allMasterTableRows);
+		persistAllFailureclass(allMasterTableRows);
+		persistAllEquipment(allMasterTableRows);
+		persistAllCallfailures(callfailures);
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void persistAllCauses(AllMasterTableRows allMasterTableRows){
+		int i = 0;
 		for(Cause cause : allMasterTableRows.getCauses()) {
 			causeRepository.mergeCause(cause);			
+			i++;
 		}
+		System.out.println("Persisted Causes = "+i);
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void persistAllCallfailures(List<Callfailure> callfailures){
+		int i = 0;
 		for(Callfailure callfailure : callfailures) {
-			callfailureRepository.mergeCallfailure(callfailure);			
+//			callfailureRepository.mergeCallfailure(callfailure);			
+//			i++;
 		}
+		System.out.println("Persisted Callfailures = "+i);
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void persistAllCountryoperator(AllMasterTableRows allMasterTableRows){
+		int i = 0;
 		for(Countryoperator countryoperator : allMasterTableRows.getCountryoperators()) {
 			countryoperatorRepository.mergeCountryoperator(countryoperator);			
+			i++;
 		}
+		System.out.println("Persisted CountryOperators= "+i);
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void persistAllEquipment(AllMasterTableRows allMasterTableRows){
+		int i = 0;
 		for(Equipment equipment : allMasterTableRows.getEquipment()) {
 			equipmentRepository.mergeEquipment(equipment);			
+			i++;
 		}
+		System.out.println("Persisted Equipments = "+i);
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void persistAllFailureclass(AllMasterTableRows allMasterTableRows){
+		int i = 0;
 		for(Failureclass failureclass : allMasterTableRows.getFailureclasses()) {
+			System.out.println(failureclass.getFailureclass() + " " + failureclass.getDescription());
 			failureclassRepository.mergeFailureclass(failureclass);		
+			i++;
 		}
+		System.out.println("Persisted FailureClasses = "+i);
 	}
 	
 }
