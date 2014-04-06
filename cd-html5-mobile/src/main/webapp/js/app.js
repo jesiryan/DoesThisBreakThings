@@ -75,6 +75,25 @@ function updateCdTable() {
     });
 }
 
+function isValidModelInput(modelString){
+	if(containsColon(modelString)){
+		return false;
+	}
+	return true;
+}
+
+function containsColon(stringInput){
+	if(stringInput.contains(';')){
+		alert("does contain a ;");
+		return true;
+	}
+	return false;
+}
+
+function startBeforeEnd(startDateTime, endDateTime){
+	
+}
+
 $(document).ready(function() {
 	$("#passwordRetype").keyup(validate);
 });
