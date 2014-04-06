@@ -33,17 +33,22 @@
         $.ajax({
             url: "rest/net/us12/"+startdate+"/"+enddate,
             type: "GET",
+            dataType: "html",
             cache: false,
             success: function(data) {
-            	if (data.length < 1) {
+            	var result=data;
+                if (result== 'No Results') {
                     $('#info').removeClass("hidden");
                     $('#hidden-container').addClass("hidden");
-            		$('#info').empty().append("Information: The query between dates " + startdate + " and " + enddate + " has returned no results.");
-					document.forms["us12Form"].reset();
-            	} else {
-            		$('#info').addClass("hidden");
+                    $('#info').empty().append("Information: The query between dates " + startdate + " and " + enddate + " has returned no results.");
+                    document.forms["us12Form"].reset();
+                } else {
+                   // alert(data);
+                    $('#info').addClass("hidden");
+                    $('#inner-container').addClass("hidden");
+                    $('#eric-multi').addClass("hidden");
                     $('#hidden-container').removeClass("hidden");
-                    $('#results').empty().append(buildUS12ResultsRows(data));
+                    $('body').append(data);
                     document.forms["us12Form"].reset();
                 }
             },
