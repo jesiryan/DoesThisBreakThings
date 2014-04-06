@@ -11,12 +11,14 @@ public class EquipmentReader {
 
 	private FileReader fileReader;
 
-	public EquipmentReader() {
-		fileReader = new FileReader();
+	public EquipmentReader(FileReader fileReader) {
+		this.fileReader = fileReader;
+//		fileReader = new FileReader();
 	}
 
 	// possibly this should be a set. not sure.
 	public List<Equipment> getAllEquipmentRows() {
+		System.out.println("Begin getting all equipments");
 		int length = fileReader.getSheetColumnLength(3);
 		ArrayList<Equipment> equipment = new ArrayList<Equipment>(length);
 		for (int i = 1; i < length + 1; i++) {

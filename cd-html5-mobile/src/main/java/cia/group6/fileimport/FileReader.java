@@ -1,6 +1,6 @@
 package cia.group6.fileimport;
 
-import cia.group6.dao.jpa.PersistenceUtil;
+//import cia.group6.dao.jpa.PersistenceUtil;
 import cia.group6.entities.*;
 import cia.group6.validation.ValidateExcelFile;
 
@@ -29,6 +29,7 @@ public class FileReader {
 			// fileName));
 			wb = WorkbookFactory.create(new FileInputStream(fileName));
 
+			System.out.println("Workbook set to: "+fileName);
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}

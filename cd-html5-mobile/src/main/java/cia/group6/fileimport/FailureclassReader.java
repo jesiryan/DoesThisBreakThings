@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 
-import cia.group6.dao.jpa.PersistenceUtil;
+//import cia.group6.dao.jpa.PersistenceUtil;
 import cia.group6.entities.Callfailure;
 import cia.group6.entities.Failureclass;
 
@@ -13,12 +13,13 @@ public class FailureclassReader {
 
 	private FileReader fileReader;
 
-	public FailureclassReader() {
-		fileReader = new FileReader();
+	public FailureclassReader(FileReader fileReader) {
+		this.fileReader = fileReader;
+//		fileReader = new FileReader();
 	}
 
 	public static void main(String[] args) {
-		FailureclassReader failureclassTable = new FailureclassReader();
+//		FailureclassReader failureclassTable = new FailureclassReader();
 //		failureclassTable.persistAllFailureclasses();
 //		System.out.println("all persisted");
 	}
@@ -30,6 +31,7 @@ public class FailureclassReader {
 	// possibly this should be a set. not sure. i've far bigger problems at the
 	// moment though.
 	public List<Failureclass> getAllFailureclassRows() {
+		System.out.println("Begin getting all failureClasses");
 		int length = fileReader.getSheetColumnLength(2);
 		ArrayList<Failureclass> failureclasses = new ArrayList<Failureclass>(length);
 		for (int i = 1; i < length + 1; i++) {

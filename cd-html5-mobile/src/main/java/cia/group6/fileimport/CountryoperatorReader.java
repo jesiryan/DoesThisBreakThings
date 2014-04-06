@@ -11,12 +11,14 @@ public class CountryoperatorReader {
 
 	private FileReader fileReader;
 
-	public CountryoperatorReader() {
-		fileReader = new FileReader();
+	public CountryoperatorReader(FileReader fileReader) {
+		this.fileReader = fileReader;
+//		fileReader = new FileReader();
 	}
 
 	// possibly this should be a set. not sure.
 	public List<Countryoperator> getAllCountryoperatorRows() {
+		System.out.println("Begin getting all countryOperators");
 		int length = fileReader.getSheetColumnLength(4);
 		ArrayList<Countryoperator> countryoperators = new ArrayList<Countryoperator>(length);
 		for (int i = 1; i < length + 1; i++) {

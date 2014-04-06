@@ -17,13 +17,14 @@ public class CallfailureReader {
 	private static int numOfInvalidRows;
 	private static int numOfValidRows;
 	
-	public CallfailureReader() {
-		fileReader = new FileReader();
+	public CallfailureReader(FileReader fileReader) {
+		this.fileReader = fileReader;
+//		fileReader = new FileReader();
 	}
 
 	// possibly this should be a set. not sure.
-	public List<Callfailure> getAllCallfailureRows(
-			AllMasterTableRows allMasterTableRows) {
+	public List<Callfailure> getAllCallfailureRows(AllMasterTableRows allMasterTableRows) {
+		System.out.println("Begin getting all callFailures");
 		setLocalTableLists(allMasterTableRows);
 		int length = fileReader.getSheetColumnLength(0);
 		numOfInvalidRows=0;

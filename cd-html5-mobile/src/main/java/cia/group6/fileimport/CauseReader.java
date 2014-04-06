@@ -5,19 +5,21 @@ import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 
-import cia.group6.dao.jpa.PersistenceUtil;
+//import cia.group6.dao.jpa.PersistenceUtil;
 import cia.group6.entities.Cause;
 
 public class CauseReader {
 
 	private FileReader fileReader;
 
-	public CauseReader() {
-		fileReader = new FileReader();
+	public CauseReader(FileReader fileReader) {
+		this.fileReader = fileReader;
+//		fileReader = new FileReader();
 	}
 
 	// possibly this should be a set. not sure.
 	public List<Cause> getAllEventCauseRows() {
+		System.out.println("Begin getting all eventCauses");
 		int length = fileReader.getSheetColumnLength(1);
 		ArrayList<Cause> eventCauses = new ArrayList<Cause>(length);
 		for (int i = 1; i < length + 1; i++) {

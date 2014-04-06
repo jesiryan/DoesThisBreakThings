@@ -57,7 +57,7 @@ public class SystemAdministratorService {
     @Inject
     MemberRegistration upload;
     
-    @EJB
+    @Inject
 	private EntitiesEJB entEJB;
 	
   
@@ -113,9 +113,10 @@ public class SystemAdministratorService {
 //			else{
 //				System.out.println("The Excel file was not valid");
 //			}
-			
+			FileReader fileReader = new FileReader(fileName);
 			AllMasterTableRows allMasterTableRows = new AllMasterTableRows();
-			List<Callfailure> callfailures = getCallFailures(allMasterTableRows);
+			List<Callfailure> callfailures = getCallFailures(fileReader, allMasterTableRows);
+			
 			entEJB.persistAllMasterTableRows(allMasterTableRows, callfailures);
 			
 			System.out.println("Done");			
@@ -130,12 +131,12 @@ public class SystemAdministratorService {
  
 	}
     
-    public List<Callfailure> getCallFailures(AllMasterTableRows allMasterTableRows) {
-		FailureclassReader failureClassReader = new FailureclassReader();		
-		CauseReader causeReader = new CauseReader();
-		CountryoperatorReader countryOperatorReader = new CountryoperatorReader();
-		EquipmentReader equipmentReader = new EquipmentReader();
-		CallfailureReader callFailureReader = new CallfailureReader();
+    public List<Callfailure> getCallFailures(FileReader fileReader, AllMasterTableRows allMasterTableRows) {
+		FailureclassReader failureClassReader = new FailureclassReader(fileReader);		
+		CauseReader causeReader = new CauseReader(fileReader);
+		CountryoperatorReader countryOperatorReader = new CountryoperatorReader(fileReader);
+		EquipmentReader equipmentReader = new EquipmentReader(fileReader);
+		CallfailureReader callFailureReader = new CallfailureReader(fileReader);
 		
 		allMasterTableRows = new AllMasterTableRows();
 
