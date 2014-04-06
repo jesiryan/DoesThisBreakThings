@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -125,9 +127,11 @@ public class SystemAdministratorService {
 		  }
  
 		}
- 
-		return Response.status(200).entity("uploadFile is called, Uploaded file name : " + fileName).build();
- 
+		Response response=null;
+		try {
+			response =  Response.temporaryRedirect(new URI("../success.html?invalidCount="+CallfailureReader.getNumOfInvalidRows()+"&validCount="+ CallfailureReader.getNumOfValidRows())).build();
+		} catch (URISyntaxException e) {e.printStackTrace();}
+		return response; 
 	}
     
     public List<Callfailure> getCallFailures(FileReader fileReader, AllMasterTableRows allMasterTableRows) {
