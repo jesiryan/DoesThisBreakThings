@@ -4,6 +4,25 @@
 		clearUser();
     	window.location.replace("index.html");
 	}
+	
+	function home() {
+    	var userType = localStorage.getItem("currentUserType");
+    	if(userType == "Customer Service Rep") {
+        	window.location.replace("custSerRepMenu.html");
+    	}
+    	else if(userType == "Support Engineer") {
+        	window.location.replace("supEngMenu.html");    		
+    	}
+    	else if(userType == "Network Management Engineer") {
+        	window.location.replace("netMgmtEngMenu.html");    		
+    	}
+    	else if(userType == "Administrator") {    		
+        	window.location.replace("adminMenu.html");
+    	}
+    	else {
+        	window.location.replace("index.html");
+    	}
+	}
 
     function clearUser() {
     	localStorage.clear();

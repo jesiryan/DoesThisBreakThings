@@ -27,6 +27,7 @@
             		}
             		addCurrentUserToLocalStorage(data);
             	} else {
+            		$('#userPassWord').val('');
             		$('#info').removeClass("hidden");
             		$('#info').empty().append("<br/>Login for Username: '"+name+"' failed. Please try again.");
                 }
