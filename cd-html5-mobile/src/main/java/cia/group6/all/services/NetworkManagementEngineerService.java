@@ -89,7 +89,7 @@ public class NetworkManagementEngineerService {
 
 		String chart, linkedChart = "";
 			
-			chart="{ \"chart\": { \"caption\" : \"Total Call Fails\" ,	\"xAxisName\" : \"Global enodeB\", \"yAxisName\" : \"Call Fails\",	\"animation\":\"0\" }, 	\"data\" : [ ";
+			chart="{ \"chart\": { \"caption\" : \"Total Call Fails\" ,	\"xAxisName\" : \"IMSI\", \"yAxisName\" : \"Call Fails\",	\"animation\":\"0\" }, 	\"data\" : [ ";
 			linkedChart = linkedChart + "], "
 			+"\"linkeddata\":[";
 			
@@ -166,17 +166,22 @@ public class NetworkManagementEngineerService {
 		if (userStory12Structures == null) {
 			return "No Results";
 		}
-		
-		String table = "<div class='wrapper' id='inner-container'><table id='results'  >"
-			+"<tr>"
-			 +" <th>IMSI</th>"
-			  +"<th>Call Failures</th> "
-			+"</tr>";
-			
+	
 		String chart, linkedChart = "";
 		chart="{ \"chart\": { \"caption\" : \"Total Call Fails\" ,	\"xAxisName\" : \"IMSI\", \"yAxisName\" : \"Call Fails\",	\"animation\":\"0\" }, 	\"data\" : [ ";
 					linkedChart = linkedChart + "], "
 					+"\"linkeddata\":[";
+					
+					
+					
+					String table = "<div class='wrapper' id='inner-container'><table id='results'  >"
+							+"<tr>"
+							 +" <th>IMSI</th>"
+							  +"<th>Call Failures</th> "
+							+"</tr>";
+					
+					
+					
 					for(UserStory12Structure current : userStory12Structures){
 						chart = chart + "{ \"label\" : \""+current.getImsi()+"\", \"value\" : \""+current.getCount()+"\" , \"link\":\"newchart-json-"+current.getImsi()+"\" },";
 						
