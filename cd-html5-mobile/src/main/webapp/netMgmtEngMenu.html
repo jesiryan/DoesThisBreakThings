@@ -2,6 +2,7 @@
 <html>
  <head>
         <title>Dt340a - Group 6</title>
+ 	    <script type="text/javascript" src="js/userPermissions.js"></script>
        
         <link rel="icon" type="image/ico" href="http://www.ericsson.com/favicon.ico"/>
         <link rel="stylesheet" type="text/css" href="css/mystyle.css">
@@ -10,7 +11,7 @@
 </head>
 
 
-    <body>
+    <body onload="networkManagementEngineerCheck()">
         <div id="container">
         
             <div id="heading-container">
@@ -27,8 +28,10 @@
                 
                 <h1>Call Investigation Assistant</h1> 
                 <h2>Group 6</h2> 
-                <h3>Network Management Engineer View</h3>          
-           
+                <h3 id="userType">Network Management Engineer View</h3>          
+				<div class='wrapper'>
+					<form class='alignleft' onclick="logout()"><input class='button' type='submit' value='Logout'/></form>				
+				</div>            
             </div>
             
             <div id="home-container" >    

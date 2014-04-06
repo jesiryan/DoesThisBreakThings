@@ -16,10 +16,10 @@
             		if(data[2]=='Support Engineer'){
             			document.location.href = '/cd-html5-mobile/supEngMenu.html';
             		}
-            		if(data[2]=='Customer Service'){
+            		if(data[2]=='Customer Service Rep'){
             			document.location.href = '/cd-html5-mobile/custSerRepMenu.html';
             		}
-            		if(data[2]=='Network Engineer'){
+            		if(data[2]=='Network Management Engineer'){
             			document.location.href = '/cd-html5-mobile/netMgmtEngMenu.html';
             		}
             		if(data[2]=='Administrator'){
@@ -32,7 +32,7 @@
                 }
             },
             error: function(error) {
-            	alert('error');
+            	alert('login error');
 //                document.location.href = '/loginFail.html';
             }
         });

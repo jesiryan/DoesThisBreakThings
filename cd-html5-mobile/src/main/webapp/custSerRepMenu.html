@@ -2,6 +2,7 @@
 <html>
  <head>
         <title>Dt340a - Group 6</title>
+ 	    <script type="text/javascript" src="js/userPermissions.js"></script>
        
         <link rel="icon" type="image/ico" href="http://www.ericsson.com/favicon.ico"/>
         <link rel="stylesheet" type="text/css" href="css/mystyle.css">
@@ -10,7 +11,7 @@
 </head>
 
 
-    <body>
+	<body onload="customerServiceRepCheck()">
         <div id="container">
         
             <div id="heading-container">
@@ -27,16 +28,18 @@
                 
                 <h1>Call Investigation Assistant</h1> 
                 <h2>Group 6</h2> 
-                <h3>Customer Service Representative View</h3>          
-           
+                <h3 id="userType">Customer Service Representative View</h3>          
+				<div class='wrapper'>
+					<form class='alignleft' onclick="logout()"><input class='button' type='submit' value='Logout'/></form>				
+				</div>            
             </div>
             
             <div id="home-container" >    
                   <h3>Please select one of the following: </h3>
               
                 <a href="userStory4.html"  ><button class='button'>User Story 04 - IMSI query</button></a>
-                <a href="UserStory5.html"  ><button class='button'>User Story 05 - IMSI query</button></a>
-                <a href="UserStory6.html"  ><button class='button'>User Story 06 - IMSI query</button></a>
+                <a href="userStory5.html"  ><button class='button'>User Story 05 - IMSI query</button></a>
+                <a href="userStory6.html"  ><button class='button'>User Story 06 - IMSI query</button></a>
             </div>
         </div>
         

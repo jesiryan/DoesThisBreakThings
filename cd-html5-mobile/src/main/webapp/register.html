@@ -2,8 +2,10 @@
 <html>
 	<head>
 		<title>Dt340a - Group 6</title>
-	<script type="text/javascript" src="js/libs/modernizr-2.5.3.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/mystyle.css">
+	    <script type="text/javascript" src="js/userPermissions.js"></script>
+
+		<script type="text/javascript" src="js/libs/modernizr-2.5.3.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/mystyle.css">
 			
 
 	<script type="text/javascript">
@@ -144,7 +146,7 @@
 	
 	</head>
 
-	<body>
+    <body onload="administratorCheck()">
 		<div id="main-container">
 			<div id="heading-container">
 				<div id="eir-image">
@@ -156,9 +158,9 @@
 				
 				<h1>Call Investigation Assistant</h1>
 				<h2>Group 6</h2>
-				<h3>System Administrator</h3>
+				<h3 id="userType">System Administrator</h3>
 				<div class='wrapper'>
-					<form class='alignleft' method='GET' action='logout'><input class='button' type='submit' value='Logout'></form>				
+					<form class='alignleft' onclick="logout()"><input class='button' type='submit' value='Logout'/></form>				
 					<a href='adminMenu.html'><button class='button alignright'>Home Page</button></a>
 				</div>
 			</div>	
