@@ -244,7 +244,7 @@ public class CallfailureRepository {
 			loginResultSet = loginStatement.executeQuery();
 			
 			while (loginResultSet.next()) {
-				us11List.add(new UserStory11Structure(loginResultSet.getInt(1), loginResultSet.getDouble(2), loginResultSet.getDouble(3), loginResultSet.getInt(4), 
+				us11List.add(new UserStory11Structure(loginResultSet.getInt(1), loginResultSet.getInt(2), loginResultSet.getInt(3), loginResultSet.getInt(4), 
 						loginResultSet.getString(5), loginResultSet.getString(6),loginResultSet.getInt(7),loginResultSet.getInt(8),loginResultSet.getInt(9),
 						loginResultSet.getInt(10),loginResultSet.getInt(11)));
 			}

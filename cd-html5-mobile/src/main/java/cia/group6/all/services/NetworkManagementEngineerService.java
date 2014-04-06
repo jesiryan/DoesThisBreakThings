@@ -67,11 +67,33 @@ public class NetworkManagementEngineerService {
         }
         return UserStory10Structures;
     }   
-
+//
+//	@GET
+//	@Path("/us11/{start}/{end}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public List<UserStory11Structure> findTop10eNodeBFails(
+//			@PathParam("start") String startString,
+//			@PathParam("end") String endString) {
+//		startString = startString.replaceAll("T", " ");
+//		endString = endString.replaceAll("T", " ");
+//
+//		List<UserStory11Structure> userStory11Structures = repository
+//				.findTop10failsForENodeB(startString, endString);
+//		if (userStory11Structures == null) {
+//			return null;
+//		}
+//		return userStory11Structures;
+//	}
+//	
+//	
+//	
+//	____________________________________
+	
+	
 	@GET
 	@Path("/us11/{start}/{end}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<UserStory11Structure> findTop10eNodeBFails(
+	public String findTop10eNodeBFails(
 			@PathParam("start") String startString,
 			@PathParam("end") String endString) {
 		startString = startString.replaceAll("T", " ");
@@ -79,11 +101,99 @@ public class NetworkManagementEngineerService {
 
 		List<UserStory11Structure> userStory11Structures = repository
 				.findTop10failsForENodeB(startString, endString);
+		
 		if (userStory11Structures == null) {
-			return null;
+			return "No Results";
 		}
-		return userStory11Structures;
+
+		String chart, linkedChart = "";
+			
+			chart="{ \"chart\": { \"caption\" : \"Total Call Fails\" ,	\"xAxisName\" : \"Global enodeB\", \"yAxisName\" : \"Call Fails\",	\"animation\":\"0\" }, 	\"data\" : [ ";
+			linkedChart = linkedChart + "], "
+			+"\"linkeddata\":[";
+			
+			String table = "<div class='wrapper' id='inner-container' ><table id='results' >"
+			+"<tr>"
+			 +" <th>MCC</th>"
+			  +"<th>MNC</th> "
+			  +"<th>cellID</th> "
+			  +"<th>Country</th> "
+			  +"<th>Operator</th> "
+			  +"<th>Total Call Failures</th> "
+			+"</tr>";
+			
+			String eNodeB="";
+			for(UserStory11Structure current : userStory11Structures){
+				eNodeB = current.getMCC()+""+current.getMNC()+""+current.getCellID();
+				chart = chart + "{ \"label\" : \""+eNodeB+"\", \"value\" : \""+current.getTotalFails()+"\" , \"link\":\"newchart-json-"+eNodeB+"\" },";
+				
+				linkedChart = linkedChart +"  {\"id\":\""+eNodeB+"\","
+					    +"  \"linkedchart\":{"
+					    +"    \"chart\":{"
+					    +"      \"caption\":\"Failure Types\","
+					    +"      \"subcaption\":\"For the Global eNodeB "+eNodeB+"\","
+					    +"      \"xaxisname\":\"Type\","
+					    +"      \"yaxisname\":\"Number\","
+					    +"      \"animation\":\"0\""
+					    +"    },"
+					    +"    \"data\":[{ \"label\":\"EMERGENCY\", \"value\":\""+current.getClass0()+"\" },"
+					    +"            { \"label\":\"HIGH PRIORITY ACCESS\", \"value\":\""+current.getClass1()+"\" },"
+					    +"            { \"label\":\"MT ACCESS\", \"value\":\""+current.getClass2()+"\" },"
+					    +"            { \"label\":\"MO SIGNALLING\", \"value\":\""+current.getClass3()+"\" },"
+					    +"            { \"label\":\"MO DATA\", \"value\":\""+current.getClass4()+"\" }]"
+					    +"  }"
+					    +"},";
+				
+				table = table +"                    <tr>"
+				+"                      <td>" + current.getMCC() + "</td>"
+				+"                      <td>" + current.getMNC() + "</td>"
+				+"                      <td>" + current.getCellID() + "</td>"
+				+"                      <td>" + current.getCountry() + "</td>"
+				+"                      <td>" + current.getOperator() + "</td>"
+				+"                      <td>" + current.getTotalFails() + "</td>"
+				+"                    </tr>";
+			
+			}
+			table = table + "</table></div><div id='eric-multi1'><img src='images/ebottomgrad.jpg' ></div>";
+		    linkedChart = linkedChart +"]	"
+		    +	"}";
+			
+			String finalChart = "<script type=\"text/javascript\">"
+					+"FusionCharts.setCurrentRenderer('javascript');"
+					+ "	var myChart = new FusionCharts(\"Column3D\", \"myChartId\", \"800\", \"600\", \"0\", \"1\");	"			
+					+ "	myChart.setJSONData("+chart+linkedChart+");"
+					+ "	myChart.render(\"chartContainer\");"
+					+ "</script>";
+		
+		return finalChart + table;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@GET
 	@Path("/us12/{start}/{end}")

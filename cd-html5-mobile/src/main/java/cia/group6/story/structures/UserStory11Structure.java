@@ -3,8 +3,8 @@ package cia.group6.story.structures;
 public class UserStory11Structure {
 
 	private int totalFails ;	
-	double MCC; 
-	double MNC;
+	int MCC; 
+	int MNC;
 	int cellID;
 	String Country;
 	String Operator;
@@ -14,7 +14,7 @@ public class UserStory11Structure {
 	int class3;
 	int class4;	
 
-	public UserStory11Structure(int totalFails, double mCC, double mNC,
+	public UserStory11Structure(int totalFails, int mCC, int mNC,
 			int cellID, String country, String operator, int class0,
 			int class1, int class2, int class3, int class4) {
 		//super();
@@ -66,16 +66,16 @@ public class UserStory11Structure {
 	public void setTotalFails(int totalFails) {
 		this.totalFails = totalFails;
 	}
-	public double getMCC() {
+	public int getMCC() {
 		return MCC;
 	}
-	public void setMCC(double mCC) {
+	public void setMCC(int mCC) {
 		this.MCC = mCC;
 	}
-	public double getMNC() {
+	public int getMNC() {
 		return MNC;
 	}
-	public void setMNC(double mNC) {
+	public void setMNC(int mNC) {
 		this.MNC = mNC;
 	}
 	public int getCellID() {

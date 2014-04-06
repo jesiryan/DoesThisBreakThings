@@ -6,13 +6,11 @@
 
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	
-	    <!-- Set viewport scaling and zoom features -->
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	    <script type="text/javascript" src="js/libs/modernizr-2.5.3.min.js"></script>
-		
-		<link rel='stylesheet' type='text/css' href='css/mystyle.css'>
-		
+	    	
+	      <script type="text/javascript" src="js/FusionCharts.js"></script>
 		
 		<script type="text/javascript">
 		  Modernizr.load([{
@@ -109,10 +107,16 @@
 	                <strong>To (date and time):</strong> <input class='submissionfield' type='datetime-local' name='enddate' id='enddate' value="2014-01-01T00:00" required>
 					<input type='button' class='button' value="Submit" onclick="getUS11ResultTemplate(document.getElementById('startdate').value, document.getElementById('enddate').value)">
 				</form>
+				<div id="info" class="hidden"></div>	
 			</div>
 			
+			
 			<div class='wrapper hidden' id='hidden-container'>
-				<div id="results"></div>
+			
+				<div id="results"> <input type="button" class="button" value="New Search" onclick="reloadPage()"></div>
+               <div id= "resultsContainer"></div>
+               
+                <div id="chartContainer"></div>
 			</div>
 			
 		</div>
