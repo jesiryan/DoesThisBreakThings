@@ -21,7 +21,11 @@ public class CauseRepository {
     public Cause findById(int id) {
         return em.find(Cause.class, id);
     }
-
+	
+    public void mergeCause(Cause cause) {
+		em.merge(cause);
+	}
+	
     public Cause findByDescription(String description) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Cause> criteria = cb.createQuery(Cause.class);

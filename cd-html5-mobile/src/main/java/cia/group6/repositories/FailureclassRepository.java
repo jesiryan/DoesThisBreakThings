@@ -22,6 +22,10 @@ public class FailureclassRepository {
         return em.find(Failureclass.class, id);
     }
 
+	public void mergeFailureclass(Failureclass failureclass) {
+		em.merge(failureclass);
+	}
+    
     public Failureclass findByDescription(String description) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Failureclass> criteria = cb.createQuery(Failureclass.class);

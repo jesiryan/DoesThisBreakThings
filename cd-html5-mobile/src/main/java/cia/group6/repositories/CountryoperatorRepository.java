@@ -22,6 +22,10 @@ public class CountryoperatorRepository {
         return em.find(Countryoperator.class, id);
     }
 
+	public void mergeCountryoperator(Countryoperator countryoperator) {
+		em.merge(countryoperator);
+	}
+    
     public Countryoperator findByCountry(String country) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Countryoperator> criteria = cb.createQuery(Countryoperator.class);

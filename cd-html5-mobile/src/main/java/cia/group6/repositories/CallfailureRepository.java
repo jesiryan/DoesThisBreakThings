@@ -49,6 +49,10 @@ public class CallfailureRepository {
     public Callfailure findByBaseDataID(int baseDataID) {
         return em.find(Callfailure.class, baseDataID);
     }
+    
+	public void mergeCallfailure(Callfailure callfailure) {
+		em.merge(callfailure);
+	}
 
     public Callfailure findByIMSI(String iMSI) {
         CriteriaBuilder cb = em.getCriteriaBuilder();

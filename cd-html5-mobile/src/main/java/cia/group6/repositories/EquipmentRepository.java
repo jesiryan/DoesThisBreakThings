@@ -26,6 +26,10 @@ public class EquipmentRepository {
         return em.find(Equipment.class, tAC);
     }
 
+	public void mergeEquipment(Equipment equipment) {
+		em.merge(equipment);
+	}
+	
     public Equipment findByEquipmentType(String equipmentType) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Equipment> criteria = cb.createQuery(Equipment.class);
