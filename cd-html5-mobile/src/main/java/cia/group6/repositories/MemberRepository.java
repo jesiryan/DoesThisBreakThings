@@ -52,7 +52,7 @@ public class MemberRepository {
         return em.createQuery(criteria).getSingleResult();
     }
     public String[] getUserByNameAndPass(String name, String password){
-		String loginQueryString = "SELECT name, password, userType FROM Member_html5mobi WHERE name = ? and password=?";
+		String loginQueryString = "SELECT name, password, userType FROM Member WHERE name = ? and password=?";
 		String[] result = new String[3];
 		//		String loginQueryString = "SELECT username, password, userType FROM User WHERE username = ? and password=?";
 		try {
