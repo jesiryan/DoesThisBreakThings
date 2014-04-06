@@ -37,7 +37,6 @@ import cia.group6.fileimport.FailureclassReader;
 import cia.group6.fileimport.FileReader;
 import cia.group6.registration.MemberRegistration;
 import cia.group6.repositories.CallfailureRepository;
-import cia.group6.services.CompactDiscService;
 import cia.group6.services.EntitiesEJB;
 import cia.group6.validation.ValidateExcelFile;
 
