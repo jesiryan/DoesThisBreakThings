@@ -25,14 +25,12 @@
    <persistence-unit name="sprint2">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
       <jta-data-source>java:/MySQL</jta-data-source>     
-      <class>cia.group6.entities.CompactDisc</class>
       <class>cia.group6.entities.Failureclass</class>
       <class>cia.group6.entities.Equipment</class>
       <class>cia.group6.entities.Countryoperator</class>
       <class>cia.group6.entities.Cause</class>
       <class>cia.group6.entities.Callfailure</class>
       <class>cia.group6.entities.Member</class>
-      <class>cia.group6.entities.Track</class>
       <properties>
          <property name="hibernate.hbm2ddl.auto" value="update" />
          <property name="hibernate.show_sql" value="true" />

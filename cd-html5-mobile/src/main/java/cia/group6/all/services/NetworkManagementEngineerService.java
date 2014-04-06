@@ -56,10 +56,12 @@ public class NetworkManagementEngineerService {
         }
         return userStory09Structures;
     }
+	
+	
     @GET
     @Path("/us10/{model}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<UserStory10Structure> findEventCauseByModel(	@PathParam("model") String modelString) {
+    public List<UserStory10Structure> findEventCauseByModel( @PathParam("model") String modelString) {
 
     	List<UserStory10Structure> UserStory10Structures = repository.findEventCauseForModel(modelString);
         if (UserStory10Structures == null) {
@@ -67,28 +69,7 @@ public class NetworkManagementEngineerService {
         }
         return UserStory10Structures;
     }   
-//
-//	@GET
-//	@Path("/us11/{start}/{end}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public List<UserStory11Structure> findTop10eNodeBFails(
-//			@PathParam("start") String startString,
-//			@PathParam("end") String endString) {
-//		startString = startString.replaceAll("T", " ");
-//		endString = endString.replaceAll("T", " ");
-//
-//		List<UserStory11Structure> userStory11Structures = repository
-//				.findTop10failsForENodeB(startString, endString);
-//		if (userStory11Structures == null) {
-//			return null;
-//		}
-//		return userStory11Structures;
-//	}
-//	
-//	
-//	
-//	____________________________________
-	
+
 	
 	@GET
 	@Path("/us11/{start}/{end}")
@@ -108,7 +89,7 @@ public class NetworkManagementEngineerService {
 
 		String chart, linkedChart = "";
 			
-			chart="{ \"chart\": { \"caption\" : \"Total Call Fails\" ,	\"xAxisName\" : \"Global enodeB\", \"yAxisName\" : \"Call Fails\",	\"animation\":\"0\" }, 	\"data\" : [ ";
+			chart="{ \"chart\": { \"caption\" : \"Total Call Fails\" ,	\"xAxisName\" : \"IMSI\", \"yAxisName\" : \"Call Fails\",	\"animation\":\"0\" }, 	\"data\" : [ ";
 			linkedChart = linkedChart + "], "
 			+"\"linkeddata\":[";
 			
@@ -170,35 +151,10 @@ public class NetworkManagementEngineerService {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 	@GET
 	@Path("/us12/{start}/{end}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<UserStory12Structure> findAllCallFailuresBetween(
+	public String findAllCallFailuresBetween(
 			@PathParam("start") String startString,
 			@PathParam("end") String endString) {
 		startString = startString.replaceAll("T", " ");
@@ -206,11 +162,81 @@ public class NetworkManagementEngineerService {
 
 		List<UserStory12Structure> userStory12Structures = repository
 				.findTop10CountBetweenTimesTotalDuration(startString, endString);
+		
 		if (userStory12Structures == null) {
-			return null;
+			return "No Results";
 		}
-		return userStory12Structures;
+	
+		String chart, linkedChart = "";
+		chart="{ \"chart\": { \"caption\" : \"Total Call Fails\" ,	\"xAxisName\" : \"IMSI\", \"yAxisName\" : \"Call Fails\",	\"animation\":\"0\" }, 	\"data\" : [ ";
+					linkedChart = linkedChart + "], "
+					+"\"linkeddata\":[";
+					
+					
+					
+					String table = "<div class='wrapper' id='inner-container'><table id='results'  >"
+							+"<tr>"
+							 +" <th>IMSI</th>"
+							  +"<th>Call Failures</th> "
+							+"</tr>";
+					
+					
+					
+					for(UserStory12Structure current : userStory12Structures){
+						chart = chart + "{ \"label\" : \""+current.getImsi()+"\", \"value\" : \""+current.getCount()+"\" , \"link\":\"newchart-json-"+current.getImsi()+"\" },";
+						
+						linkedChart = linkedChart +"  {\"id\":\""+current.getImsi()+"\","
+								+"  \"linkedchart\":{"
+								+"    \"chart\":{"
+								+"      \"caption\":\"Failure Types\","
+								+"      \"subcaption\":\"For the IMSI "+current.getImsi()+"\","
+								+"      \"xaxisname\":\"Type\","
+								+"      \"yaxisname\":\"Number\","
+								+"      \"animation\":\"0\""
+								+"    },"
+								+"    \"data\":[{ \"label\":\"EMERGENCY\", \"value\":\""+current.getClass0()+"\" },"
+								+"            { \"label\":\"HIGH PRIORITY ACCESS\", \"value\":\""+current.getClass1()+"\" },"
+								+"            { \"label\":\"MT ACCESS\", \"value\":\""+current.getClass2()+"\" },"
+								+"            { \"label\":\"MO SIGNALLING\", \"value\":\""+current.getClass3()+"\" },"
+								+"            { \"label\":\"MO DATA\", \"value\":\""+current.getClass4()+"\" }]"
+								+"  }"
+								+"},";
+								
+											table = table +"                    <tr>"
+					+"                      <td>" + current.getImsi() + "</td>"
+					+"                      <td>" + current.getCount() + "</td>"
+					+"                    </tr>";
+					
+					}
+					table = table + "</table></div><div id='eric-multi1'><img src='images/ebottomgrad.jpg' ></div>";
+					linkedChart = linkedChart +"]	"
+					+	"}";
+					
+					String finalChart = "<script type=\"text/javascript\">"
+							+"FusionCharts.setCurrentRenderer('javascript');"
+							+ "	var myChart = new FusionCharts(\"Column3D\", \"myChartId\", \"800\", \"600\", \"0\", \"1\");	"			
+							+ "	myChart.setJSONData("+chart+linkedChart+");"
+							+ "	myChart.render(\"chartContainer\");"
+							+ "</script>";
+				
+				
+		return finalChart + table;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@GET
 	@Path("/us13/{start}/{end}")
