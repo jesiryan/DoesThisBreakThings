@@ -46,6 +46,7 @@ public class EntitiesEJB {
 		persistAllCountryoperator(allMasterTableRows);
 		persistAllFailureclass(allMasterTableRows);
 		persistAllEquipment(allMasterTableRows);
+		
 		persistAllCallfailures(callfailures);
 	}
 	
