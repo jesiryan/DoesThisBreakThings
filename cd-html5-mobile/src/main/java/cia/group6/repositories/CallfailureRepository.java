@@ -81,20 +81,16 @@ public class CallfailureRepository {
 				.createNamedQuery("CallFailure.findAllBetween")
 				.setParameter("startDateTime", startDateTime)
 				.setParameter("endDateTime", endDateTime).getResultList();
-		if (callFailures.size() == 0)
-			return null;
-		else
-			return callFailures;
+
+		return callFailures;
     }
     
     // User story 4
     public List<Callfailure> findCauseCode_EventIDByIMSI(String IMSI) {
 		List<Callfailure> callfailures = (List<Callfailure>) 
 				em.createNamedQuery("Callfailure.findByIMSI").setParameter("IMSI", IMSI).getResultList();
-		if (callfailures.size() == 0)
-			return null;
-		else
-			return callfailures;
+
+		return callfailures;
 	}
     
     // User story 5
@@ -115,10 +111,7 @@ public class CallfailureRepository {
 			}
 		} catch (SQLException e) { e.printStackTrace(); }		
 
-		if (us05List.size() == 0)
-			return null;
-		else
-			return us05List;
+		return us05List;
 	}
 	
 	// User story 6
@@ -137,11 +130,8 @@ public class CallfailureRepository {
 			}
 		} catch (SQLException e) { e.printStackTrace(); }	
 		
-		
-		if (userStory06Structures.size() == 0)
-			return null;
-		else
-			return userStory06Structures;
+
+		return userStory06Structures;
 	}
 	
 	
@@ -164,11 +154,8 @@ public class CallfailureRepository {
 			}
 		} catch (SQLException e) { e.printStackTrace(); }	
 		
-		
-		if (us07List.size() == 0)
-			return null;
-		else
-			return us07List;
+
+		return us07List;
 	}
 	
 	
@@ -192,11 +179,8 @@ public class CallfailureRepository {
 				}
 				} catch (SQLException e) { e.printStackTrace(); }	
 			
-			
-			if (us08List.size() == 0)
-				return null;
-			else
-				return us08List;
+
+			return us08List;
 		}
 
     	
@@ -217,10 +201,7 @@ public class CallfailureRepository {
 			}
 		} catch (SQLException e) { e.printStackTrace(); }		
 
-		if (us09List.size() == 0)
-			return null;
-		else
-			return us09List;
+		return us09List;
 	}
     
     // User story 11
@@ -253,10 +234,8 @@ public class CallfailureRepository {
 			
 		} catch (SQLException e) { e.printStackTrace(); }		
 
-		if (us11List.size() == 0)
-			return null;
-		else
-			return us11List;
+
+		return us11List;
 	}
     
     // User story 12
@@ -287,10 +266,8 @@ public class CallfailureRepository {
 			
 		} catch (SQLException e) { e.printStackTrace(); }		
 
-		if (us12List.size() == 0)
-			return null;
-		else
-			return us12List;
+
+		return us12List;
 	}
     
 
@@ -325,10 +302,8 @@ public class CallfailureRepository {
  			
  		} catch (SQLException e) { e.printStackTrace(); }		
 
- 		if (us13List.size() == 0)
- 			return null;
- 		else
- 			return us13List;
+
+ 		return us13List;
  	}
 
     
@@ -351,12 +326,10 @@ public class CallfailureRepository {
  			}
  		} catch (SQLException e) { e.printStackTrace(); }	
  		 		
- 		if (us14List.size() == 0)
- 			return null;
- 		else
- 			return us14List;
- 	}
 
+ 		return us14List;
+ 	}
+ 	// User story 10
 	public List<UserStory10Structure> findEventCauseForModel(String modelString) {
 		List<UserStory10Structure> us10List = new ArrayList<UserStory10Structure>();
 
@@ -378,10 +351,8 @@ public class CallfailureRepository {
 			
 		} catch (SQLException e) { e.printStackTrace(); }		
 
-		if (us10List.size() == 0)
-			return null;
-		else
-			return us10List;
+
+		return us10List;
 	}
 }
 
