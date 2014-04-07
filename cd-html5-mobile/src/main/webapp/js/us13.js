@@ -30,9 +30,9 @@
             type: "GET",
             dataType: "html",
             cache: false,
-           
             success: function(data) {
-                if (data.length < 1) {
+            	var result=data;
+                if (result== 'No Results') {
                     $('#info').removeClass("hidden");
                     $('#hidden-container').addClass("hidden");
                     $('#info').empty().append("Information: The query has returned no results.");

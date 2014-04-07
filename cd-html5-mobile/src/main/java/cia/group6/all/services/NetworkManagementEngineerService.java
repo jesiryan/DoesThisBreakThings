@@ -224,19 +224,6 @@ public class NetworkManagementEngineerService {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	@GET
 	@Path("/us13/{start}/{end}")
@@ -248,6 +235,10 @@ public class NetworkManagementEngineerService {
 		endString = endString.replaceAll("T", " ");
 
 		List<UserStory13Structure> userStory13Structures = repository.findAllTimeTop(startString, endString);
+		
+		if (userStory13Structures == null) {
+			return "No Results";
+		}
 		
 		String labelTag= "",valueSet1 ="", valueSet2 ="",linkedChart= "", eNodeB = "";
 		for(UserStory13Structure current : userStory13Structures){
