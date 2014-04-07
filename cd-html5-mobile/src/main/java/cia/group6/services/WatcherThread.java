@@ -18,7 +18,8 @@ public class WatcherThread extends Thread {
 	private String path;
 
 	public WatcherThread() {
-		path = "C:\\watched folder\\";
+		//path = "C:\\watched folder\\";
+		path = "/home/brendan/Documents/project/call failures/";
 	}
 
 	public void run() {

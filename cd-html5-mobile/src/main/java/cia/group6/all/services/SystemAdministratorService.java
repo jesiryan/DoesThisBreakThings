@@ -57,134 +57,133 @@ public class SystemAdministratorService {
     MemberRegistration upload;
     
     @Inject
-	private EntitiesEJB entEJB;
-	
+private EntitiesEJB entEJB;
   
-	private final String UPLOADED_FILE_PATH = "C:\\Users\\Public\\";
+//	private final String UPLOADED_FILE_PATH = "C:\\Users\\Public\\";
+    private final String UPLOADED_FILE_PATH = "/home/brendan/Documents/project/call failures/";
+
     
     // EXAMPLE METHOD - path consists of user story number and variable to send to query; can also use @QueryParam instead
     @GET
     @Path("/usXX/{imsi}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Callfailure> findCauseCode_EventIDByIMSI(@PathParam("imsi") String IMSI) {	
-    	List<Callfailure> callfailures = repository.findCauseCode_EventIDByIMSI(IMSI);
+    List<Callfailure> callfailures = repository.findCauseCode_EventIDByIMSI(IMSI);
         if (callfailures == null) {
-        	return null;
+        return null;
         }
         return callfailures;
     }  
     
     @POST
-	@Path("/upload")
-	@Consumes("multipart/form-data")
-	public Response uploadFile(MultipartFormDataInput input) {
+@Path("/upload")
+@Consumes("multipart/form-data")
+public Response uploadFile(MultipartFormDataInput input) {
  
-		String fileName = "";
+String fileName = "";
  
-		Map<String, List<InputPart>> uploadForm = input.getFormDataMap();
-		List<InputPart> inputParts = uploadForm.get("uploadedFile");
+Map<String, List<InputPart>> uploadForm = input.getFormDataMap();
+List<InputPart> inputParts = uploadForm.get("uploadedFile");
  
-		for (InputPart inputPart : inputParts) {
+for (InputPart inputPart : inputParts) {
  
-		 try {
+try {
  
-			MultivaluedMap<String, String> header = inputPart.getHeaders();
-			fileName = getFileName(header);
+MultivaluedMap<String, String> header = inputPart.getHeaders();
+fileName = getFileName(header);
  
-			//convert the uploaded file to inputstream
-			InputStream inputStream = inputPart.getBody(InputStream.class,null);
+//convert the uploaded file to inputstream
+InputStream inputStream = inputPart.getBody(InputStream.class,null);
  
-			byte [] bytes = IOUtils.toByteArray(inputStream);
+byte [] bytes = IOUtils.toByteArray(inputStream);
  
-			//constructs upload file path
-			fileName = UPLOADED_FILE_PATH + fileName;
+//constructs upload file path
+fileName = UPLOADED_FILE_PATH + fileName;
  
-			writeFile(bytes,fileName);
+writeFile(bytes,fileName);
  
-//			FileReader filereader = new FileReader(fileName);
-//			if(new ValidateExcelFile(filereader).isXLSValid()){
-////				PersistenceUtil.persistAll(fileName);
-////				System.out.println("Upload complete @ "
-////						+new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
+//	FileReader filereader = new FileReader(fileName);
+//	if(new ValidateExcelFile(filereader).isXLSValid()){
+////	PersistenceUtil.persistAll(fileName);
+////	System.out.println("Upload complete @ "
+////	+new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
 //
-//				response.sendRedirect("success.html?invalidCount="+CallFailureReader.getNumOfInvalidRows()+"&validCount="+ CallFailureReader.getNumOfValidRows());
-//			}
-//			else{
-//				System.out.println("The Excel file was not valid");
-//			}
-			System.out.println(fileName);
-			FileReader fileReader = new FileReader(fileName);
-			AllMasterTableRows allMasterTableRows = new AllMasterTableRows();
-			List<Callfailure> callfailures = getCallFailures(fileReader, allMasterTableRows);
-			entEJB.persistAllMasterTableRows(allMasterTableRows, callfailures);
-			
-			System.out.println("Done");			
-		  } catch (IOException e) {
-			e.printStackTrace();
-		  }
+//	response.sendRedirect("success.html?invalidCount="+CallFailureReader.getNumOfInvalidRows()+"&validCount="+ CallFailureReader.getNumOfValidRows());
+//	}
+//	else{
+//	System.out.println("The Excel file was not valid");
+//	}
+System.out.println(fileName);
+FileReader fileReader = new FileReader(fileName);
+AllMasterTableRows allMasterTableRows = new AllMasterTableRows();
+List<Callfailure> callfailures = getCallFailures(fileReader, allMasterTableRows);
+entEJB.persistAllMasterTableRows(allMasterTableRows, callfailures);
+System.out.println("Done");	
+ } catch (IOException e) {
+e.printStackTrace();
+ }
  
-		}
-		Response response=null;
-		try {
-			response =  Response.temporaryRedirect(new URI("../success.html?invalidCount="+CallfailureReader.getNumOfInvalidRows()+"&validCount="+ CallfailureReader.getNumOfValidRows())).build();
-		} catch (URISyntaxException e) {e.printStackTrace();}
-		return response;
-	}
+}
+Response response=null;
+try {
+response =  Response.temporaryRedirect(new URI("../success.html?invalidCount="+CallfailureReader.getNumOfInvalidRows()+"&validCount="+ CallfailureReader.getNumOfValidRows())).build();
+} catch (URISyntaxException e) {e.printStackTrace();}
+return response;
+}
     
     public List<Callfailure> getCallFailures(FileReader fileReader, AllMasterTableRows allMasterTableRows) {
-		FailureclassReader failureClassReader = new FailureclassReader(fileReader);		
-		CauseReader causeReader = new CauseReader(fileReader);
-		CountryoperatorReader countryOperatorReader = new CountryoperatorReader(fileReader);
-		EquipmentReader equipmentReader = new EquipmentReader(fileReader);
-		CallfailureReader callFailureReader = new CallfailureReader(fileReader);
-		
-		allMasterTableRows.setFailureclasses(failureClassReader.getAllFailureclassRows());
-		allMasterTableRows.setCauses(causeReader.getAllEventCauseRows());
-		allMasterTableRows.setCountryoperators(countryOperatorReader.getAllCountryoperatorRows());
-		allMasterTableRows.setEquipment(equipmentReader.getAllEquipmentRows());
+FailureclassReader failureClassReader = new FailureclassReader(fileReader);	
+CauseReader causeReader = new CauseReader(fileReader);
+CountryoperatorReader countryOperatorReader = new CountryoperatorReader(fileReader);
+EquipmentReader equipmentReader = new EquipmentReader(fileReader);
+CallfailureReader callFailureReader = new CallfailureReader(fileReader);
+allMasterTableRows.setFailureclasses(failureClassReader.getAllFailureclassRows());
+allMasterTableRows.setCauses(causeReader.getAllEventCauseRows());
+allMasterTableRows.setCountryoperators(countryOperatorReader.getAllCountryoperatorRows());
+allMasterTableRows.setEquipment(equipmentReader.getAllEquipmentRows());
 
-		return callFailureReader.getAllCallfailureRows(allMasterTableRows);
-	}
+return callFailureReader.getAllCallfailureRows(allMasterTableRows);
+}
  
-	/**
-	 * header sample
-	 * {
-	 * 	Content-Type=[image/png], 
-	 * 	Content-Disposition=[form-data; name="file"; filename="filename.extension"]
-	 * }
-	 **/
-	//get uploaded filename, is there a easy way in RESTEasy?
-	private String getFileName(MultivaluedMap<String, String> header) {
+/**
+* header sample
+* {
+* Content-Type=[image/png], 
+* Content-Disposition=[form-data; name="file"; filename="filename.extension"]
+* }
+**/
+//get uploaded filename, is there a easy way in RESTEasy?
+private String getFileName(MultivaluedMap<String, String> header) {
  
-		String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
+String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
  
-		for (String filename : contentDisposition) {
-			if ((filename.trim().startsWith("filename"))) {
+for (String filename : contentDisposition) {
+if ((filename.trim().startsWith("filename"))) {
  
-				String[] name = filename.split("=");
+String[] name = filename.split("=");
  
-				String finalFileName = name[1].trim().replaceAll("\"", "");
-				return finalFileName;
-			}
-		}
-		return "unknown";
-	}
+String finalFileName = name[1].trim().replaceAll("\"", "");
+return finalFileName;
+}
+}
+return "unknown";
+}
  
-	//save to somewhere
-	private void writeFile(byte[] content, String filename) throws IOException {
+//save to somewhere
+private void writeFile(byte[] content, String filename) throws IOException {
  
-		File file = new File(filename);
+File file = new File(filename);
  
-		if (!file.exists()) {
-			file.createNewFile();
-		}
+if (!file.exists()) {
+file.createNewFile();
+}
  
-		FileOutputStream fop = new FileOutputStream(file);
+FileOutputStream fop = new FileOutputStream(file);
  
-		fop.write(content);
-		fop.flush();
-		fop.close();
+fop.write(content);
+fop.flush();
+fop.close();
  
-	}
+}
     
 }
