@@ -1,8 +1,5 @@
 package cia.group6.all.services;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -89,7 +86,7 @@ public class NetworkManagementEngineerService {
 
 		String chart, linkedChart = "";
 			
-			chart="{ \"chart\": { \"caption\" : \"Total Call Fails\" ,	\"xAxisName\" : \"Global enodeB\", \"yAxisName\" : \"Call Fails\",	\"animation\":\"0\" }, 	\"data\" : [ ";
+			chart="{ \"chart\": { \"caption\" : \"Total Call Fails\" ,	\"xAxisName\" : \"IMSI\", \"yAxisName\" : \"Call Fails\",	\"animation\":\"0\" }, 	\"data\" : [ ";
 			linkedChart = linkedChart + "], "
 			+"\"linkeddata\":[";
 			
@@ -166,17 +163,22 @@ public class NetworkManagementEngineerService {
 		if (userStory12Structures == null) {
 			return "No Results";
 		}
-		
-		String table = "<div class='wrapper' id='inner-container'><table id='results'  >"
-			+"<tr>"
-			 +" <th>IMSI</th>"
-			  +"<th>Call Failures</th> "
-			+"</tr>";
-			
+	
 		String chart, linkedChart = "";
 		chart="{ \"chart\": { \"caption\" : \"Total Call Fails\" ,	\"xAxisName\" : \"IMSI\", \"yAxisName\" : \"Call Fails\",	\"animation\":\"0\" }, 	\"data\" : [ ";
 					linkedChart = linkedChart + "], "
 					+"\"linkeddata\":[";
+					
+					
+					
+					String table = "<div class='wrapper' id='inner-container'><table id='results'  >"
+							+"<tr>"
+							 +" <th>IMSI</th>"
+							  +"<th>Call Failures</th> "
+							+"</tr>";
+					
+					
+					
 					for(UserStory12Structure current : userStory12Structures){
 						chart = chart + "{ \"label\" : \""+current.getImsi()+"\", \"value\" : \""+current.getCount()+"\" , \"link\":\"newchart-json-"+current.getImsi()+"\" },";
 						
@@ -219,19 +221,6 @@ public class NetworkManagementEngineerService {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	@GET
 	@Path("/us13/{start}/{end}")
@@ -243,6 +232,10 @@ public class NetworkManagementEngineerService {
 		endString = endString.replaceAll("T", " ");
 
 		List<UserStory13Structure> userStory13Structures = repository.findAllTimeTop(startString, endString);
+		
+		if (userStory13Structures == null) {
+			return "No Results";
+		}
 		
 		String labelTag= "",valueSet1 ="", valueSet2 ="",linkedChart= "", eNodeB = "";
 		for(UserStory13Structure current : userStory13Structures){

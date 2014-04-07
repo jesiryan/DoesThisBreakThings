@@ -13,7 +13,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import cia.group6.entities.Callfailure;
 import cia.group6.registration.MemberRegistration;
 import cia.group6.repositories.CallfailureRepository;
 import cia.group6.repositories.EquipmentRepository;

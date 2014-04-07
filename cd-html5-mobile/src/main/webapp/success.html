@@ -100,6 +100,16 @@
                 //    <input class='button' Type="button" VALUE="Back" onClick="history.go(-1);return true;">
                 //</form>-->
             </div>
+            <div id="upload-container">
+				<h3>File Uploaded Successfully</h3>
+                <script>
+					document.write('The number of valid rows that have been added to the database is ' + getUrlVars()["validCount"]);
+				</script>
+				<br>
+				<script>
+					document.write('The number of invalid rows that have not been added to the database is ' + getUrlVars()["invalidCount"]);
+				</script>
+			</div>
         </div>
         
         <div id="eric-multi">

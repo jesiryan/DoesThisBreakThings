@@ -1,5 +1,12 @@
 //****************************User Story 12*******************************//
     
+
+	function reloadPage()
+	{
+			location.reload();
+	}
+
+
 	/*Pass start and end dateTimes into this function which is called from the submit when you enter start and end dateTimes*/
     function getUS12ResultTemplate(startdate,enddate) {
     	

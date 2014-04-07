@@ -16,9 +16,6 @@
  */
 package cia.group6.all.services;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -32,13 +29,11 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import cia.group6.entities.Callfailure;
-import cia.group6.entities.Member;
 import cia.group6.registration.MemberRegistration;
 import cia.group6.repositories.CallfailureRepository;
 

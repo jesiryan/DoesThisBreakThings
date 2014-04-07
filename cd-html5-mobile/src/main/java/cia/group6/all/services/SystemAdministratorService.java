@@ -4,11 +4,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -37,9 +38,7 @@ import cia.group6.fileimport.FailureclassReader;
 import cia.group6.fileimport.FileReader;
 import cia.group6.registration.MemberRegistration;
 import cia.group6.repositories.CallfailureRepository;
-import cia.group6.services.CompactDiscService;
 import cia.group6.services.EntitiesEJB;
-import cia.group6.validation.ValidateExcelFile;
 
 @Path("/admin")
 @RequestScoped
@@ -125,9 +124,11 @@ public class SystemAdministratorService {
 		  }
  
 		}
- 
-		return Response.status(200).entity("uploadFile is called, Uploaded file name : " + fileName).build();
- 
+		Response response=null;
+		try {
+			response =  Response.temporaryRedirect(new URI("../success.html?invalidCount="+CallfailureReader.getNumOfInvalidRows()+"&validCount="+ CallfailureReader.getNumOfValidRows())).build();
+		} catch (URISyntaxException e) {e.printStackTrace();}
+		return response;
 	}
     
     public List<Callfailure> getCallFailures(FileReader fileReader, AllMasterTableRows allMasterTableRows) {

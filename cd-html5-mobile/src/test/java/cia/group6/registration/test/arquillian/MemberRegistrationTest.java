@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cia.group6.registration.test;
+package cia.group6.registration.test.arquillian;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -43,7 +43,6 @@ import cia.group6.resources.Resources;
 /**
  * Uses Arquilian to test the JAX-RS processing class for member registration.
  * 
- * @author balunasj
  */
 @RunWith(Arquillian.class)
 public class MemberRegistrationTest {
@@ -65,7 +64,7 @@ public class MemberRegistrationTest {
 
    @Test
    public void testRegister() throws Exception {
-      Member member = createMemberInstance("Jane Doe", "jane@mailinator.com", "2125551234");
+      Member member = createMemberInstance("Test Ja", "pass", "Customer Service Rep");
       Response response = memberRegistration.createMember(member);
 
       assertEquals("Unexpected response status", 200, response.getStatus());
@@ -84,16 +83,16 @@ public class MemberRegistrationTest {
                     3, ((Map<String, String>)response.getEntity()).size());
       log.info("Invalid member register attempt failed with return code " + response.getStatus());
    }
-
+   		
    @SuppressWarnings("unchecked")
    @Test
-   public void testDuplicateEmail() throws Exception {
+   public void testDuplicateName() throws Exception {
       //Register an initial user
-      Member member = createMemberInstance("Jane Doe", "jane@mailinator.com", "2125551234");
+      Member member = createMemberInstance("Jane Doe", "pass", "Network Management Engineer");
       memberRegistration.createMember(member);
 
       //Register a different user with the same email
-      Member anotherMember = createMemberInstance("John Doe", "jane@mailinator.com", "2133551234");
+      Member anotherMember = createMemberInstance("Jane Doe", "pass", "Support Engineer");
       Response response = memberRegistration.createMember(anotherMember);
 
       assertEquals("Unexpected response status", 409, response.getStatus());
@@ -106,8 +105,8 @@ public class MemberRegistrationTest {
    private Member createMemberInstance(String name, String password, String userType) {
       Member member = new Member();
       member.setName(name);
-//      member.setPassword(password);
-//      member.setUserType(userType);
+      member.setPassword(password);
+      member.setUserType(userType);
       return member;
    }
 }
