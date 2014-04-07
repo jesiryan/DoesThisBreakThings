@@ -33,8 +33,6 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import cia.group6.entities.Cause;
-import cia.group6.entities.Countryoperator;
 import cia.group6.entities.Equipment;
 import cia.group6.registration.MemberRegistration;
 import cia.group6.repositories.EquipmentRepository;
