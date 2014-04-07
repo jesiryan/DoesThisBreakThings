@@ -55,12 +55,9 @@
     overflow: hidden;
     padding: 1em;
     width: auto;
-<<<<<<< HEAD
-=======
-    height: auto;
->>>>>>> branch 'master' of https://github.com/jesiryan/DoesThisBreakThings.git
     text-align: center;
     padding-bottom: 25px;
+    
     
 }
 #upload-container {
