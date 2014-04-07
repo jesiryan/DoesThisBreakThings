@@ -98,8 +98,6 @@ public class MemberService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createMember(Member member) {
         Response.ResponseBuilder builder = null;
-
-       // System.out.print("Hello");
         
         try {
             //Validates member using bean validation

@@ -63,11 +63,11 @@ public class MemberRepository {
 		loginResultSet = loginStatement.executeQuery();		
 
 		while (loginResultSet.next()) {			
-			System.out.println("=========================================||||||||||||||||||||||||||||||||||||||||||||||||||---------------------------------------------------------------------");
-			System.out.println(loginResultSet.getString(1));
-			System.out.println(loginResultSet.getString(2));
-			System.out.println(loginResultSet.getString(3));
-			System.out.println("=========================================||||||||||||||||||||||||||||||||||||||||||||||||||---------------------------------------------------------------------");
+//			System.out.println("=========================================||||||||||||||||||||||||||||||||||||||||||||||||||---------------------------------------------------------------------");
+//			System.out.println(loginResultSet.getString(1));
+//			System.out.println(loginResultSet.getString(2));
+//			System.out.println(loginResultSet.getString(3));
+//			System.out.println("=========================================||||||||||||||||||||||||||||||||||||||||||||||||||---------------------------------------------------------------------");
 			result[0] = loginResultSet.getString(1);
 			result[1] = loginResultSet.getString(2);
 			result[2] = loginResultSet.getString(3);

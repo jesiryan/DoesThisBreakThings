@@ -94,7 +94,7 @@ public class EntitiesEJB {
 	public void persistAllFailureclass(AllMasterTableRows allMasterTableRows){
 		int i = 0;
 		for(Failureclass failureclass : allMasterTableRows.getFailureclasses()) {
-			System.out.println(failureclass.getFailureclass() + " " + failureclass.getDescription());
+//			System.out.println(failureclass.getFailureclass() + " " + failureclass.getDescription());
 			failureclassRepository.mergeFailureclass(failureclass);		
 			i++;
 		}
