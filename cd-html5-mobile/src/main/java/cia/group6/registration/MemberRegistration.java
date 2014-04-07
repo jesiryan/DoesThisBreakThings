@@ -39,7 +39,6 @@ public class MemberRegistration {
     private Event<Member> memberEventSrc;
 
     public void register(Member member) throws Exception {
-    	System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
         log.info("Registering " + member.getName());
         em.persist(member);
         memberEventSrc.fire(member);
