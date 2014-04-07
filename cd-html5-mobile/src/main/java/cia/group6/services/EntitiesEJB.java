@@ -24,10 +24,6 @@ import cia.group6.repositories.FailureclassRepository;
 @Stateless
 @LocalBean
 public class EntitiesEJB {
-
-	public EntitiesEJB() {
-		
-	}
 	
     @Inject
     private CauseRepository  causeRepository;  
@@ -39,6 +35,10 @@ public class EntitiesEJB {
     private EquipmentRepository equipmentRepository;
     @Inject
     private FailureclassRepository failureclassRepository;
+
+	public EntitiesEJB() {
+		
+	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void persistAllMasterTableRows(AllMasterTableRows allMasterTableRows, List<Callfailure> callfailures) {
@@ -50,6 +50,17 @@ public class EntitiesEJB {
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void persistAllFailureclass(AllMasterTableRows allMasterTableRows){
+		int i = 0;
+		for(Failureclass failureclass : allMasterTableRows.getFailureclasses()) {
+			System.out.println(failureclass.getFailureclass() + " " + failureclass.getDescription());
+			failureclassRepository.mergeFailureclass(failureclass);		
+			i++;
+		}
+		System.out.println("Persisted FailureClasses = "+i);
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void persistAllCauses(AllMasterTableRows allMasterTableRows){
 		int i = 0;
 		for(Cause cause : allMasterTableRows.getCauses()) {
@@ -57,16 +68,6 @@ public class EntitiesEJB {
 			i++;
 		}
 		System.out.println("Persisted Causes = "+i);
-	}
-	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void persistAllCallfailures(List<Callfailure> callfailures){
-		int i = 0;
-		for(Callfailure callfailure : callfailures) {
-			callfailureRepository.mergeCallfailure(callfailure);			
-			i++;
-		}
-		System.out.println("Persisted Callfailures = "+i);
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -90,14 +91,13 @@ public class EntitiesEJB {
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void persistAllFailureclass(AllMasterTableRows allMasterTableRows){
+	public void persistAllCallfailures(List<Callfailure> callfailures){
 		int i = 0;
-		for(Failureclass failureclass : allMasterTableRows.getFailureclasses()) {
-			System.out.println(failureclass.getFailureclass() + " " + failureclass.getDescription());
-			failureclassRepository.mergeFailureclass(failureclass);		
+		for(Callfailure callfailure : callfailures) {
+			callfailureRepository.mergeCallfailure(callfailure);			
 			i++;
 		}
-		System.out.println("Persisted FailureClasses = "+i);
+		System.out.println("Persisted Callfailures = "+i);
 	}
 	
 }
