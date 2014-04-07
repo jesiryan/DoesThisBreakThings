@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
 	String driverClassName = "com.mysql.jdbc.Driver";
-	String connectionUrl = "jdbc:mysql://localhost:3306/sprint1";
+	String connectionUrl = "jdbc:mysql://localhost:3306/sprint2";
 	String dbUser = "root";
 	String dbPwd = "toor";
 
