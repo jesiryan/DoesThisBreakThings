@@ -1,5 +1,7 @@
 package cia.group6.all.services;
 
+import java.util.List;
+
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -9,6 +11,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import cia.group6.entities.AllMasterTableRows;
+import cia.group6.entities.Callfailure;
 import cia.group6.fileimport.CallfailureReader;
 import cia.group6.fileimport.CauseReader;
 import cia.group6.fileimport.CountryoperatorReader;
@@ -31,6 +35,8 @@ public class LocalPersistenceService {
 	private CountryoperatorReader countryOperatorReader;
 	private EquipmentReader equipmentReader;
 	private CallfailureReader callFailureReader;
+	private AllMasterTableRows allMasterTableRows;
+	private List<Callfailure> callFailures;
 
 	public LocalPersistenceService() {
 		super();
@@ -38,9 +44,12 @@ public class LocalPersistenceService {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void login(String pathAndName) throws Exception {
-		System.out.println("pathAndName" + pathAndName+"a");
-//		createReaders(pathAndName);
+	public void readAndStoreData(String pathAndName) throws Exception {
+		System.out.println("pathAndName-" + pathAndName + "-");
+		createReaders(pathAndName);
+		extractDataFromFile();
+		persist();
+		System.out.println("file data completely stored in database");
 	}
 
 	public void createReaders(String pathAndName) {
@@ -50,6 +59,22 @@ public class LocalPersistenceService {
 		countryOperatorReader = new CountryoperatorReader(lowLevelReader);
 		equipmentReader = new EquipmentReader(lowLevelReader);
 		callFailureReader = new CallfailureReader(lowLevelReader);
+	}
+
+	public void extractDataFromFile() {
+		allMasterTableRows = new AllMasterTableRows();
+		allMasterTableRows.setFailureclasses(failureClassReader
+				.getAllFailureclassRows());
+		allMasterTableRows.setCauses(causeReader.getAllEventCauseRows());
+		allMasterTableRows.setCountryoperators(countryOperatorReader
+				.getAllCountryoperatorRows());
+		allMasterTableRows.setEquipment(equipmentReader.getAllEquipmentRows());
+		callFailures = callFailureReader
+				.getAllCallfailureRows(allMasterTableRows);
+	}
+
+	public void persist() {
+		entEJB.persistAllMasterTableRows(allMasterTableRows, callFailures);
 	}
 
 	public void checkInjection() {
