@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
 	<head>
 		<title>Dt340a - Group 6</title>
 		<link rel='icon' type='image/ico' href='http://www.ericsson.com/favicon.ico'/>
@@ -11,6 +11,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	    <script type="text/javascript" src="js/libs/modernizr-2.5.3.min.js"></script>
+		
 		<link rel='stylesheet' type='text/css' href='css/mystyle.css'>
 		
 		
@@ -21,7 +22,7 @@
 		          "js/libs/underscore-min.js",
 		          // Minification - See Readme for details
 		          // For minification, comment out this file
-		          "js/us4.js"
+		          "js/us6.js"
 		          // For minification, uncomment this file
 		          // "js/app.min.js"
 		      ],
@@ -71,9 +72,9 @@
 		      },
 			complete: function() {
 			    $( document ).ready( function() {
-			        $('#us04Form').submit(function(event) {
+			        $('#us06Form').submit(function(event) {
 			        	var imsi = document.getElementById('imsi').value;
-			        	getIMSIResultTemplate(imsi);
+			        	getUS06ResultTemplate(imsi);
 			            return false;
 			        });
 			    });
@@ -81,42 +82,44 @@
 		}]);
 		</script>
 	</head>
-     
+	
 	<body onload="customerServiceRepCheck()">
 		<div id='main-container'>
 			<div id='heading-container'>
-				<div id='eir-image'> 
-					<img alt='Ericsson' src='http://www.ericsson.com/shared/eipa/images/elogo.png'>   
+	
+				<div id='eir-image'>
+					<img alt='Ericsson'src='http://www.ericsson.com/shared/eipa/images/elogo.png'>
 				</div>
-				<div id='dit-image'> 
-					<img alt='DIT' src='http://www.dit.ie/media/styleimages/dit_crest.gif' width='90px' height='90px'>  
+	
+	
+				<div id='dit-image'>
+					<img alt='DIT' src='http://www.dit.ie/media/styleimages/dit_crest.gif' width='90px' height='90px'>
 				</div>
+			
 				<h1>Call Investigation Assistant</h1> 
 				<h2>Group 6</h2> 
 				<h3 id="userType">Customer Service Representative</h3>
 				<div class='wrapper'>
 					<form class='alignleft' onclick="logout()"><input class='button' type='submit' value='Logout'/></form>				
 					<a><button class='button alignright' onclick="home()">Home Page</button></a>
-				</div> 
-
+					</div> 
 			</div>
-			<div class='wrapper' id='inner-container' >  
-				<form id='us04Form'>
+			
+	
+			<div class='wrapper' id='inner-container'>
+			<form id="us06Form">
 					<strong>Enter IMSI:</strong><input class='submissionfield' type='text' name='imsi' id='imsi' placeholder='Please Enter an IMSI number Here' required>
 					<input type='submit' class='button' value="Submit">
 				</form>
-				<div id="info" class="hidden"></div>
+				<div id="info" class="hidden"></div>				
 			</div>
-			
-				
-			
 			<div class='wrapper hidden' id='hidden-container'>
 				<table id="results"></table>
-
 			</div>
 		</div>
 		<div id='eric-multi'>
-			<img src='images/ebottomgrad.jpg' >
+			<img src='images/ebottomgrad.jpg'>
 		</div>
 	</body>
+
 </html>
